@@ -295,7 +295,11 @@
       ]
     }
   ],
-  "altura_pilar": 2.8,
-  "diametro_pilar": 0.15,
+  "altura_pilar": 2.5,
+  "diametro_pilar": 0.13,
+  "altura_tora": 2.0,
+  "altura_pedestal": 0.5,
+  "prof_pedestal": 0.3,
+  "diametro_pedestal": 0.3,
   "altura_piso": 0.1
 }

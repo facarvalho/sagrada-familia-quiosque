@@ -107,8 +107,9 @@ info_lines = [
     ("Ala (banheiros)", "2.25 x 2.50 m"),
     ("Espessura do piso", f"{data.get('altura_piso', 0.10):.2f} m"),
     ("Nível", "0.00 m (nivel_quiosque)"),
-    ("Altura dos pilares", f"{data.get('altura_pilar', 2.80):.2f} m"),
-    ("Diâmetro dos pilares", f"{data.get('diametro_pilar', 0.15):.2f} m"),
+    ("Topo dos pilares", f"{data.get('altura_pilar', 2.50):.2f} m"),
+    ("Tora de eucalipto 12/14", f"{data.get('altura_tora', 2.00):.2f} m · Ø {data.get('diametro_pilar', 0.13):.2f} m"),
+    ("Pedestal de concreto", f"Ø {data.get('diametro_pedestal', 0.30):.2f} m · +{data.get('altura_pedestal', 0.50):.2f} / -{data.get('prof_pedestal', 0.30):.2f} m"),
 ]
 info_h = 40 + (line_h + 22) * (len(info_lines) - 1)
 draw.rounded_rectangle(

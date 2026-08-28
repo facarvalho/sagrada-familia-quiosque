@@ -44,7 +44,9 @@ def build(ns):
 
     WT = 0.06
     Z0 = altura_piso
-    Z1 = altura_piso + 2.5   # deixa ~0.3m de vao ate o telhado p/ ventilacao
+    # Lado leste (x=4) e o beiral baixo da meia-agua (~2.5 m). Parede em
+    # 2.0 m deixa um vao de ventilacao ate o telhado em todo o trecho.
+    Z1 = altura_piso + 2.0
 
     def wall_segment(name, a, b):
         x0, x1 = min(a[0], b[0]), max(a[0], b[0])

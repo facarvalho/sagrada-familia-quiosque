@@ -19,10 +19,31 @@ centro_y_piscina = 1.25
 # permanece no centro original, por isso usa uma variável separada.
 centro_y_piscina_agua = centro_y_piscina - 1.0
 
-altura_pilar = 2.8
-raio_pilar = 0.075
+# --- Pilares: tora de eucalipto 12/14 sobre pedestal de concreto ---------
+# O pedestal (sapata cilíndrica de concreto) vai de 0,30 m abaixo do piso
+# até 0,50 m acima dele, para tirar a madeira do contato com o piso
+# molhado. A tora de eucalipto (2,00 m) começa no topo do pedestal; o topo
+# dos pilares fica nivelado em +2,50 m do piso (= altura_pilar, referência
+# usada pelo telhado e pelos módulos de extras.py).
+raio_pilar = 0.065          # eucalipto roliço 12/14 (média ~13 cm)
+altura_tora = 2.0           # trecho de madeira, acima do pedestal
+altura_pedestal = 0.5       # concreto acima do piso
+prof_pedestal = 0.3         # concreto abaixo do piso
+raio_pedestal = 0.15        # sapata cilíndrica Ø30 cm
+altura_pilar = altura_pedestal + altura_tora   # 2.5 - topo dos pilares
 nivel_quiosque = 0.0
 nivel_piscina = 0.0
+
+# --- Telhado meia-água ----------------------------------------------------
+# Caimento de 15% escoando para OESTE (x baixo = 0), em direção à piscina.
+# Lado alto = leste (x = 4). O lado baixo (x=0) fica na cota do topo dos
+# pilares; o lado alto sobe sobre montantes curtos. As telhas (1,00 x 4,50 m)
+# vencem no máximo 2,50 m de vão livre -> terças a cada ~2 m (x = 0 / 2 / 4).
+caimento_telhado = 0.15
+x_beiral_baixo = 0.0
+# A ala (x = -2.25) fica do lado baixo: os pilares 7 e 8 são encurtados
+# para o topo acompanhar o plano inclinado do telhado.
+rebaixo_ala = caimento_telhado * 2.25
 altura_piso = 0.1
 
 # Dimensões da Piscina Esmeralda (54m³) - Alinhada ao comprimento do piso (Eixo Y)
@@ -61,10 +82,26 @@ pilares_coords = [
 ]
 
 for i, coord in enumerate(pilares_coords):
+    # Pedestal de concreto (sapata cilíndrica): de -prof_pedestal até
+    # +altura_pedestal em relação ao piso.
     bpy.ops.mesh.primitive_cylinder_add(
-        radius=raio_pilar, 
-        depth=altura_pilar, 
-        location=(coord[0], coord[1], nivel_quiosque + (altura_pilar / 2))
+        radius=raio_pedestal,
+        depth=altura_pedestal + prof_pedestal,
+        location=(coord[0], coord[1],
+                  nivel_quiosque + (altura_pedestal - prof_pedestal) / 2.0)
+    )
+    pedestal = bpy.context.active_object
+    pedestal.name = f"Pedestal_Concreto_{i+1}"
+    pedestal.data.materials.append(mat_concreto_geral)
+
+    # Tora de eucalipto, apoiada no topo do pedestal. Pilares 7 e 8 (ala)
+    # são encurtados para o topo seguir o caimento do telhado para oeste.
+    tora_i = altura_tora - (rebaixo_ala if (i + 1) in (7, 8) else 0.0)
+    bpy.ops.mesh.primitive_cylinder_add(
+        radius=raio_pilar,
+        depth=tora_i,
+        location=(coord[0], coord[1],
+                  nivel_quiosque + altura_pedestal + (tora_i / 2.0))
     )
     pilar = bpy.context.active_object
     pilar.name = f"Pilar_Eucalipto_{i+1}"
@@ -109,9 +146,18 @@ bpy.ops.object.mode_set(mode='OBJECT')
 obj_piso.data.materials.append(mat_piso_quiosque)
 
 # ---------------------------------------------------------------------------
-# 5. TELHADO DE ZINCO
+# 5. TELHADO DE ZINCO (MEIA-ÁGUA, CAIMENTO DE 15%)
 # ---------------------------------------------------------------------------
-altura_telhado = nivel_quiosque + altura_pilar + 0.05
+# A água escoa para OESTE (x=0), em direção à piscina. Lado alto = leste
+# (x=4). Plano único inclinado; roof_frame.py depois o translada para
+# descansar sobre as terças. (params caimento_telhado / x_beiral_baixo
+# definidos no bloco 1.)
+z_telhado_baixo = nivel_quiosque + altura_pilar + 0.05
+
+def z_telhado(x):
+    return z_telhado_baixo + caimento_telhado * (x - x_beiral_baixo)
+
+altura_telhado = z_telhado_baixo   # compat.: cota do beiral baixo
 mesh_telhado = bpy.data.meshes.new("Mesh_Telhado_L")
 obj_telhado = bpy.data.objects.new("Telhado_Zinco_L", mesh_telhado)
 collection.objects.link(obj_telhado)
@@ -120,15 +166,22 @@ bpy.context.view_layer.objects.active = obj_telhado
 bpy.ops.object.mode_set(mode='EDIT')
 bm_t = bmesh.from_edit_mesh(mesh_telhado)
 
-vt1 = bm_t.verts.new((-2.25, 12.0, altura_telhado))
-vt2 = bm_t.verts.new((4.0, 12.0, altura_telhado))
-vt3 = bm_t.verts.new((4.0, 0.0, altura_telhado))
-vt4 = bm_t.verts.new((0.0, 0.0, altura_telhado))
-vt5 = bm_t.verts.new((0.0, 9.5, altura_telhado))
-vt6 = bm_t.verts.new((0.25, 9.5, altura_telhado))
-vt7 = bm_t.verts.new((-2.25, 9.5, altura_telhado))
+# Contorno em "L" com beiral de 0,40 m nas bordas externas. No canto
+# reentrante do L (face oeste do corpo principal x face sul da ala) o
+# beiral das duas faces se encontra em (0-0.4, 9.5-0.4). z varia só com
+# x, então o plano permanece plano mesmo inclinado.
+beiral_telhado = 0.4
+_contorno_telhado = [
+    (4.0 + beiral_telhado,   12.0 + beiral_telhado),   # nordeste
+    (4.0 + beiral_telhado,   0.0 - beiral_telhado),    # sudeste
+    (0.0 - beiral_telhado,   0.0 - beiral_telhado),    # sudoeste (corpo principal)
+    (0.0 - beiral_telhado,   9.5 - beiral_telhado),    # canto reentrante do L
+    (-2.25 - beiral_telhado, 9.5 - beiral_telhado),    # sudoeste da ala
+    (-2.25 - beiral_telhado, 12.0 + beiral_telhado),   # noroeste da ala
+]
+verts_telhado = [bm_t.verts.new((x, y, z_telhado(x))) for (x, y) in _contorno_telhado]
 
-bm_t.faces.new([vt1, vt2, vt3, vt4, vt5, vt6, vt7])
+bm_t.faces.new(verts_telhado)
 bmesh.update_edit_mesh(mesh_telhado)
 bpy.ops.object.mode_set(mode='OBJECT')
 obj_telhado.data.materials.append(mat_zinco)

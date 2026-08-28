@@ -1,19 +1,22 @@
 """
-Estrutura de vigas de eucalipto para apoiar o telhado (vão livre máximo de
-3m das telhas). Duas camadas:
+Estrutura da cobertura em meia-água (caimento de 15% escoando para OESTE,
+x=0 - em direção à piscina). Lado alto: leste (x=4).
 
-  Camada 1 (travamento entre pilares, apoiada no topo dos pilares):
-    Pilar1-Pilar2, Pilar10-Pilar3, Pilar6-Pilar5, Pilar9-Pilar4,
-    Pilar7-Pilar6, Pilar8-Pilar9
+Estrutura enxuta (a telha de 1,00 x 4,50 m vence até 2,50 m de vão livre):
 
-  Camada 2 (apoiada sobre a camada 1):
-    Pilar2-Pilar5 (lado leste), Pilar1-Pilar6 (lado oeste), uma viga
-    central entre elas (sem pilar embaixo), e Pilar7-Pilar8 (que fica em
-    cima das vigas Pilar7-Pilar6 e Pilar8-Pilar9)
+  1. Montantes curtos sobre os 4 pilares da fileira leste (x=4), para
+     levantar esse lado e formar o caimento de 15%.
+  2. Vigas transversais (sentido X) sobre os pares de pilares, acompanhando
+     o caimento.
+  3. Terças (sentido Y) sobre as transversais, em x = 0 / 2 / 4 (espaçamento
+     ~2,0 m <= 2,5 m) + uma terça na ala (x = -2.25).
 
-O telhado (Telhado_Zinco_L) é então reposicionado para descansar sobre o
-topo da camada 2, em vez de flutuar 5cm acima do topo dos pilares como no
-projeto original.
+A telha assenta direto nas terças. O objeto Telhado_Zinco_L (plano já
+inclinado, criado em projeto.py) é transladado no eixo Z para descansar
+sobre as terças.
+
+Bitola de todas as peças: eucalipto roliço 12/14 (raio 0.065 m); as terças
+poderiam ser 8/10, mas o vão entre transversais favorece manter 12/14.
 """
 import bpy
 import mathutils
@@ -33,9 +36,10 @@ def _mat(name, color, roughness=0.5, metallic=0.0):
     return mat
 
 
-def _beam(name, p1, p2, z, radius, mat):
-    a = mathutils.Vector((p1[0], p1[1], z))
-    b = mathutils.Vector((p2[0], p2[1], z))
+def _beam(name, p1, p2, radius, mat):
+    """Viga cilíndrica entre dois pontos 3D quaisquer (aceita inclinação)."""
+    a = mathutils.Vector((p1[0], p1[1], p1[2]))
+    b = mathutils.Vector((p2[0], p2[1], p2[2]))
     direction = b - a
     length = direction.length
     mid = (a + b) / 2.0
@@ -51,52 +55,64 @@ def _beam(name, p1, p2, z, radius, mat):
 
 def build(ns):
     pilares_coords = ns["pilares_coords"]
-    altura_pilar = ns["altura_pilar"]
+    altura_pilar = ns["altura_pilar"]                 # topo dos pilares (2.5)
+    caimento = ns.get("caimento_telhado", 0.15)
+    x_baixo = ns.get("x_beiral_baixo", 0.0)           # lado baixo = oeste
 
     mat_viga = bpy.data.materials.get("Material_Eucalipto") or _mat(
         "Material_Eucalipto", (0.35, 0.22, 0.12, 1.0), roughness=0.8
     )
 
     p = {i + 1: pilares_coords[i] for i in range(10)}
-    VIGA_R = 0.07
+    R = 0.065          # eucalipto 12/14
 
-    z1 = altura_pilar + VIGA_R           # centro da camada 1 (apoiada no topo dos pilares)
-    z1_top = altura_pilar + 2 * VIGA_R
-    z2 = z1_top + VIGA_R                 # centro da camada 2 (apoiada sobre a camada 1)
-    z2_top = z1_top + 2 * VIGA_R
+    # Cota do eixo das vigas transversais em função de x. No lado baixo
+    # (x=0) elas apoiam direto no topo dos pilares.
+    def z_transv(x):
+        return altura_pilar + R + caimento * (x - x_baixo)
 
-    # --- Camada 1: travamentos entre pilares -----------------------------
-    camada1 = [
-        ("Viga_P1_P2", p[1], p[2]),
-        ("Viga_P10_P3", p[10], p[3]),
-        ("Viga_P6_P5", p[6], p[5]),
-        ("Viga_P9_P4", p[9], p[4]),
-        ("Viga_P7_P6", p[7], p[6]),
-        ("Viga_P8_P9", p[8], p[9]),
+    # --- 1. Montantes sobre a fileira leste (lado alto) ------------------
+    for name, pt in [("Montante_P2", p[2]), ("Montante_P3", p[3]),
+                     ("Montante_P4", p[4]), ("Montante_P5", p[5])]:
+        z0 = altura_pilar
+        z1 = z_transv(pt[0]) - R          # topo do montante = base da transversal
+        if z1 - z0 > 0.02:
+            _beam(name, (pt[0], pt[1], z0), (pt[0], pt[1], z1), R, mat_viga)
+
+    # --- 2. Vigas transversais (sentido X), acompanham o caimento -------
+    transversais = [
+        ("Viga_Transv_Y0",       p[1],  p[2]),   # (0,0)-(4,0)
+        ("Viga_Transv_Y4",       p[10], p[3]),   # (0,4)-(4,4)
+        ("Viga_Transv_P9_P4",    p[9],  p[4]),   # (0,9.5)-(4,8)
+        ("Viga_Transv_Y12",      p[6],  p[5]),   # (0,12)-(4,12)
+        ("Viga_Transv_Ala_Y9_5", p[8],  p[9]),   # (-2.25,9.5)-(0,9.5)
+        ("Viga_Transv_Ala_Y12",  p[7],  p[6]),   # (-2.25,12)-(0,12)
     ]
-    for name, a, b in camada1:
-        _beam(name, a, b, z1, VIGA_R, mat_viga)
+    for name, a, b in transversais:
+        _beam(name,
+              (a[0], a[1], z_transv(a[0])),
+              (b[0], b[1], z_transv(b[0])),
+              R, mat_viga)
 
-    # --- Camada 2: vigas longitudinais (leste, oeste, central) + a viga
-    # Pilar7-Pilar8, que fica em cima das vigas Pilar7-Pilar6 e Pilar8-Pilar9 --
-    y_min = min(pt[1] for pt in pilares_coords if pt[0] in (0.0,)) if False else 0.0
-    y_max = 12.0
-    camada2 = [
-        ("Viga_Longitudinal_Leste", p[2], p[5]),
-        ("Viga_Longitudinal_Oeste", p[1], p[6]),
-        ("Viga_Longitudinal_Central", (2.0, y_min, 0.0), (2.0, y_max, 0.0)),
-        ("Viga_P7_P8", p[7], p[8]),
+    # --- 3. Terças (sentido Y), sobre as transversais ------------------
+    z_terca_off = 2 * R
+    tercas = [
+        ("Terca_Oeste_X0",   0.0,   0.0,  12.0),
+        ("Terca_Central_X2", 2.0,   0.0,  12.0),
+        ("Terca_Leste_X4",   4.0,   0.0,  12.0),
+        ("Terca_Ala_Xm225", -2.25,  9.25, 12.0),
     ]
-    for name, a, b in camada2:
-        _beam(name, a, b, z2, VIGA_R, mat_viga)
+    for name, x, y0, y1 in tercas:
+        z = z_transv(x) + z_terca_off
+        _beam(name, (x, y0, z), (x, y1, z), R, mat_viga)
 
-    # --- Reposiciona o telhado para descansar sobre a camada 2 ------------
+    # --- 4. Reposiciona o telhado sobre as terças ---------------------
     telhado = bpy.data.objects.get("Telhado_Zinco_L")
     roof_raise = 0.0
     if telhado:
-        original_roof_z = altura_pilar + 0.05  # fórmula usada no projeto.py
-        target_roof_z = z2_top + 0.02
-        roof_raise = target_roof_z - original_roof_z
+        original_low = altura_pilar + 0.05             # z_telhado(x_baixo)
+        target_low = z_transv(x_baixo) + z_terca_off + R + 0.02
+        roof_raise = target_low - original_low
         telhado.location.z += roof_raise
 
-    return {"z1_top": z1_top, "z2_top": z2_top, "roof_raise": roof_raise}
+    return {"roof_raise": roof_raise, "z_transv_x4": z_transv(4.0)}

@@ -32,7 +32,7 @@ interface gráfica).
 | `lounge.py` | Sala de estar entre pilares 4-5-6 (2 sofás + mesa de centro + tapete) |
 | `tv.py` | TV de parede entre pilares 4-5, voltada para a sala de estar |
 | `bartables.py` | Mesas de bar altas com banquetas, entre pilares 3-4 |
-| `roof_frame.py` | Estrutura de vigas de eucalipto (2 camadas) para vencer o vão livre máx. de 3m das telhas; reposiciona o telhado sobre a nova estrutura |
+| `roof_frame.py` | Estrutura da cobertura em meia-água (caimento 15% para oeste, em direção à piscina): 4 montantes na fileira leste + vigas transversais 12/14 + 3 terças 12/14 (x=0/2/4) + terça da ala; reposiciona o telhado sobre as terças. Telha 1,00 × 4,50 m (vão livre ≤ 2,5 m) |
 
 Cada módulo expõe `build(ns)`, onde `ns` é o namespace resultante de
 executar `projeto.py` (dá acesso a `pilares_coords`, `altura_piso` etc. sem

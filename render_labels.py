@@ -23,6 +23,9 @@ centro_y_piscina = _projeto_ns["centro_y_piscina"]
 centro_y_piscina_agua = _projeto_ns.get("centro_y_piscina_agua", centro_y_piscina)
 altura_pilar = _projeto_ns["altura_pilar"]
 raio_pilar = _projeto_ns["raio_pilar"]
+altura_tora = _projeto_ns.get("altura_tora", altura_pilar)
+altura_pedestal = _projeto_ns.get("altura_pedestal", 0.0)
+prof_pedestal = _projeto_ns.get("prof_pedestal", 0.0)
 altura_piso = _projeto_ns["altura_piso"]
 largura_piscina = _projeto_ns["largura_piscina"]
 comprimento_piscina = _projeto_ns["comprimento_piscina"]
@@ -131,7 +134,9 @@ y1 = centro_y_piscina_agua + comprimento_piscina / 2
 anchors = [
     {
         "point": (4.0, 4.0, altura_pilar / 2),
-        "text": f"Pilares de Eucalipto (10x)\nØ {raio_pilar * 2:.2f} x H {altura_pilar:.2f} m",
+        "text": (f"Pilares de Eucalipto (10x)\n"
+                 f"tora 12/14 Ø {raio_pilar * 2:.2f} m · H {altura_tora:.2f} m\n"
+                 f"sobre pedestal concreto (+{altura_pedestal:.2f}/-{prof_pedestal:.2f} m)"),
         "side": "right",
     },
     {
@@ -140,8 +145,10 @@ anchors = [
         "side": "right",
     },
     {
-        "point": (2.0, 3.0, altura_pilar + 0.05),
-        "text": "Telhado de Zinco\nH 2.85 m",
+        "point": (2.0, 3.0, 3.0),
+        "text": ("Telhado de Zinco\n"
+                 "meia-água, caimento 15% p/ oeste (piscina)\n"
+                 "telhas 1,00 x 4,50 m · terças a cada ~2 m"),
         "side": "top",
     },
     {
@@ -164,7 +171,7 @@ anchors = [
 dimensions = [
     {"p1": (x0, y0, 0.0), "p2": (x0, y1, 0.0), "text": "10.50 m", "offset_side": "left"},
     {"p1": (x0, y1, 0.0), "p2": (x1, y1, 0.0), "text": "3.70 m", "offset_side": "top"},
-    {"p1": (4.0, 4.0, 0.0), "p2": (4.0, 4.0, altura_pilar), "text": "2.80 m", "offset_side": "left"},
+    {"p1": (4.0, 4.0, 0.0), "p2": (4.0, 4.0, altura_pilar), "text": f"{altura_pilar:.2f} m", "offset_side": "left"},
 ]
 
 bpy.context.view_layer.update()

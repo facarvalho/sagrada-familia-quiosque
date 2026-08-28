@@ -40,6 +40,38 @@ Registro das mudanças pedidas pelo cliente, na ordem em que foram feitas.
     - Geladeira e fogão entre pilares 1-2.
     - TV de parede entre pilares 4-5.
 
+13. **Revisão dos pilares e do telhado** (28/08/2026):
+    - Pilares agora são **tora de eucalipto 12/14** (`raio_pilar` 0.075 → 0.065),
+      **2,00 m** de madeira sobre um **pedestal de concreto** cilíndrico
+      (Ø 0.30 m, de -0.30 m a +0.50 m do piso) para tirar a madeira do
+      contato com o piso — objeto `Pedestal_Concreto_{n}` por pilar.
+    - `altura_pilar` passou a significar o **topo dos pilares = 2,50 m**
+      (era 2,80 m); novas variáveis `altura_tora`, `altura_pedestal`,
+      `prof_pedestal`, `raio_pedestal`.
+    - Telhado agora é **meia-água com caimento de 15%** escoando para
+      **leste (x=4), lado oposto à piscina**; lado alto = x=0 e a ala.
+      O telhado (`Telhado_Zinco_L`) virou um plano inclinado com beiral
+      de 0,40 m.
+    - `roof_frame.py` reescrito: montantes sobre as fileiras altas +
+      vigas transversais/frechais 12/14 + caibros 8/10 a cada 0,50 m.
+    - Parede de fechamento (`wall.py`) baixada de 2,50 m → 2,00 m para não
+      encostar no beiral baixo.
+    - `render_labels.py`, `render_floorplan.py`, `annotate_floorplan.py` e
+      `gerar_pdf.py` atualizados com as novas medidas.
+    - Levantamento de materiais para orçamento em `orcamento_quiosque.md`.
+
+14. **Caimento invertido e estrutura enxuta** (28/08/2026):
+    - Telhado agora escoa para **oeste (x=0), em direção à piscina**; lado
+      alto passou a ser o leste (x=4). Montantes agora só na fileira leste.
+    - Estrutura reduzida: removidos os 25 caibros. Passou a ser
+      4 montantes + 6 vigas transversais 12/14 + 4 terças 12/14
+      (x = 0 / 2 / 4 e a da ala). A telha (informada pelo cliente:
+      **1,00 × 4,50 m, vão livre ≤ 2,50 m**) assenta direto nas terças,
+      que ficam a ~2,0 m entre si.
+    - Pilares 7 e 8 (ala) encurtados (~2,16 m de topo) para acompanhar o
+      plano do telhado, que é mais baixo desse lado.
+    - `orcamento_quiosque.md` e docs atualizados.
+
 ## Pendências / problemas conhecidos
 
 - **Pequeno artefato preto** no encontro em L do piso do quiosque (perto dos
