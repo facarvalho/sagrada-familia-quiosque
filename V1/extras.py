@@ -7,14 +7,14 @@ de vigas do telhado.
 Ordem importa: roof_frame precisa rodar por último, pois reposiciona o
 telhado (Telhado_Zinco_L) com base na altura da nova estrutura de vigas.
 """
-import bathroom
-import counter
-import wall
-import lounge
-import bartables
-import appliances
-import tv
-import roof_frame
+import V1.bathroom as bathroom
+import V1.counter as counter
+import V1.wall as wall
+import V1.lounge as lounge
+import V1.bartables as bartables
+import V1.appliances as appliances
+import V1.tv as tv
+import V1.roof_frame as roof_frame
 
 
 def build_all(ns):

@@ -13,13 +13,13 @@ with open(projeto_path, "r", encoding="utf-8") as f:
 
 if scriptdir not in sys.path:
     sys.path.insert(0, scriptdir)
-import extras
+import V1.extras as extras
 _extras_info = extras.build_all(_projeto_ns)
 bath_info = _extras_info["bathroom"]
 counter_info = _extras_info["counter"]
 
 # --- Correções não-destrutivas de bugs do projeto original (ver fixes.py) --
-import fixes
+import V1.fixes as fixes
 fixes.apply_all()
 
 # --- Iluminação (mesma configuração de fim de tarde) ------------------------

@@ -11,10 +11,10 @@ with open(projeto_path, "r", encoding="utf-8") as f:
 
 if scriptdir not in sys.path:
     sys.path.insert(0, scriptdir)
-import extras
+import V1.extras as extras
 extras.build_all(_projeto_ns)
 
-import fixes
+import V1.fixes as fixes
 fixes.apply_all()
 
 # --- Iluminação (fim de tarde) ----------------------------------------------

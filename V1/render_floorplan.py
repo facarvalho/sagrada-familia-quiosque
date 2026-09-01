@@ -15,7 +15,7 @@ with open(projeto_path, "r", encoding="utf-8") as f:
 
 if scriptdir not in sys.path:
     sys.path.insert(0, scriptdir)
-import extras
+import V1.extras as extras
 extras.build_all(_projeto_ns)
 
 pilares_coords = _projeto_ns["pilares_coords"]
@@ -24,7 +24,7 @@ altura_pilar = _projeto_ns["altura_pilar"]
 raio_pilar = _projeto_ns["raio_pilar"]
 
 # Correções não-destrutivas de bugs do projeto original (ver fixes.py)
-import fixes
+import V1.fixes as fixes
 fixes.apply_all()
 
 # Esconde o telhado para revelar o piso e os pilares vistos de cima.

@@ -20,13 +20,13 @@ with open(projeto_path, "r", encoding="utf-8") as f:
 # ---------------------------------------------------------------------------
 if scriptdir not in sys.path:
     sys.path.insert(0, scriptdir)
-import extras
+import V1.extras as extras
 extras.build_all(_projeto_ns)
 
 # ---------------------------------------------------------------------------
 # 1b. CORREÇÕES NÃO-DESTRUTIVAS DE BUGS DO PROJETO ORIGINAL (ver fixes.py)
 # ---------------------------------------------------------------------------
-import fixes
+import V1.fixes as fixes
 fixes.apply_all()
 
 # ---------------------------------------------------------------------------

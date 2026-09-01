@@ -1,6 +1,6 @@
 import datetime
 from PIL import Image
-from pdf_lib import PDFDoc, wrap_text, text_width, PAGE_W, PAGE_H
+from V1.pdf_lib import PDFDoc, wrap_text, text_width, PAGE_W, PAGE_H
 
 BASE = "/home/fac/piscina"
 CONV = PAGE_W / 1240.0  # mantém as proporções do layout original (1240x1754px)
