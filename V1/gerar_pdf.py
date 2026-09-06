@@ -2,7 +2,7 @@ import datetime
 from PIL import Image
 from V1.pdf_lib import PDFDoc, wrap_text, text_width, PAGE_W, PAGE_H
 
-BASE = "/home/fac/piscina"
+BASE = "/home/fac/piscina/V1"
 CONV = PAGE_W / 1240.0  # mantém as proporções do layout original (1240x1754px)
 
 
@@ -118,7 +118,7 @@ y = section(p, y, "Piscina Esmeralda", [
 ])
 
 y = section(p, y, "Piso do Quiosque", [
-    ("Piso principal", "4.00 x 12.00 m"),
+    ("Piso principal", "4.00 x 10.50 m"),
     ("Ala (banheiros/gourmet)", "~2.15 x 2.50 m"),
     ("Espessura do piso", "0.10 m"),
     ("Piso de concreto (área externa)", "9.00 x 16.50 m"),

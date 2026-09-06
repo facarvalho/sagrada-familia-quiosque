@@ -45,7 +45,7 @@ def build(ns):
     mat_inox = _mat("Material_Eletro_Inox", (0.72, 0.73, 0.75, 1.0), roughness=0.3, metallic=0.85)
     mat_preto = _mat("Material_Eletro_Preto", (0.05, 0.05, 0.05, 1.0), roughness=0.4)
 
-    Y_WALL = 0.03  # face interna da parede sul (y=0 +- espessura/2)
+    Y_WALL = 1.53  # face interna da parede sul (y=1,5 +- espessura/2)
 
     # --- Geladeira (perto do Pilar 2, ao lado da área gourmet) --------------
     fr_w, fr_d, fr_h = 0.68, 0.65, 1.80

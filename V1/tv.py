@@ -37,7 +37,7 @@ def build(ns):
 
     WALL_X = 4.0
     TV_CX = WALL_X - 0.035
-    TV_CY = 10.0
+    TV_CY = 10.75
     TV_CZ = altura_piso + 1.55
     TV_W, TV_H = 1.25, 0.72
 

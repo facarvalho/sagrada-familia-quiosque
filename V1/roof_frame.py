@@ -97,9 +97,9 @@ def build(ns):
     # --- 3. Terças (sentido Y), sobre as transversais ------------------
     z_terca_off = 2 * R
     tercas = [
-        ("Terca_Oeste_X0",   0.0,   0.0,  12.0),
-        ("Terca_Central_X2", 2.0,   0.0,  12.0),
-        ("Terca_Leste_X4",   4.0,   0.0,  12.0),
+        ("Terca_Oeste_X0",   0.0,   1.5,  12.0),
+        ("Terca_Central_X2", 2.0,   1.5,  12.0),
+        ("Terca_Leste_X4",   4.0,   1.5,  12.0),
         ("Terca_Ala_Xm225", -2.25,  9.25, 12.0),
     ]
     for name, x, y0, y1 in tercas:

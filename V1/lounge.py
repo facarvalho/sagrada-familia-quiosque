@@ -70,13 +70,14 @@ def build(ns):
     mat_mesa = _mat("Material_Mesa_Centro", (0.30, 0.20, 0.12, 1.0), roughness=0.6)
     mat_tapete = _mat("Material_Tapete", (0.62, 0.35, 0.25, 1.0), roughness=0.95)
 
-    # Área aproximada entre pilares 4 (4,8), 5 (4,12) e 6 (0.75,12).
-    CX, CY = 2.3, 9.7
+    # Área aproximada entre pilares 4 (4; 9,5), 5 (4,12) e 6 (0,12) -
+    # vao de 2,5 m em Y apos o encurtamento; sofas mais rasos e juntos.
+    CX, CY = 2.3, 10.75
 
-    _box("Sala_Tapete", CX, CY, altura_piso + 0.005, 2.6, 3.0, 0.01, mat_tapete)
+    _box("Sala_Tapete", CX, CY, altura_piso + 0.005, 2.6, 2.2, 0.01, mat_tapete)
 
-    _sofa("Sofa_Sul", CX, CY - 0.85, "north", mat_estrutura, mat_almofada, altura_piso)
-    _sofa("Sofa_Norte", CX, CY + 0.85, "south", mat_estrutura, mat_almofada, altura_piso)
+    _sofa("Sofa_Sul", CX, CY - 0.70, "north", mat_estrutura, mat_almofada, altura_piso, depth=0.72)
+    _sofa("Sofa_Norte", CX, CY + 0.70, "south", mat_estrutura, mat_almofada, altura_piso, depth=0.72)
 
     table_h = altura_piso + 0.35
     _box("Mesa_Centro_Tampo", CX, CY, table_h, 1.0, 0.55, 0.05, mat_mesa)

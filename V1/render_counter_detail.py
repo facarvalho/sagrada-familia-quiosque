@@ -26,8 +26,9 @@ cam_data = bpy.data.cameras.new("Camera_Counter")
 cam_data.lens = 30
 cam_obj = bpy.data.objects.new("Camera_Counter", cam_data)
 bpy.context.collection.objects.link(cam_obj)
-cam_location = mathutils.Vector((-2.58, -1.14, 2.05))
-target = mathutils.Vector((3.6, 2.0, 1.1))
+# camera segue o centro real da bancada (cy) para acompanhar mudancas de layout
+cam_location = mathutils.Vector((-2.58, cy - 3.24, 2.05))
+target = mathutils.Vector((3.6, cy - 0.1, 1.1))
 cam_obj.location = cam_location
 direction = target - cam_location
 cam_obj.rotation_euler = direction.to_track_quat('-Z', 'Y').to_euler()
@@ -60,7 +61,7 @@ fill_data = bpy.data.lights.new("Luz_Preenchimento", type='POINT')
 fill_data.energy = 18
 fill_obj = bpy.data.objects.new("Luz_Preenchimento", fill_data)
 bpy.context.collection.objects.link(fill_obj)
-fill_obj.location = (1.5, 1.0, 2.6)
+fill_obj.location = (1.5, cy - 1.1, 2.6)
 
 scene = bpy.context.scene
 scene.view_settings.view_transform = 'Standard'

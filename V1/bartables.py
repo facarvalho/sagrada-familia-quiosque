@@ -52,8 +52,8 @@ def build(ns):
     mat_madeira = _mat("Material_MesaBar_Madeira", (0.36, 0.24, 0.14, 1.0), roughness=0.7)
     mat_metal = _mat("Material_MesaBar_Metal", (0.15, 0.15, 0.16, 1.0), roughness=0.35, metallic=0.85)
 
-    # Entre Pilar 3 (4,4) e Pilar 4 (4,8): 2 mesas espalhadas.
-    positions = [(2.6, 5.1), (1.6, 6.9)]
+    # Entre Pilar 3 (4; 5,5) e Pilar 4 (4; 9,5): 2 mesas espalhadas.
+    positions = [(2.6, 6.6), (1.6, 8.4)]
     for i, (x, y) in enumerate(positions, start=1):
         _bar_table(f"MesaBar_{i}", x, y, altura_piso, mat_madeira, mat_metal)
 

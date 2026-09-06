@@ -2,7 +2,7 @@ import json
 import math
 from PIL import Image, ImageDraw, ImageFont
 
-BASE_DIR = "/home/fac/piscina"
+BASE_DIR = "/home/fac/piscina/V1"
 img = Image.open(f"{BASE_DIR}/renders/projeto_render_base.png").convert("RGB")
 draw = ImageDraw.Draw(img, "RGBA")
 

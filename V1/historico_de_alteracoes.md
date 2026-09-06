@@ -72,6 +72,21 @@ Registro das mudanças pedidas pelo cliente, na ordem em que foram feitas.
       plano do telhado, que é mais baixo desse lado.
     - `orcamento_quiosque.md` e docs atualizados.
 
+15. **Quiosque encurtado 12,0 m → 10,5 m** (05/09/2026):
+    - A redução de 1,5 m sai do **lado sul**. **P1 e P2 recuados de y=0
+      para y=1,5**.
+    - Fileiras leste e oeste **realinhadas** em `y = 1,5 / 5,5 / 9,5 / 12`
+      (vãos 4,0 / 4,0 / 2,5 m): P3 e P10 centrados entre P1 e P9 (y=5,5);
+      **P4 alinhado com P9** (y=9,5).
+    - Medidas: **P9→P1 = 8,0 m**, **P9→P6 = 2,5 m**, total **P1→P6 = 10,5 m**.
+    - Móveis acompanharam: bancada/pia + mesa (`counter.py`) e mesas de bar
+      (`bartables.py`) deslocadas +1,5 m; geladeira/fogão na parede sul
+      (`appliances.py`); sala de estar comprimida para o vão de 2,5 m
+      (sofás mais rasos e juntos, `lounge.py`, `tv.py`). Banheiros intactos.
+    - Ajustes: `projeto.py` (pilares, piso em L, contorno do telhado),
+      `roof_frame.py` (terças), textos de cota em `render_labels.py`,
+      `annotate_floorplan.py`, `gerar_pdf.py` (piso principal 4,00 × 10,50 m).
+
 ## Pendências / problemas conhecidos
 
 - **Pequeno artefato preto** no encontro em L do piso do quiosque (perto dos

@@ -141,7 +141,7 @@ anchors = [
     },
     {
         "point": (2.0, 6.0, altura_piso),
-        "text": "Piso do Quiosque (L)\n4.00 x 12.00 m (+ala 2.25 x 2.50 m)\nesp. 0.10 m",
+        "text": "Piso do Quiosque (L)\n4.00 x 10.50 m (+ala 2.25 x 2.50 m)\nesp. 0.10 m",
         "side": "right",
     },
     {

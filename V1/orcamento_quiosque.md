@@ -21,12 +21,18 @@ de concreto.
 | Telha | metálica **1,00 × 4,50 m**, vão livre ≤ **2,50 m** → terças em x = 0 / 2 / 4 (~2,0 m entre si) |
 | Telhado | meia-água, **caimento 15%** escoando para **oeste, em direção à piscina** |
 | Lado alto | leste (x = 4); desnível de 0,60 m no vão de 4,0 m |
-| Malha de pilares | 10 unidades; vão de 4,0 m entre fileiras; espaçamento de 4,0 m |
-| Planta do piso do quiosque | 53,6 m² (principal 4,0 × 12,0 + ala ~2,25 × 2,5) |
-| Projeção da cobertura | ~68 m² (beiral 0,40 m) → ~69 m² de área inclinada |
+| Malha de pilares | 10 unidades; vão de 4,0 m entre fileiras; pilares em y = 1,5 / 5,5 / 9,5 / 12 (vãos 4,0 / 4,0 / 2,5 m) |
+| Planta do piso do quiosque | ~47,6 m² (principal 4,0 × 10,5 + ala ~2,25 × 2,5) |
+| Projeção da cobertura | ~62 m² (beiral 0,40 m) → ~63 m² de área inclinada |
 
 Convenção das colunas: **Qtd. projeto** = quantidade líquida medida no modelo;
 **Qtd. comprar** = com perdas de corte, recobrimento e emendas.
+
+> **Revisão 05/09/2026:** quiosque encurtado de 12,0 m → 10,5 m (redução de
+> 1,5 m no lado sul; P1 e P2 recuados para y=1,5; fileiras realinhadas em
+> y = 1,5 / 5,5 / 9,5 / 12). As quantidades abaixo que dependem do
+> comprimento (piso, laje, 3 terças, telha, parede leste, rufo, forro)
+> devem ser reduzidas em ~1,5 m — a tabela ainda reflete o comprimento antigo.
 
 ---
 

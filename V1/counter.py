@@ -56,9 +56,9 @@ def build(ns):
         bsdf_brasa.inputs["Emission Strength"].default_value = 1.5
     mat_madeira_mesa = _mat("Material_Mesa_Rustica", (0.34, 0.22, 0.13, 1.0), roughness=0.8)
 
-    # --- Bancada encostada na parede leste (x=4), entre Pilar 2 (4,0) e
-    # Pilar 3 (4,4) -----------------------------------------------------
-    Y0, Y1 = 0.6, 3.6           # comprimento da bancada (3.0m)
+    # --- Bancada encostada na parede leste (x=4), entre Pilar 2 (4; 1,5) e
+    # Pilar 3 (4; 5,5) - vao de 4,0 m ----------------------------------
+    Y0, Y1 = 2.1, 5.1          # comprimento da bancada (3.0m)
     DEPTH = 0.65
     X_WALL = 4.0
     X_FRONT = X_WALL - DEPTH
@@ -106,7 +106,7 @@ def build(ns):
     # ---------------------------------------------------------------------
     # Mesa rústica para 8 pessoas (2 bancos corridos), em frente à bancada
     # ---------------------------------------------------------------------
-    TABLE_CX, TABLE_CY = 2.15, 2.05
+    TABLE_CX, TABLE_CY = 2.15, 3.55
     TABLE_LEN, TABLE_W = 2.4, 0.9
     TABLE_TOP_H = altura_piso + 0.75
     LEG_R = 0.05

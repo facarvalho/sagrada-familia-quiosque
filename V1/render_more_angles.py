@@ -103,7 +103,8 @@ scene.camera = cam2
 render_to(os.path.join(renders_dir, "vista_aerea.png"))
 
 # --- 3. Vista interna do corredor, olhando para a bancada/churrasqueira ----
-cam3 = make_camera("Cam_Corredor", (0.5, 0.3, 1.65), (2.3, 9.7, 1.2), lens=28)
+# (piso comeca em y=1,5 apos o encurtamento; camera recuada para dentro)
+cam3 = make_camera("Cam_Corredor", (0.7, 2.2, 1.65), (1.9, 10.5, 1.2), lens=28)
 scene.camera = cam3
 render_to(os.path.join(renders_dir, "vista_corredor.png"))
 

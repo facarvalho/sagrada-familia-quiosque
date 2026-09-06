@@ -2,7 +2,7 @@ import json
 import math
 from PIL import Image, ImageDraw, ImageFont
 
-BASE_DIR = "/home/fac/piscina"
+BASE_DIR = "/home/fac/piscina/V1"
 img = Image.open(f"{BASE_DIR}/renders/planta_quiosque_base.png").convert("RGB")
 draw = ImageDraw.Draw(img, "RGBA")
 
@@ -103,7 +103,7 @@ for p in data["pillars"]:
 info_x0, info_y0 = W - 330, legend_y0 + legend_h + 24
 info_lines = [
     ("Piso do Quiosque", None),
-    ("Piso principal", "4.00 x 12.00 m"),
+    ("Piso principal", "4.00 x 10.50 m"),
     ("Ala (banheiros)", "2.25 x 2.50 m"),
     ("Espessura do piso", f"{data.get('altura_piso', 0.10):.2f} m"),
     ("Nível", "0.00 m (nivel_quiosque)"),

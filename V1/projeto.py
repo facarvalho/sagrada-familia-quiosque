@@ -75,10 +75,16 @@ mat_zinco = criar_material("Material_Zinco", (0.75, 0.78, 0.8, 1.0), roughness=0
 # ---------------------------------------------------------------------------
 # 3. PILARES DE EUCALIPTO (10 Unidades)
 # ---------------------------------------------------------------------------
+# Quiosque encurtado de 12,0 m -> 10,5 m: a reducao (1,5 m) sai do lado
+# sul. P1 e P2 recuados para y=1,5. Fileiras leste e oeste alinhadas em
+# y = 1,5 / 5,5 / 9,5 / 12 (vaos 4,0 / 4,0 / 2,5 m):
+#   P10 e P3 centrados entre P1 e P9 -> y=5,5
+#   P4 alinhado com P9 -> y=9,5
+# Medidas: P9->P1 = 8,0 m, P9->P6 = 2,5 m, total P1->P6 = 10,5 m.
 pilares_coords = [
-    (0.0, 0.0, 0.0),    (4.0, 0.0, 0.0),    (4.0, 4.0, 0.0),    (4.0, 8.0, 0.0),
+    (0.0, 1.5, 0.0),    (4.0, 1.5, 0.0),    (4.0, 5.5, 0.0),    (4.0, 9.5, 0.0),
     (4.0, 12.0, 0.0),   (0.0, 12.0, 0.0),   (-2.25, 12.0, 0.0), (-2.25, 9.5, 0.0),
-    (0.0, 9.5, 0.0),    (0.0, 4.0, 0.0)
+    (0.0, 9.5, 0.0),    (0.0, 5.5, 0.0)
 ]
 
 for i, coord in enumerate(pilares_coords):
@@ -121,10 +127,10 @@ bpy.context.view_layer.objects.active = obj_piso
 bpy.ops.object.mode_set(mode='EDIT')
 bm = bmesh.from_edit_mesh(mesh_piso)
 
-# Piso Horizontal (4m x 12m)
-h1, h2 = bm.verts.new((0.0, 0.0, z_piso_inferior)), bm.verts.new((4.0, 0.0, z_piso_inferior))
+# Piso Horizontal (4m x 10,5m) - borda sul recuada para y=1,5
+h1, h2 = bm.verts.new((0.0, 1.5, z_piso_inferior)), bm.verts.new((4.0, 1.5, z_piso_inferior))
 h3, h4 = bm.verts.new((4.0, 12.0, z_piso_inferior)), bm.verts.new((0.0, 12.0, z_piso_inferior))
-h5, h6 = bm.verts.new((0.0, 0.0, z_piso_superior)), bm.verts.new((4.0, 0.0, z_piso_superior))
+h5, h6 = bm.verts.new((0.0, 1.5, z_piso_superior)), bm.verts.new((4.0, 1.5, z_piso_superior))
 h7, h8 = bm.verts.new((4.0, 12.0, z_piso_superior)), bm.verts.new((0.0, 12.0, z_piso_superior))
 
 bm.faces.new([h1, h2, h6, h5]); bm.faces.new([h2, h3, h7, h6])
@@ -173,8 +179,8 @@ bm_t = bmesh.from_edit_mesh(mesh_telhado)
 beiral_telhado = 0.4
 _contorno_telhado = [
     (4.0 + beiral_telhado,   12.0 + beiral_telhado),   # nordeste
-    (4.0 + beiral_telhado,   0.0 - beiral_telhado),    # sudeste
-    (0.0 - beiral_telhado,   0.0 - beiral_telhado),    # sudoeste (corpo principal)
+    (4.0 + beiral_telhado,   1.5 - beiral_telhado),    # sudeste
+    (0.0 - beiral_telhado,   1.5 - beiral_telhado),    # sudoeste (corpo principal)
     (0.0 - beiral_telhado,   9.5 - beiral_telhado),    # canto reentrante do L
     (-2.25 - beiral_telhado, 9.5 - beiral_telhado),    # sudoeste da ala
     (-2.25 - beiral_telhado, 12.0 + beiral_telhado),   # noroeste da ala
