@@ -119,7 +119,7 @@ draw_dimension(dims[2]["p1px"], dims[2]["p2px"], dims[2]["text"], "left")
 anchors = {a["text"].split("\n")[0]: a for a in data["anchors"]}
 
 right_entries = [
-    anchors["Telhado de Zinco"],
+    anchors["Telhado (Telha Sanduíche PIR)"],
     anchors["Pilares de Eucalipto (10x)"],
     anchors["Piso do Quiosque (L)"],
 ]

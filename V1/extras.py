@@ -14,6 +14,7 @@ import V1.lounge as lounge
 import V1.bartables as bartables
 import V1.appliances as appliances
 import V1.tv as tv
+import V1.calcadas as calcadas
 import V1.roof_frame as roof_frame
 
 
@@ -26,5 +27,6 @@ def build_all(ns):
     result["bartables"] = bartables.build(ns)
     result["appliances"] = appliances.build(ns)
     result["tv"] = tv.build(ns)
+    result["calcadas"] = calcadas.build(ns)
     result["roof_frame"] = roof_frame.build(ns)
     return result

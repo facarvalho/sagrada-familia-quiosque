@@ -44,7 +44,12 @@ x_beiral_baixo = 0.0
 # A ala (x = -2.25) fica do lado baixo: os pilares 7 e 8 são encurtados
 # para o topo acompanhar o plano inclinado do telhado.
 rebaixo_ala = caimento_telhado * 2.25
-altura_piso = 0.1
+# Piso do quiosque NO MESMO NIVEL do deck da piscina (sem degrau): o topo
+# da laje fica em z = nivel_piscina (0). `altura_piso` = cota do topo do
+# piso, usada como referencia pelos modulos de extras.py (moveis, paredes)
+# -> agora 0. A espessura da laje e `esp_piso`, escavada para baixo.
+esp_piso = 0.10
+altura_piso = 0.0
 
 # Dimensões da Piscina Esmeralda (54m³) - Alinhada ao comprimento do piso (Eixo Y)
 comprimento_piscina = 10.50  # Eixo Y
@@ -81,10 +86,17 @@ mat_zinco = criar_material("Material_Zinco", (0.75, 0.78, 0.8, 1.0), roughness=0
 #   P10 e P3 centrados entre P1 e P9 -> y=5,5
 #   P4 alinhado com P9 -> y=9,5
 # Medidas: P9->P1 = 8,0 m, P9->P6 = 2,5 m, total P1->P6 = 10,5 m.
+#
+# Fileira OESTE (P1, P10, P9, P6) recuada 0,40 m para dentro (x = 0 -> 0,40):
+# o piso e a cobertura continuam com 4,0 m (borda oeste em x=0); o recuo
+# cria um beiral de 0,40 m de telha alem dos pilares no lado da piscina,
+# onde corre a calha (ver calcadas.py). A terca T1 (viga longitudinal oeste
+# que liga P1-P10-P9-P6) fica sobre os pilares, em x=0,40.
+recuo_oeste = 0.4
 pilares_coords = [
-    (0.0, 1.5, 0.0),    (4.0, 1.5, 0.0),    (4.0, 5.5, 0.0),    (4.0, 9.5, 0.0),
-    (4.0, 12.0, 0.0),   (0.0, 12.0, 0.0),   (-2.25, 12.0, 0.0), (-2.25, 9.5, 0.0),
-    (0.0, 9.5, 0.0),    (0.0, 5.5, 0.0)
+    (recuo_oeste, 1.5, 0.0),  (4.0, 1.5, 0.0),        (4.0, 5.5, 0.0),   (4.0, 9.5, 0.0),
+    (4.0, 12.0, 0.0),         (recuo_oeste, 12.0, 0.0), (-2.25, 12.0, 0.0), (-2.25, 9.5, 0.0),
+    (recuo_oeste, 9.5, 0.0),  (recuo_oeste, 5.5, 0.0)
 ]
 
 for i, coord in enumerate(pilares_coords):
@@ -100,9 +112,15 @@ for i, coord in enumerate(pilares_coords):
     pedestal.name = f"Pedestal_Concreto_{i+1}"
     pedestal.data.materials.append(mat_concreto_geral)
 
-    # Tora de eucalipto, apoiada no topo do pedestal. Pilares 7 e 8 (ala)
-    # são encurtados para o topo seguir o caimento do telhado para oeste.
+    # Tora de eucalipto, apoiada no topo do pedestal.
+    #  - Pilares 7 e 8 (ala): encurtados p/ o topo seguir o caimento p/ oeste.
+    #  - Pilares 1, 10, 9 e 6 (fileira oeste recuada 0,40 m): ALONGADOS
+    #    (+caimento*recuo_oeste = +0,06 m) para o topo alcançar a face
+    #    inferior das transversais/terça T1 nessa posição (senão T1 fica
+    #    "flutuando" acima desses pilares).
     tora_i = altura_tora - (rebaixo_ala if (i + 1) in (7, 8) else 0.0)
+    if (i + 1) in (1, 6, 9, 10):
+        tora_i += caimento_telhado * recuo_oeste
     bpy.ops.mesh.primitive_cylinder_add(
         radius=raio_pilar,
         depth=tora_i,
@@ -116,8 +134,8 @@ for i, coord in enumerate(pilares_coords):
 # ---------------------------------------------------------------------------
 # 4. PISO DO QUIOSQUE EM "L"
 # ---------------------------------------------------------------------------
-z_piso_inferior = nivel_quiosque
-z_piso_superior = nivel_quiosque + altura_piso
+z_piso_superior = nivel_quiosque          # topo da laje = nivel do deck da piscina
+z_piso_inferior = nivel_quiosque - esp_piso
 
 mesh_piso = bpy.data.meshes.new("Mesh_Piso_Quiosque_L")
 obj_piso = bpy.data.objects.new("Piso_Quiosque_L", mesh_piso)
@@ -127,25 +145,26 @@ bpy.context.view_layer.objects.active = obj_piso
 bpy.ops.object.mode_set(mode='EDIT')
 bm = bmesh.from_edit_mesh(mesh_piso)
 
-# Piso Horizontal (4m x 10,5m) - borda sul recuada para y=1,5
-h1, h2 = bm.verts.new((0.0, 1.5, z_piso_inferior)), bm.verts.new((4.0, 1.5, z_piso_inferior))
-h3, h4 = bm.verts.new((4.0, 12.0, z_piso_inferior)), bm.verts.new((0.0, 12.0, z_piso_inferior))
-h5, h6 = bm.verts.new((0.0, 1.5, z_piso_superior)), bm.verts.new((4.0, 1.5, z_piso_superior))
-h7, h8 = bm.verts.new((4.0, 12.0, z_piso_superior)), bm.verts.new((0.0, 12.0, z_piso_superior))
-
-bm.faces.new([h1, h2, h6, h5]); bm.faces.new([h2, h3, h7, h6])
-bm.faces.new([h3, h4, h8, h7]); bm.faces.new([h4, h1, h5, h8])
-bm.faces.new([h5, h6, h7, h8])
-
-# Piso Vertical (-2.25m x 2.5m)
-v1, v2 = bm.verts.new((-2.25, 9.5, z_piso_inferior)), bm.verts.new((0.25, 9.5, z_piso_inferior))
-v3, v4 = bm.verts.new((0.75, 12.0, z_piso_inferior)), bm.verts.new((-2.25, 12.0, z_piso_inferior))
-v5, v6 = bm.verts.new((-2.25, 9.5, z_piso_superior)), bm.verts.new((0.25, 9.5, z_piso_superior))
-v7, v8 = bm.verts.new((0.75, 12.0, z_piso_superior)), bm.verts.new((-2.25, 12.0, z_piso_superior))
-
-bm.faces.new([v1, v2, v6, v5]); bm.faces.new([v2, v3, v7, v6])
-bm.faces.new([v3, v4, v8, v7]); bm.faces.new([v4, v1, v5, v8])
-bm.faces.new([v5, v6, v7, v8])
+# Piso em "L" num unico solido estanque (sem dois blocos sobrepostos, que
+# antes deixavam uma face interna exposta no canto reentrante perto de P6/P9).
+# Contorno do L, no sentido anti-horario visto de cima:
+#   corpo principal x[0..4] y[1,5..12] + ala x[-2,25..0] y[9,5..12].
+_piso_outline = [
+    (0.0,   1.5),    # a - sudoeste do corpo
+    (4.0,   1.5),    # b - sudeste
+    (4.0,   12.0),   # c - nordeste
+    (-2.25, 12.0),   # d - noroeste da ala
+    (-2.25, 9.5),    # e - sudoeste da ala
+    (0.0,   9.5),    # f - canto reentrante do L
+]
+_pb = [bm.verts.new((x, y, z_piso_inferior)) for (x, y) in _piso_outline]
+_pt = [bm.verts.new((x, y, z_piso_superior)) for (x, y) in _piso_outline]
+bm.faces.new(_pt)                       # face superior (n-gon)
+bm.faces.new(list(reversed(_pb)))       # face inferior
+_n = len(_piso_outline)
+for _i in range(_n):
+    _j = (_i + 1) % _n
+    bm.faces.new([_pb[_i], _pb[_j], _pt[_j], _pt[_i]])
 
 bmesh.update_edit_mesh(mesh_piso)
 bpy.ops.object.mode_set(mode='OBJECT')
@@ -172,18 +191,30 @@ bpy.context.view_layer.objects.active = obj_telhado
 bpy.ops.object.mode_set(mode='EDIT')
 bm_t = bmesh.from_edit_mesh(mesh_telhado)
 
-# Contorno em "L" com beiral de 0,40 m nas bordas externas. No canto
-# reentrante do L (face oeste do corpo principal x face sul da ala) o
-# beiral das duas faces se encontra em (0-0.4, 9.5-0.4). z varia só com
-# x, então o plano permanece plano mesmo inclinado.
+# Contorno em "L". No lado LESTE o telhado MORRE NA TERÇA T3 (x=4,0) - sem
+# beiral alem de T3 (lado alto do caimento). Beiral de 0,40 m so no SUL. No
+# lado OESTE (piscina) a telha vai ate x=0 (borda do piso) - como os pilares
+# oeste recuaram para x=0,40, isso ja da 0,40 m de beiral alem dos pilares,
+# onde corre a calha. z varia só com x, o plano permanece plano mesmo inclinado.
+# Tamanhos de beiral (telha alem do eixo dos pilares / borda do piso):
+#   leste (corpo principal) ......... 0,00 m  (telhado termina em T3, x=4,0)
+#   sul (corpo principal) ........... 0,40 m
+#   oeste (lado da piscina) ......... 0,40 m de telha alem dos pilares
+#                                     (pilares recuados 0,40 -> telha ate x=0)
+#   norte (P6-P5) ................... 0,50 m
+#   ala (P7-P8): oeste, sul e norte . 0,70 m, igual nos tres lados livres
 beiral_telhado = 0.4
+beiral_norte = 0.5
+beiral_ala = 0.7
+x_telhado_leste = 4.0      # borda leste da telha = eixo da terça T3 (sem beiral)
+x_beiral_oeste = 0.0        # borda oeste da telha do corpo principal = borda do piso
 _contorno_telhado = [
-    (4.0 + beiral_telhado,   12.0 + beiral_telhado),   # nordeste
-    (4.0 + beiral_telhado,   1.5 - beiral_telhado),    # sudeste
-    (0.0 - beiral_telhado,   1.5 - beiral_telhado),    # sudoeste (corpo principal)
-    (0.0 - beiral_telhado,   9.5 - beiral_telhado),    # canto reentrante do L
-    (-2.25 - beiral_telhado, 9.5 - beiral_telhado),    # sudoeste da ala
-    (-2.25 - beiral_telhado, 12.0 + beiral_telhado),   # noroeste da ala
+    (x_telhado_leste,           12.0 + beiral_norte),   # nordeste (em T3)
+    (x_telhado_leste,           1.5 - beiral_telhado),  # sudeste (em T3)
+    (x_beiral_oeste,             1.5 - beiral_telhado),  # sudoeste (corpo principal)
+    (x_beiral_oeste,             9.5 - beiral_ala),       # canto reentrante do L
+    (-2.25 - beiral_ala,         9.5 - beiral_ala),      # sudoeste da ala (beiral 0,70)
+    (-2.25 - beiral_ala,         12.0 + beiral_ala),     # noroeste da ala (beiral 0,70)
 ]
 verts_telhado = [bm_t.verts.new((x, y, z_telhado(x))) for (x, y) in _contorno_telhado]
 

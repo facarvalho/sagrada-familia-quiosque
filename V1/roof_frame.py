@@ -6,14 +6,19 @@ Estrutura enxuta (a telha de 1,00 x 4,50 m vence até 2,50 m de vão livre):
 
   1. Montantes curtos sobre os 4 pilares da fileira leste (x=4), para
      levantar esse lado e formar o caimento de 15%.
-  2. Vigas transversais (sentido X) sobre os pares de pilares, acompanhando
-     o caimento.
-  3. Terças (sentido Y) sobre as transversais, em x = 0 / 2 / 4 (espaçamento
-     ~2,0 m <= 2,5 m) + uma terça na ala (x = -2.25).
+  2. Vigas transversais V1..V6 (sentido X), pilar a pilar.
+  3. Terças T1..T4 (sentido Y) sobre as transversais: T1 x=0,40 (fileira
+     recuada) / T2 no eixo entre T1 e T3 (x=2,20) / T3 x=4,0 + T4 na ala
+     (x=-2,25). As 4 terças terminam na mesma linha norte (y=12,50 = beiral
+     de 0,50 m). T1-T3 tem 11,0 m (ponta sul em y=1,50); T4 tem 3,50 m,
+     centrada no vão P8-P7 (mid y=10,75).
 
-A telha assenta direto nas terças. O objeto Telhado_Zinco_L (plano já
-inclinado, criado em projeto.py) é transladado no eixo Z para descansar
-sobre as terças.
+A telha assenta direto nas terças (cantilever nas pontas = beiral). O
+objeto Telhado_Zinco_L (plano já inclinado, criado em projeto.py) é
+transladado no eixo Z para descansar sobre as terças.
+
+`build()` retorna, em result["schedule"], a numeração e o comprimento de
+todas as terças e vigas transversais (usado pela planta anotada).
 
 Bitola de todas as peças: eucalipto roliço 12/14 (raio 0.065 m); as terças
 poderiam ser 8/10, mas o vão entre transversais favorece manter 12/14.
@@ -34,6 +39,19 @@ def _mat(name, color, roughness=0.5, metallic=0.0):
         bsdf.inputs["Roughness"].default_value = roughness
         bsdf.inputs["Metallic"].default_value = metallic
     return mat
+
+
+def roof_underside_z(ns, x):
+    """Cota da face inferior do telhado (já com o roof_raise aplicado) em
+    função de x. As paredes de muro tendinoso (wall.py / bathroom.py) sobem
+    até aqui para ficarem "até o topo", sem vão de ventilação."""
+    altura_pilar = ns["altura_pilar"]
+    caimento = ns.get("caimento_telhado", 0.15)
+    x_baixo = ns.get("x_beiral_baixo", 0.0)
+    R = 0.065
+    z_transv_baixo = altura_pilar + R                 # z_transv(x_baixo)
+    target_low = z_transv_baixo + 2 * R + R + 0.02    # = base da telha no beiral baixo
+    return target_low + caimento * (x - x_baixo)
 
 
 def _beam(name, p1, p2, radius, mat):
@@ -71,6 +89,9 @@ def build(ns):
     def z_transv(x):
         return altura_pilar + R + caimento * (x - x_baixo)
 
+    recuo_oeste = ns.get("recuo_oeste", 0.0)
+    _beiral_ala = ns.get("beiral_ala", 0.7)
+
     # --- 1. Montantes sobre a fileira leste (lado alto) ------------------
     for name, pt in [("Montante_P2", p[2]), ("Montante_P3", p[3]),
                      ("Montante_P4", p[4]), ("Montante_P5", p[5])]:
@@ -79,40 +100,77 @@ def build(ns):
         if z1 - z0 > 0.02:
             _beam(name, (pt[0], pt[1], z0), (pt[0], pt[1], z1), R, mat_viga)
 
-    # --- 2. Vigas transversais (sentido X), acompanham o caimento -------
+    # --- 2. Vigas transversais (sentido X), pilar a pilar --------------
+    # Numeradas V1..V6 (sul -> norte). Comprimento medido entre eixos de
+    # pilares (3,60 m nas do corpo, fileira oeste recuada 0,40 m). EXCEÇÃO:
+    # V1 e V2 avançam 0,40 m a oeste, até a linha do beiral/calha (x=0),
+    # para APOIAR A CALHA -> ficam com 4,00 m.
+    x_calha = ns.get("x_beiral_oeste", 0.0)
+    v1_oeste = (x_calha, p[1][1], p[1][2])
+    v2_oeste = (x_calha, p[10][1], p[10][2])
     transversais = [
-        ("Viga_Transv_Y0",       p[1],  p[2]),   # (0,0)-(4,0)
-        ("Viga_Transv_Y4",       p[10], p[3]),   # (0,4)-(4,4)
-        ("Viga_Transv_P9_P4",    p[9],  p[4]),   # (0,9.5)-(4,8)
-        ("Viga_Transv_Y12",      p[6],  p[5]),   # (0,12)-(4,12)
-        ("Viga_Transv_Ala_Y9_5", p[8],  p[9]),   # (-2.25,9.5)-(0,9.5)
-        ("Viga_Transv_Ala_Y12",  p[7],  p[6]),   # (-2.25,12)-(0,12)
+        ("V1", "Viga_Transv_V1", v1_oeste, p[2]),  # x=0 -> P2   (y=1,5)  L=4,00
+        ("V2", "Viga_Transv_V2", v2_oeste, p[3]),  # x=0 -> P3   (y=5,5)  L=4,00
+        ("V3", "Viga_Transv_V3", p[9],  p[4]),   # P9-P4   (y=9,5)
+        ("V4", "Viga_Transv_V4", p[6],  p[5]),   # P6-P5   (y=12)
+        ("V5", "Viga_Transv_V5_Ala", p[8], p[9]),  # P8-P9  (y=9,5, ala)
+        ("V6", "Viga_Transv_V6_Ala", p[7], p[6]),  # P7-P6  (y=12,  ala)
     ]
-    for name, a, b in transversais:
-        _beam(name,
-              (a[0], a[1], z_transv(a[0])),
-              (b[0], b[1], z_transv(b[0])),
+    schedule = {"transversais": [], "tercas": []}
+    for num, name, a, b in transversais:
+        _beam(name, (a[0], a[1], z_transv(a[0])), (b[0], b[1], z_transv(b[0])),
               R, mat_viga)
+        comp = ((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2) ** 0.5
+        schedule["transversais"].append({
+            "n": num, "nome": name, "eixo": "X", "y": round(a[1], 2),
+            "p1": [round(a[0], 2), round(a[1], 2)],
+            "p2": [round(b[0], 2), round(b[1], 2)],
+            "comprimento": round(comp, 2),
+        })
 
-    # --- 3. Terças (sentido Y), sobre as transversais ------------------
+    # --- 3. Terças (sentido Y), sobre as transversais -----------------
+    # Numeradas T1..T4 (oeste -> leste, + a da ala). Todas as quatro terças
+    # terminam na MESMA linha ao norte (y = 12,50), formando um beiral
+    # contínuo de 0,50 m além da fileira de pilares norte (y = 12,0).
+    #  - T1..T3: L = 11,00 m -> ponta sul em y = 1,50 (na linha de P1/P2).
+    #    T2 fica exatamente no eixo entre T1 (x=recuo_oeste) e T3 (x=4,0).
+    #  - T4 (ala): L = 3,50 m -> ponta sul em y = 9,00; segue centrada no
+    #    vão P8-P7 (y 9,5..12,0 -> mid 10,75).
     z_terca_off = 2 * R
+
+    y_beiral_norte = 12.5                 # ponta norte comum a T1..T4
+    x_t2 = (recuo_oeste + 4.0) / 2.0
+
+    comp_corpo = 11.0
+    y1_corpo = y_beiral_norte
+    y0_corpo = y1_corpo - comp_corpo
+
+    comp_ala = 3.5
+    y1_ala = y_beiral_norte
+    y0_ala = y1_ala - comp_ala
+
     tercas = [
-        ("Terca_Oeste_X0",   0.0,   1.5,  12.0),
-        ("Terca_Central_X2", 2.0,   1.5,  12.0),
-        ("Terca_Leste_X4",   4.0,   1.5,  12.0),
-        ("Terca_Ala_Xm225", -2.25,  9.25, 12.0),
+        ("T1", "Terca_T1_Oeste",   recuo_oeste, y0_corpo, y1_corpo),  # sobre P1-P10-P9-P6
+        ("T2", "Terca_T2_Central", x_t2,        y0_corpo, y1_corpo),  # eixo entre T1 e T3
+        ("T3", "Terca_T3_Leste",   4.0,         y0_corpo, y1_corpo),  # sobre P2-P3-P4-P5
+        ("T4", "Terca_T4_Ala",    -2.25,        y0_ala,   y1_ala),    # centrada em P8-P7
     ]
-    for name, x, y0, y1 in tercas:
+    for num, name, x, y0, y1 in tercas:
         z = z_transv(x) + z_terca_off
         _beam(name, (x, y0, z), (x, y1, z), R, mat_viga)
+        schedule["tercas"].append({
+            "n": num, "nome": name, "eixo": "Y", "x": round(x, 2),
+            "y0": round(y0, 2), "y1": round(y1, 2),
+            "comprimento": round(y1 - y0, 2),
+        })
 
-    # --- 4. Reposiciona o telhado sobre as terças ---------------------
+    # --- 4. Reposiciona o telhado sobre as terças --------------------
     telhado = bpy.data.objects.get("Telhado_Zinco_L")
     roof_raise = 0.0
     if telhado:
         original_low = altura_pilar + 0.05             # z_telhado(x_baixo)
-        target_low = z_transv(x_baixo) + z_terca_off + R + 0.02
-        roof_raise = target_low - original_low
+        roof_raise = roof_underside_z(ns, x_baixo) - original_low
         telhado.location.z += roof_raise
 
-    return {"roof_raise": roof_raise, "z_transv_x4": z_transv(4.0)}
+    return {"roof_raise": roof_raise, "z_transv_x4": z_transv(4.0),
+            "schedule": schedule, "R": R, "beiral_ala": _beiral_ala}

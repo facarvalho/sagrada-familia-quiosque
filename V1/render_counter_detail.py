@@ -23,12 +23,21 @@ X_FRONT, X_WALL, Y0, Y1 = counter_info["bounds"]
 cx, cy = (X_FRONT + X_WALL) / 2.0, (Y0 + Y1) / 2.0
 
 cam_data = bpy.data.cameras.new("Camera_Counter")
-cam_data.lens = 30
+cam_data.lens = 28
 cam_obj = bpy.data.objects.new("Camera_Counter", cam_data)
 bpy.context.collection.objects.link(cam_obj)
-# camera segue o centro real da bancada (cy) para acompanhar mudancas de layout
-cam_location = mathutils.Vector((-2.58, cy - 3.24, 2.05))
-target = mathutils.Vector((3.6, cy - 0.1, 1.1))
+# Vista olhando de P9 (0,40; 9,50) para P2 (4,00; 1,50) - diagonal longa
+# atravessando todo o quiosque ate o canto sudeste (area da pia /
+# churrasqueira). A camera fica no eixo P9->P2, ~0,90 m adiante de P9 (senao
+# o pilar de P9 tapa o quadro), na altura do olhar e deslocada um pouco para
+# o lado da piscina.
+P9 = mathutils.Vector((0.40, 9.50, 0.0))
+P2 = mathutils.Vector((4.00, 1.50, 0.0))
+_dir = (P2 - P9).normalized()
+_perp = mathutils.Vector((-_dir.y, _dir.x, 0.0))  # aponta para dentro do quiosque
+cam_location = mathutils.Vector((P9.x + _dir.x * 0.90 - _perp.x * 0.15,
+                                 P9.y + _dir.y * 0.90 - _perp.y * 0.15, 1.63))
+target = mathutils.Vector((3.70, 1.70, 1.05))
 cam_obj.location = cam_location
 direction = target - cam_location
 cam_obj.rotation_euler = direction.to_track_quat('-Z', 'Y').to_euler()

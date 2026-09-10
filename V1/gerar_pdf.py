@@ -21,7 +21,7 @@ BG_SECTION = (245, 242, 238)
 WHITE = (255, 255, 255)
 
 doc = PDFDoc()
-TOTAL_PAGES = 8
+TOTAL_PAGES = 22   # 6 de conteúdo + 15 de galeria + 1 de sequência
 
 
 def footer(page, page_no, section_name):
@@ -64,11 +64,11 @@ p.text(MARGIN, ty, "Conteúdo deste caderno", font="Helvetica-Bold", size=F_H2, 
 ty += F_H2 * 2.0
 items = [
     "1. Vista geral do projeto (render 3D)",
-    "2. Planta técnica do quiosque – pilares e distâncias",
+    "2. Planta técnica do quiosque – pilares, terças e vigas",
     "3. Especificações técnicas gerais",
-    "4. Estrutura do telhado (meia-água em eucalipto)",
+    "4. Estrutura do telhado (meia-água, telha sanduíche PIR)",
     "5. Ambientes e mobiliário",
-    "6. Galeria de imagens adicionais",
+    "6. Galeria de imagens (15 pranchas, uma por página)",
     "7. Sequência de execução recomendada",
 ]
 for it in items:
@@ -118,9 +118,9 @@ y = section(p, y, "Piscina Esmeralda", [
 ])
 
 y = section(p, y, "Piso do Quiosque", [
-    ("Piso principal", "4.00 x 10.50 m"),
-    ("Ala (banheiros/gourmet)", "~2.15 x 2.50 m"),
-    ("Espessura do piso", "0.10 m"),
+    ("Piso principal", "4.00 x 10.50 m (sólido único em L)"),
+    ("Ala (banheiros)", "~2.65 x 2.50 m (borda leste em P9-P6)"),
+    ("Espessura do piso", "0.10 m (topo no nível do deck da piscina)"),
     ("Piso de concreto (área externa)", "9.00 x 16.50 m"),
 ])
 
@@ -128,14 +128,14 @@ y = section(p, y, "Pilares de Eucalipto (10 unidades)", [
     ("Classe / diâmetro", "Eucalipto roliço 12/14 (Ø ~0.13 m)"),
     ("Tora de madeira", "2.00 m, apoiada no topo do pedestal"),
     ("Pedestal de concreto", "Ø 0.30 m, de -0.30 m a +0.50 m do piso"),
-    ("Topo dos pilares", "2.50 m (pilares 7 e 8 da ala: ~2.16 m)"),
-    ("Alinhamento", "Pilares 6 e 9 no eixo x=0 (junto a 1 e 10)"),
+    ("Topo dos pilares", "2.50 m (fileira oeste P1/P10/P9/P6: 2.56 m; ala P7/P8: ~2.16 m)"),
+    ("Fileira oeste (P1,P10,P9,P6)", "recuada 0.40 m para dentro (x = 0.40)"),
 ])
 
-y = section(p, y, "Parede de Fechamento", [
-    ("Material", "Placa cimentícia"),
-    ("Trecho", "Pilares 1-2-3-4-5 (lados sul e leste)"),
-    ("Altura", "2.00 m (vão de ventilação até o beiral baixo)"),
+y = section(p, y, "Paredes de Fechamento", [
+    ("Material", "Muro tendinoso (malla + varão tensionados, reboco rústico 2 faces)"),
+    ("Corpo principal", "lados sul e leste - sobem até a face inferior do telhado"),
+    ("Banheiros", "h 2.50 m, com respiro sob o telhado; verga acima das portas"),
 ])
 footer(p, 4, "Especificações técnicas")
 
@@ -157,15 +157,17 @@ y = section(p, y, "Caimento", [
 ])
 
 y = section(p, y, "Telhas e estrutura", [
-    ("Telha", "Metálica 1,00 x 4,50 m - vão livre máx. 2,50 m"),
+    ("Telha", "Sanduíche trapezoidal PIR 30 mm - útil 1,00 m - vão máx. terça 2,60 m"),
+    ("Quantidade", "12 telhas: 8 de 4,04 m (sul) + 4 de 7,03 m (norte)"),
+    ("Comprar / peso", "~60,5 m2 de telha / ~561 kg"),
     ("Montantes", "4 un., sobre a fileira leste (x=4), ~0.60 m"),
     ("Vigas transversais", "Eucalipto 12/14, sentido X, sobre pares de pilares"),
-    ("Terças", "Eucalipto 12/14, sentido Y, em x = 0 / 2 / 4 (+ ala x = -2.25)"),
-    ("Beiral", "0.40 m nas bordas externas"),
+    ("Terças (12/14, sentido Y)", "T1 x=0,40 / T2 x=2,20 / T3 x=4,00 (L 11,00 m); T4 ala x=-2,25 (L 3,50 m)"),
+    ("Beiral", "leste 0 (morre em T3) | sul/oeste 0,40 | norte 0,50 | ala 0,70 m"),
 ])
 
 y = section(p, y, "Alturas de referência (a partir do piso)", [
-    ("Topo dos pilares (corpo principal)", "2.50 m"),
+    ("Topo dos pilares (corpo)", "2.50 m (fileira oeste P1/P10/P9/P6: 2.56 m)"),
     ("Topo dos pilares 7 e 8 (ala)", "~2.16 m (acompanham o caimento)"),
     ("Vão livre sob o telhado", "~2.6 m (oeste) a ~3.4 m (leste)"),
     ("Beiral baixo (oeste, piscina)", "~2.4 m"),
@@ -177,9 +179,11 @@ p = doc.new_page()
 p.text(MARGIN, P(50), "4. Ambientes e Mobiliário", font="Helvetica-Bold", size=F_H1, color=INK)
 y = P(90)
 y = section(p, y, "Banheiros (ala, pilares 6-7-8-9)", [
-    ("Duchas quentes", "2, lado oeste (porta para o lado da piscina)"),
-    ("Lavabos", "2, lado leste (porta para o corredor do quiosque)"),
-    ("Corredor interno", "Removido - cabines ampliadas"),
+    ("Cabines", "4 (1,30 x 1,15 m): 2 duchas quentes (O) + 2 sanitários (L)"),
+    ("Portas", "0,60 x 1,90 m; duchas abrem p/ a piscina, sanitários p/ o corredor"),
+    ("Sanitários", "só o vaso (sem pia na cabine)"),
+    ("Lava-mãos", "pia comunitária rústica de 1,80 m, 3 bicas, na parede P8-P9"),
+    ("Piso", "caixa de brita (tabuleiro rebaixado ~0,14 m, meio-fio ~0,09 m)"),
 ])
 y = section(p, y, "Área Gourmet (pilares 1-2-3)", [
     ("Bancada", "Pia + churrasqueira de bancada, acabamento rústico"),
@@ -194,40 +198,48 @@ y = section(p, y, "Mesas de Bar (pilares 3-4)", [
     ("Quantidade", "2 mesas altas, 2 banquetas cada"),
 ])
 
-thumbs = ["vista_entrada.png", "vista_corredor.png", "vista_aerea.png"]
-gap = P(16)
-tw = (PAGE_W - 2 * MARGIN - 2 * gap) / 3
-tx = MARGIN
-for name in thumbs:
-    iw, ih = p.fit_image(f"{BASE}/renders/{name}", tx, y, tw, P(220))
-    p.rect(tx, y, tx + iw, y + ih, stroke=LINE, width=1)
-    tx += tw + gap
 footer(p, 6, "Ambientes e mobiliário")
 
-# ============================================================ PÁGINA 6 — GALERIA DE IMAGENS
-p = doc.new_page()
-p.text(MARGIN, P(50), "5. Galeria de Imagens Adicionais", font="Helvetica-Bold", size=F_H1, color=INK)
+# ============================================================ GALERIA DE IMAGENS
+# Uma imagem por página, em PAISAGEM, ocupando toda a largura da página
+# (ou toda a altura, para os desenhos verticais). Legenda em barra inferior.
 gallery = [
-    ("Área da Pia / Bancada Gourmet", "vista_area_pia.png"),
-    ("Corredor Olhando para a Cozinha", "vista_corredor_cozinha.png"),
-    ("Interior da Ducha", "banheiro_ducha_interior.png"),
-    ("Interior do Lavabo", "banheiro_lavabo_interior.png"),
-    ("Planta dos Banheiros", "banheiro_planta.png"),
-    ("Vista 360° (Fisheye)", "vista_360_fisheye.png"),
+    ("Vista geral do projeto", "projeto_render.png"),
+    ("Planta técnica do quiosque - pilares, terças e vigas", "planta_quiosque_anotada.png"),
+    ("Piso do quiosque + calçada - medidas", "piso_quiosque_medidas.png"),
+    ("Projeto do telhado - telha sanduíche PIR, terças e telhas", "telhado_quiosque_medidas.png"),
+    ("Banheiros da ala - planta e medidas (caixa de brita)", "banheiro_planta_medidas.png"),
+    ("Vista da entrada (do lado da piscina)", "vista_entrada.png"),
+    ("Vista aérea 3/4 da propriedade", "vista_aerea.png"),
+    ("Vista interna do corredor", "vista_corredor.png"),
+    ("Area da pia / bancada gourmet (de P9 para P2)", "vista_area_pia.png"),
+    ("Corredor olhando para a cozinha", "vista_corredor_cozinha.png"),
+    ("Interior da ducha", "banheiro_ducha_interior.png"),
+    ("Interior do lavabo", "banheiro_lavabo_interior.png"),
+    ("Vista externa - eixo da terça T2, 15 m ao norte", "vista_15m_T2_V1.png"),
+    ("Vista externa - 10 m entre P6 e P2", "vista_10m_entre_P6_P2.png"),
+    ("Vista 360 (fisheye) do interior", "vista_360_fisheye.png"),
 ]
-g_gap_x, g_gap_y = P(16), P(14)
-cell_w = (PAGE_W - 2 * MARGIN - g_gap_x) / 2
-cell_h = (PAGE_H - P(90) - P(70) - 2 * g_gap_y) / 3
-gy = P(90)
-for i, (caption, fname) in enumerate(gallery):
-    col = i % 2
-    row = i // 2
-    gx = MARGIN + col * (cell_w + g_gap_x)
-    cy = gy + row * (cell_h + g_gap_y)
-    p.text(gx, cy, caption, font="Helvetica-Bold", size=F_BODY, color=INK)
-    iw, ih = p.fit_image(f"{BASE}/renders/{fname}", gx, cy + F_BODY * 1.6, cell_w, cell_h - F_BODY * 1.6)
-    p.rect(gx, cy + F_BODY * 1.6, gx + iw, cy + F_BODY * 1.6 + ih, stroke=LINE, width=1)
-footer(p, 7, "Galeria de imagens")
+GAL_START = 7
+for gi, (caption, fname) in enumerate(gallery):
+    p = doc.new_page()
+    p.w, p.h = PAGE_H, PAGE_W          # A4 paisagem
+    bar_h = 30
+    pad = P(18)
+    box_w = p.w - 2 * pad
+    box_h = p.h - 2 * pad - bar_h
+    _im = Image.open(f"{BASE}/renders/{fname}")
+    _r = min(box_w / _im.width, box_h / _im.height)
+    iw, ih = _im.width * _r, _im.height * _r
+    ix = (p.w - iw) / 2.0
+    iy = pad + (box_h - ih) / 2.0
+    p.image(f"{BASE}/renders/{fname}", ix, iy, iw, ih)
+    p.rect(ix, iy, ix + iw, iy + ih, stroke=LINE, width=1)
+    p.rect(0, p.h - bar_h, p.w, p.h, fill=INK)
+    p.text(28, p.h - 11, caption, font="Helvetica-Bold", size=10, color=WHITE)
+    _cap = f"{GAL_START + gi} / {TOTAL_PAGES}    -    Galeria    -    {today}"
+    p.text(p.w - 28 - text_width(_cap, 9), p.h - 11, _cap, font="Helvetica", size=9,
+           color=(210, 210, 210))
 
 # ============================================================ PÁGINA 7 — SEQUÊNCIA DE EXECUÇÃO
 p = doc.new_page()
@@ -239,8 +251,8 @@ steps = [
     "Execução das brocas e pedestais de concreto (Ø 0.30 m, de -0.30 a +0.50 m) nas 10 posições da planta.",
     "Montagem dos 10 pilares de eucalipto 12/14 (tora de 2.00 m) sobre bases metálicas fixadas nos pedestais.",
     "Montagem dos montantes (leste) e das vigas transversais 12/14, formando o caimento de 15% para oeste.",
-    "Montagem das terças 12/14 (x = 0 / 2 / 4 + ala) e assentamento das telhas 1,00 x 4,50 m (vão livre <= 2,5 m).",
-    "Levantamento da parede de fechamento em placa cimentícia (pilares 1-2-3-4-5).",
+    "Montagem das terças 12/14 (T1 x=0,40 / T2 x=2,20 / T3 x=4,00 + T4 ala) e assentamento das 12 telhas sanduíche PIR 30 mm (largura útil 1,00 m).",
+    "Levantamento das paredes de fechamento em muro tendinoso (lados sul e leste, até o telhado).",
     "Construção das paredes e instalação hidráulica dos banheiros (ala, pilares 6-7-8-9).",
     "Instalação da bancada, pia, churrasqueira, geladeira e fogão (área gourmet, pilares 1-2-3).",
     "Instalação da lâmina d'água e acabamento (azulejo) da piscina.",
@@ -257,6 +269,7 @@ for i, st in enumerate(steps, start=1):
         p.text(MARGIN + STEP_INDENT, ly, ln, font="Helvetica", size=F_BODY, color=INK)
         ly += P(16)
     y = ly + P(6)
+_LAST_PAGE = TOTAL_PAGES
 
 p.text(MARGIN, PAGE_H - P(140), "Observação:", font="Helvetica-Bold", size=F_H2, color=INK)
 obs = ("Este caderno reflete o projeto 3D gerado até o momento da emissão. Medidas devem ser "
@@ -266,7 +279,7 @@ ly = PAGE_H - P(115)
 for ln in wrap_text(obs, F_SMALL, PAGE_W - 2 * MARGIN):
     p.text(MARGIN, ly, ln, font="Helvetica", size=F_SMALL, color=MUTED)
     ly += P(15)
-footer(p, 8, "Sequência de execução")
+footer(p, TOTAL_PAGES, "Sequência de execução")
 
 out_path = f"{BASE}/Caderno_de_Obra.pdf"
 doc.save(out_path)

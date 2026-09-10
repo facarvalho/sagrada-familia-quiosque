@@ -1,9 +1,17 @@
 """
-Parede de fechamento em placa cimentícia ao longo dos pilares 1-2-3-4-5
-(lado sul + lado leste do corredor principal), fechando esse lado do
-quiosque e mantendo o lado oeste (voltado para a piscina) aberto.
+Fechamento em MURO TENDINOSO ao longo dos pilares 1-2-3-4-5 (lado sul +
+lado leste do corredor principal), fechando esse lado do quiosque e
+mantendo o lado oeste (voltado para a piscina) aberto.
+
+Muro tendinoso: malla de vena + varão de 1/4" tensionados entre os pilares
+de eucalipto e revestidos com argamassa nas duas faces -> parede fina
+(~5 cm), monolítica, de reboco rústico. Aqui as paredes sobem ATÉ O TOPO
+(face inferior do telhado), sem vão de ventilação.
 """
 import bpy
+import bmesh
+
+import V1.roof_frame as roof_frame
 
 
 def _mat(name, color, roughness=0.5, metallic=0.0):
@@ -20,11 +28,36 @@ def _mat(name, color, roughness=0.5, metallic=0.0):
     return mat
 
 
-def _box(name, cx, cy, cz, sx, sy, sz, mat):
-    bpy.ops.mesh.primitive_cube_add(size=1.0, location=(cx, cy, cz))
-    obj = bpy.context.active_object
-    obj.name = name
-    obj.scale = (sx, sy, sz)
+def _panel(name, a, b, z0, zta, ztb, wt, mat):
+    """Painel fino de parede entre A e B, base plana em z0 e topo indo de
+    zta (em A) a ztb (em B) -> acompanha a inclinação do telhado."""
+    ax, ay = a[0], a[1]
+    bx, by = b[0], b[1]
+    if abs(bx - ax) < 1e-6:            # parede ao longo de Y (x fixo)
+        ox, oy = wt / 2.0, 0.0
+    else:                             # parede ao longo de X (y fixo)
+        ox, oy = 0.0, wt / 2.0
+
+    mesh = bpy.data.meshes.new(f"Mesh_{name}")
+    obj = bpy.data.objects.new(name, mesh)
+    bpy.context.collection.objects.link(obj)
+    bm = bmesh.new()
+    v = [
+        bm.verts.new((ax - ox, ay - oy, z0)),
+        bm.verts.new((bx - ox, by - oy, z0)),
+        bm.verts.new((bx - ox, by - oy, ztb)),
+        bm.verts.new((ax - ox, ay - oy, zta)),
+        bm.verts.new((ax + ox, ay + oy, z0)),
+        bm.verts.new((bx + ox, by + oy, z0)),
+        bm.verts.new((bx + ox, by + oy, ztb)),
+        bm.verts.new((ax + ox, ay + oy, zta)),
+    ]
+    for f in ([0, 1, 2, 3], [7, 6, 5, 4], [4, 5, 1, 0],
+              [3, 2, 6, 7], [4, 0, 3, 7], [1, 5, 6, 2]):
+        bm.faces.new([v[i] for i in f])
+    bm.normal_update()
+    bm.to_mesh(mesh)
+    bm.free()
     if mat:
         obj.data.materials.append(mat)
     return obj
@@ -34,33 +67,26 @@ def build(ns):
     pilares_coords = ns["pilares_coords"]
     altura_piso = ns["altura_piso"]
 
-    mat_placa = _mat("Material_Placa_Cimenticia", (0.72, 0.71, 0.68, 1.0), roughness=0.8)
+    mat_muro = _mat("Material_Muro_Tendinoso", (0.80, 0.78, 0.72, 1.0), roughness=0.97)
 
-    p1 = pilares_coords[0]   # (0, 0)
-    p2 = pilares_coords[1]   # (4, 0)
-    p3 = pilares_coords[2]   # (4, 4)
-    p4 = pilares_coords[3]   # (4, 8)
-    p5 = pilares_coords[4]   # (4, 12)
+    p1 = pilares_coords[0]
+    p2 = pilares_coords[1]
+    p3 = pilares_coords[2]
+    p4 = pilares_coords[3]
+    p5 = pilares_coords[4]
 
-    WT = 0.06
+    WT = 0.05                          # muro tendinoso ~5 cm
     Z0 = altura_piso
-    # Lado leste (x=4) e o beiral baixo da meia-agua (~2.5 m). Parede em
-    # 2.0 m deixa um vao de ventilacao ate o telhado em todo o trecho.
-    Z1 = altura_piso + 2.0
+
+    def zt(x):
+        return roof_frame.roof_underside_z(ns, x)
 
     def wall_segment(name, a, b):
-        x0, x1 = min(a[0], b[0]), max(a[0], b[0])
-        y0, y1 = min(a[1], b[1]), max(a[1], b[1])
-        if x1 - x0 < 0.01:  # segmento vertical (varia em Y, parede ao longo de X fixo)
-            x0, x1 = a[0] - WT / 2, a[0] + WT / 2
-        else:  # segmento horizontal (varia em X, parede ao longo de Y fixo)
-            y0, y1 = a[1] - WT / 2, a[1] + WT / 2
-        cx, cy, cz = (x0 + x1) / 2.0, (y0 + y1) / 2.0, (Z0 + Z1) / 2.0
-        _box(name, cx, cy, cz, max(x1 - x0, WT), max(y1 - y0, WT), Z1 - Z0, mat_placa)
+        _panel(name, a, b, Z0, zt(a[0]), zt(b[0]), WT, mat_muro)
 
     wall_segment("Parede_Sul_1_2", p1, p2)
     wall_segment("Parede_Leste_2_3", p2, p3)
     wall_segment("Parede_Leste_3_4", p3, p4)
     wall_segment("Parede_Leste_4_5", p4, p5)
 
-    return {"top_z": Z1}
+    return {"top_z": zt(4.0)}

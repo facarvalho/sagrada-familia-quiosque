@@ -45,20 +45,27 @@ sun_obj = bpy.data.objects.new("Sol", sun_data)
 bpy.context.collection.objects.link(sun_obj)
 sun_obj.rotation_euler = (math.pi / 2 - sun_elevation, 0.0, sun_rotation + math.pi)
 
-# luz de preenchimento fraca para dentro dos banheiros (cabines fechadas)
-fill_data = bpy.data.lights.new("Luz_Interna_Banheiro", type='POINT')
-fill_data.energy = 45
-fill_obj = bpy.data.objects.new("Luz_Interna_Banheiro", fill_data)
-bpy.context.collection.objects.link(fill_obj)
+# luz de preenchimento para dentro dos banheiros. As paredes agora tem
+# 2,50 m (antes 2,0) e as cabines estao fechadas ate perto do teto -> uma
+# luz por quadrante, logo abaixo do topo das paredes.
 X0, X1, Y0, Y1 = bath_info["bounds"]
 XM = bath_info["center_wall_x"]
 YM = bath_info["row_split"]
-fill_obj.location = ((X0 + X1) / 2.0, (Y0 + Y1) / 2.0, 2.4)
+for qi, (qx, qy) in enumerate([
+    ((X0 + XM) / 2.0, (Y0 + YM) / 2.0), ((X0 + XM) / 2.0, (YM + Y1) / 2.0),
+    ((XM + X1) / 2.0, (Y0 + YM) / 2.0), ((XM + X1) / 2.0, (YM + Y1) / 2.0),
+]):
+    fd = bpy.data.lights.new(f"Luz_Interna_Banheiro_{qi+1}", type='POINT')
+    fd.energy = 14
+    fd.shadow_soft_size = 0.35
+    fo = bpy.data.objects.new(f"Luz_Interna_Banheiro_{qi+1}", fd)
+    bpy.context.collection.objects.link(fo)
+    fo.location = (qx, qy, 2.05)
 
 scene = bpy.context.scene
 scene.view_settings.view_transform = 'Standard'
 scene.render.engine = 'CYCLES'
-scene.cycles.use_denoising = False
+scene.cycles.use_denoising = False       # este build do Blender não tem OpenImageDenoiser
 scene.cycles.diffuse_bounces = 8
 scene.cycles.max_bounces = 16
 scene.render.film_transparent = False
@@ -79,13 +86,18 @@ def make_camera(name, location, target, lens=32):
     return cam_obj
 
 
-def render_to(path, res_x=1600, res_y=900, samples=220):
+def render_to(path, res_x=1600, res_y=900, samples=220, exposure=0.0,
+              view_transform='Standard'):
     scene.render.resolution_x = res_x
     scene.render.resolution_y = res_y
     scene.cycles.samples = samples
+    scene.view_settings.exposure = exposure
+    scene.view_settings.view_transform = view_transform
     scene.render.filepath = path
     scene.render.image_settings.file_format = 'PNG'
     bpy.ops.render.render(write_still=True)
+    scene.view_settings.exposure = 0.0
+    scene.view_settings.view_transform = 'Standard'
     print("RENDER_OK:", path)
 
 
@@ -114,9 +126,13 @@ was_hidden = door_ducha1.hide_render if door_ducha1 else None
 if door_ducha1:
     door_ducha1.hide_render = True
 door_y1 = (Y0 + YM) / 2.0
-cam4 = make_camera("Cam_Ducha", (X0 - 1.3, door_y1, 1.5), (XM - 0.2, door_y1, 1.1), lens=32)
+# camera no canto SO da cabine, olhando na diagonal para a parede central
+# (coluna da ducha + chuveiro elétrico + base), mostrando o piso de brita.
+cam4 = make_camera("Cam_Ducha", (X0 + 0.14, Y0 + 0.14, 1.45),
+                   (XM - 0.12, door_y1 + 0.04, 1.55), lens=20)
 scene.camera = cam4
-render_to(os.path.join(renders_dir, "banheiro_ducha_interior.png"), res_x=1400, res_y=1000, samples=220)
+render_to(os.path.join(renders_dir, "banheiro_ducha_interior.png"), res_x=1500, res_y=1100,
+          samples=420, exposure=-0.4, view_transform='AgX')
 if door_ducha1:
     door_ducha1.hide_render = was_hidden
 
@@ -125,9 +141,13 @@ door_lavabo1 = bpy.data.objects.get("Banheiro_Parede_Leste_1_Porta")
 was_hidden2 = door_lavabo1.hide_render if door_lavabo1 else None
 if door_lavabo1:
     door_lavabo1.hide_render = True
-cam5 = make_camera("Cam_Lavabo", (X1 + 1.3, door_y1, 1.5), (XM + 0.2, door_y1, 1.0), lens=32)
+# camera no canto SE da cabine, olhando na diagonal para o vaso encostado
+# na parede central (caixa + bacia + assento) e o piso de brita.
+cam5 = make_camera("Cam_Lavabo", (X1 - 0.16, Y0 + 0.16, 1.55),
+                   (XM + 0.22, door_y1 + 0.05, 0.55), lens=22)
 scene.camera = cam5
-render_to(os.path.join(renders_dir, "banheiro_lavabo_interior.png"), res_x=1400, res_y=1000, samples=220)
+render_to(os.path.join(renders_dir, "banheiro_lavabo_interior.png"), res_x=1500, res_y=1100,
+          samples=420, exposure=0.6, view_transform='AgX')
 if door_lavabo1:
     door_lavabo1.hide_render = was_hidden2
 

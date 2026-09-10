@@ -1,2 +1,6 @@
 __pycache__/
 *.pyc
+
+# render de video: frames intermediarios (regeneraveis por render_walkthrough.py)
+V1/renders/passeio_frames/
+V1/renders/passeio_frames_draft/

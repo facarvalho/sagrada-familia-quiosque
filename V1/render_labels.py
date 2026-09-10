@@ -146,9 +146,9 @@ anchors = [
     },
     {
         "point": (2.0, 3.0, 3.0),
-        "text": ("Telhado de Zinco\n"
+        "text": ("Telhado (Telha Sanduíche PIR)\n"
                  "meia-água, caimento 15% p/ oeste (piscina)\n"
-                 "telhas 1,00 x 4,50 m · terças a cada ~2 m"),
+                 "12 telhas · largura útil 1,00 m · terças T1–T4"),
         "side": "top",
     },
     {

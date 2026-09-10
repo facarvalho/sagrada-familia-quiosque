@@ -16,7 +16,9 @@ with open(projeto_path, "r", encoding="utf-8") as f:
 if scriptdir not in sys.path:
     sys.path.insert(0, scriptdir)
 import V1.extras as extras
-extras.build_all(_projeto_ns)
+_extras_info = extras.build_all(_projeto_ns)
+_schedule = _extras_info.get("roof_frame", {}).get("schedule", {"transversais": [], "tercas": []})
+_drenagem = _extras_info.get("calcadas", {}).get("drenagem", {})
 
 pilares_coords = _projeto_ns["pilares_coords"]
 altura_piso = _projeto_ns["altura_piso"]
@@ -142,11 +144,49 @@ for i in range(n):
         "normal": [nx, ny],
     })
 
+# --- Terças e vigas transversais (numeradas), projetadas para a planta ---
+tercas_plan = []
+for t in _schedule.get("tercas", []):
+    x, y0, y1 = t["x"], t["y0"], t["y1"]
+    tercas_plan.append({
+        "n": t["n"], "comprimento": t["comprimento"],
+        "x": x, "y0": y0, "y1": y1,
+        "p1px": project((x, y0, 2.0)), "p2px": project((x, y1, 2.0)),
+        "midpx": project((x, (y0 + y1) / 2.0, 2.0)),
+    })
+transv_plan = []
+for v in _schedule.get("transversais", []):
+    a, b = v["p1"], v["p2"]
+    transv_plan.append({
+        "n": v["n"], "comprimento": v["comprimento"], "y": v["y"],
+        "p1px": project((a[0], a[1], 2.0)), "p2px": project((b[0], b[1], 2.0)),
+        "midpx": project(((a[0] + b[0]) / 2.0, (a[1] + b[1]) / 2.0, 2.0)),
+    })
+
+# --- Drenagem pluvial (canaleta + cano Ø100), projetada para a planta ---
+drenagem_plan = {}
+if _drenagem:
+    dx = _drenagem["eixo_x"]
+    cy0, cy1 = _drenagem["cano"]
+    gy0, gy1 = _drenagem["canaleta"]
+    by0, by1 = _drenagem["sob_banheiro"]
+    drenagem_plan = {
+        "diam_mm": _drenagem.get("diam_mm", 100),
+        "cano_px": [project((dx, cy0, 0.0)), project((dx, cy1, 0.0))],
+        "canaleta_px": [project((dx, gy0, 0.0)), project((dx, gy1, 0.0))],
+        "sob_banheiro_px": [project((dx, by0, 0.0)), project((dx, by1, 0.0))],
+        "caixa_px": project((dx, _drenagem.get("caixa_y", cy1), 0.0)),
+        "mid_px": project((dx, (cy0 + cy1) / 2.0, 0.0)),
+    }
+
 data = {
     "width": scene.render.resolution_x,
     "height": scene.render.resolution_y,
     "pillars": pillars,
     "edges": edges,
+    "tercas": tercas_plan,
+    "transversais": transv_plan,
+    "drenagem": drenagem_plan,
     "altura_pilar": altura_pilar,
     "diametro_pilar": raio_pilar * 2,
     "altura_tora": _projeto_ns.get("altura_tora", altura_pilar),
@@ -154,6 +194,7 @@ data = {
     "prof_pedestal": _projeto_ns.get("prof_pedestal", 0.0),
     "diametro_pedestal": _projeto_ns.get("raio_pedestal", 0.0) * 2,
     "altura_piso": altura_piso,
+    "esp_piso": _projeto_ns.get("esp_piso", altura_piso or 0.10),
 }
 json_path = os.path.join(scriptdir, "renders", "planta_quiosque.json")
 with open(json_path, "w", encoding="utf-8") as f:
