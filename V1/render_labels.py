@@ -20,6 +20,7 @@ centro_x_piscina = _projeto_ns["centro_x_piscina"]
 centro_y_piscina = _projeto_ns["centro_y_piscina"]
 # Posição real da piscina (casca/água) - pode diferir do centro do piso de
 # concreto ao redor, que não se move junto (ver projeto.py).
+centro_x_piscina_agua = _projeto_ns.get("centro_x_piscina_agua", centro_x_piscina)
 centro_y_piscina_agua = _projeto_ns.get("centro_y_piscina_agua", centro_y_piscina)
 altura_pilar = _projeto_ns["altura_pilar"]
 raio_pilar = _projeto_ns["raio_pilar"]
@@ -126,8 +127,8 @@ scene.render.image_settings.file_format = 'PNG'
 # ---------------------------------------------------------------------------
 # 4b. PONTOS DE ANOTAÇÃO (nomes + medidas), projetados para a câmera do render
 # ---------------------------------------------------------------------------
-x0 = centro_x_piscina - largura_piscina / 2
-x1 = centro_x_piscina + largura_piscina / 2
+x0 = centro_x_piscina_agua - largura_piscina / 2
+x1 = centro_x_piscina_agua + largura_piscina / 2
 y0 = centro_y_piscina_agua - comprimento_piscina / 2
 y1 = centro_y_piscina_agua + comprimento_piscina / 2
 
@@ -157,12 +158,12 @@ anchors = [
         "side": "left",
     },
     {
-        "point": (centro_x_piscina, y0 + 1.5, -0.05),
+        "point": (centro_x_piscina_agua, y0 + 1.5, -0.05),
         "text": "Piscina Esmeralda\n3.70 x 10.50 m\nprof. 1.30 - 1.70 m (~54 m³)",
         "side": "left",
     },
     {
-        "point": (centro_x_piscina, y1 - 1.5, -0.10),
+        "point": (centro_x_piscina_agua, y1 - 1.5, -0.10),
         "text": "Lâmina d'Água\n(nível -0.10 m)",
         "side": "right",
     },

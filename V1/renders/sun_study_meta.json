@@ -1,0 +1,59 @@
+{
+  "cenas": [
+    {
+      "arquivo": "sol_verao_13h.png",
+      "estacao": "verao",
+      "data": "21/12/2026",
+      "hora": "13:00",
+      "azimute_real_deg": 258.4,
+      "elevacao_deg": 76.5
+    },
+    {
+      "arquivo": "sol_verao_15h.png",
+      "estacao": "verao",
+      "data": "21/12/2026",
+      "hora": "15:00",
+      "azimute_real_deg": 258.4,
+      "elevacao_deg": 49.0
+    },
+    {
+      "arquivo": "sol_verao_17h.png",
+      "estacao": "verao",
+      "data": "21/12/2026",
+      "hora": "17:00",
+      "azimute_real_deg": 252.4,
+      "elevacao_deg": 22.0
+    },
+    {
+      "arquivo": "sol_inverno_13h.png",
+      "estacao": "inverno",
+      "data": "21/06/2026",
+      "hora": "13:00",
+      "azimute_real_deg": 342.8,
+      "elevacao_deg": 43.3
+    },
+    {
+      "arquivo": "sol_inverno_15h.png",
+      "estacao": "inverno",
+      "data": "21/06/2026",
+      "hora": "15:00",
+      "azimute_real_deg": 314.1,
+      "elevacao_deg": 28.3
+    },
+    {
+      "arquivo": "sol_inverno_17h.png",
+      "estacao": "inverno",
+      "data": "21/06/2026",
+      "hora": "17:00",
+      "azimute_real_deg": 297.9,
+      "elevacao_deg": 5.6
+    }
+  ],
+  "arrow_tip_px": [
+    -278334.462890625,
+    84738.90014648438
+  ],
+  "rotation_offset_deg": 133.7,
+  "lat": -21.353064729197495,
+  "lon": -45.9900583949398
+}

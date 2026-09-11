@@ -113,7 +113,7 @@ y = section(p, y, "Piscina Esmeralda", [
     ("Dimensões (largura x comprimento)", "3.70 x 10.50 m"),
     ("Profundidade", "1.30 m (rasa) a 1.70 m (funda)"),
     ("Volume aproximado", "~54 m³"),
-    ("Posição do centro (x, y)", "-4.5, 0.25"),
+    ("Posição do centro (x, y)", "-3.67, -0.15 (georreferenciada por GPS/KML)"),
     ("Nível da lâmina d'água", "-0.10 m em relação ao piso"),
 ])
 

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document id="1kP5jKyNiL-nVIqWSGH3EzjHIt5GP1mpT">
+	<name>Projeto sem título</name>
+	<gx:CascadingStyle kml:id="__managed_style_0B10969D2841C39D436B_highlight">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2127&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_0B10969D2841C39D436B">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_0B10969D2841C39D436B_normal</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_0B10969D2841C39D436B_highlight</styleUrl>
+		</Pair>
+	</StyleMap>
+	<gx:CascadingStyle kml:id="__managed_style_066F0AE4C041C39A6997_highlight">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_0B10969D2841C39D436B_normal">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2127&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_066F0AE4C041C39A6997_normal">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_066F0AE4C041C39A6997">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_066F0AE4C041C39A6997_normal</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_066F0AE4C041C39A6997_highlight</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark id="0404610C8C41C39A6989">
+		<name>canto pisco piscina 1</name>
+		<LookAt>
+			<longitude>-45.99001581279595</longitude>
+			<latitude>-21.35303910920393</latitude>
+			<altitude>776.9510668161518</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>39.41009191258218</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_066F0AE4C041C39A6997</styleUrl>
+		<Point>
+			<coordinates>-45.98997069389765,-21.35308042265654,776.8928982875879</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="06D1987D9241C39AC781">
+		<name>canto pisco piscina 2</name>
+		<LookAt>
+			<longitude>-45.99001581279595</longitude>
+			<latitude>-21.35303910920393</latitude>
+			<altitude>776.9510668161518</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>39.41009191258218</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_066F0AE4C041C39A6997</styleUrl>
+		<Point>
+			<coordinates>-45.99002329639482,-21.3531376169034,777.5193949208807</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0AA8A4135A41C39AF944">
+		<name>canto pisco piscina 3</name>
+		<LookAt>
+			<longitude>-45.99001581279595</longitude>
+			<latitude>-21.35303910920393</latitude>
+			<altitude>776.9510668161518</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>39.41009191258218</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_066F0AE4C041C39A6997</styleUrl>
+		<Point>
+			<coordinates>-45.99008934792938,-21.35297487282374,776.8784740953912</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="03CB1713E041C39B3404">
+		<name>canto pisco piscina 4</name>
+		<LookAt>
+			<longitude>-45.99001581279595</longitude>
+			<latitude>-21.35303910920393</latitude>
+			<altitude>776.9510668161518</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>39.41009191258218</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_066F0AE4C041C39A6997</styleUrl>
+		<Point>
+			<coordinates>-45.99014327805587,-21.35302700486034,777.4448781410773</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0C382E46A741C39BE026">
+		<name>canto piscina 1</name>
+		<LookAt>
+			<longitude>-45.99001581279595</longitude>
+			<latitude>-21.35303910920393</latitude>
+			<altitude>776.9510668161518</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>39.41009191258218</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_066F0AE4C041C39A6997</styleUrl>
+		<Point>
+			<coordinates>-45.99003962675136,-21.3530895377555,777.3294719565472</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="094DD6580E41C39C1C76">
+		<name>canto piscina 2</name>
+		<LookAt>
+			<longitude>-45.99001581279595</longitude>
+			<latitude>-21.35303910920393</latitude>
+			<altitude>776.9510668161518</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>39.41009191258218</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_066F0AE4C041C39A6997</styleUrl>
+		<Point>
+			<coordinates>-45.99002135220582,-21.35307358175373,777.1553159955486</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="043785C08F41C39C4793">
+		<name>canto piscina 3</name>
+		<LookAt>
+			<longitude>-45.99001581279595</longitude>
+			<latitude>-21.35303910920393</latitude>
+			<altitude>776.9510668161518</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>39.41009191258218</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_066F0AE4C041C39A6997</styleUrl>
+		<Point>
+			<coordinates>-45.9900876212287,-21.35301118420442,777.1291711980514</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0E5D01642641C39C9C5F">
+		<name>canto piscina 4</name>
+		<LookAt>
+			<longitude>-45.99001581279595</longitude>
+			<latitude>-21.35303910920393</latitude>
+			<altitude>776.9510668161518</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>39.41009191258218</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_066F0AE4C041C39A6997</styleUrl>
+		<Point>
+			<coordinates>-45.99010584253725,-21.35302836521769,777.3129383920262</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="038F35EF8D41C39D2E00">
+		<name>P9</name>
+		<LookAt>
+			<longitude>-45.99000075865621</longitude>
+			<latitude>-21.35308233981736</latitude>
+			<altitude>777.085065235114</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>39.27609062188367</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0B10969D2841C39D436B</styleUrl>
+		<Point>
+			<coordinates>-45.99002345910391,-21.3531374023157,777.5190907460113</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0DE745813841C39E859F">
+		<name>P1</name>
+		<LookAt>
+			<longitude>-45.99000863684123</longitude>
+			<latitude>-21.35310253058332</latitude>
+			<altitude>777.2238020217161</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>24.99999605342965</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0B10969D2841C39D436B</styleUrl>
+		<Point>
+			<coordinates>-45.99007943129325,-21.35308730348391,777.5080432785169</coordinates>
+		</Point>
+	</Placemark>
+</Document>
+</kml>

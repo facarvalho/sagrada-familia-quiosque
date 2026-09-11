@@ -14,10 +14,17 @@ collection = bpy.context.collection
 # ---------------------------------------------------------------------------
 centro_x_piscina = -4.5
 centro_y_piscina = 1.25
-# A piscina (casca + água) foi deslocada 1m para reduzir a sombra do
-# quiosque sobre a água - mas o piso de concreto ao redor (chao_piscina)
-# permanece no centro original, por isso usa uma variável separada.
-centro_y_piscina_agua = centro_y_piscina - 1.0
+# Posição REAL da piscina (casca + água), já construída, extraída de
+# V1/cordenadas.kml (pontos "canto piscina 1-4", GPS/Google Earth) e
+# georreferenciada usando os pilares do quiosque (P1/P9) como âncora - ver
+# V1/sun_geo.py (ROTATION_OFFSET_DEG = 133,7°, o eixo do quiosque NÃO é o
+# norte verdadeiro). Antes deste ajuste o centro era um chute que ficava
+# ~1 m fora do lugar; o tamanho continua o do fabricante (abaixo). O piso
+# de concreto ao redor (chao_piscina) usa variável separada e ficou onde
+# estava - já cobria a posição real com folga, e alinhar seu centro ao da
+# piscina fazia o retângulo de 9 m colidir com o piso do quiosque (x>=0).
+centro_x_piscina_agua = -3.67
+centro_y_piscina_agua = -0.15
 
 # --- Pilares: tora de eucalipto 12/14 sobre pedestal de concreto ---------
 # O pedestal (sapata cilíndrica de concreto) vai de 0,30 m abaixo do piso
@@ -236,7 +243,7 @@ chao_piscina.data.materials.append(mat_concreto_geral)
 # Escavação e Casca da Piscina
 bpy.ops.mesh.primitive_cube_add(
     size=1.0,
-    location=(centro_x_piscina, centro_y_piscina_agua, nivel_piscina - (prof_funda / 2))
+    location=(centro_x_piscina_agua, centro_y_piscina_agua, nivel_piscina - (prof_funda / 2))
 )
 casca_piscina = bpy.context.active_object
 casca_piscina.name = "Piscina_Esmeralda_Casca"
@@ -262,7 +269,7 @@ mod_bool.object = casca_piscina
 # Lâmina d'Água
 bpy.ops.mesh.primitive_plane_add(
     size=1.0,
-    location=(centro_x_piscina, centro_y_piscina_agua, nivel_piscina - 0.10)
+    location=(centro_x_piscina_agua, centro_y_piscina_agua, nivel_piscina - 0.10)
 )
 agua_piscina = bpy.context.active_object
 agua_piscina.name = "Piscina_Esmeralda_Agua"
