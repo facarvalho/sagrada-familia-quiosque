@@ -44,9 +44,9 @@
       ]
     },
     {
-      id: "v3", label: "V3 — quina nordeste",
+      id: "v3", label: "Quiosque com fundo p/ casa da mãe",
       items: ["10h","11h","12h","13h","14h","15h","16h","17h","18h","19h"].map(function(h){
-        return ["V3/renders/projeto_render_"+h+".png", "V3 (atravessado, quina NE) — "+h];
+        return ["V3/renders/projeto_render_"+h+".png", "Fundo p/ casa da mãe — "+h];
       })
     },
     {
@@ -56,10 +56,15 @@
       })
     },
     {
-      id: "v5", label: "V5 — borda norte",
-      items: ["7h","8h","9h","10h","11h","12h","13h","14h","15h","16h","17h","18h"].map(function(h){
-        return ["V5/renders/projeto_render_"+h+".png", "V5 (borda norte) — "+h];
-      })
+      id: "v6", label: "Quiosque com fundo p/ cerca do Fernando",
+      items: [].concat(
+        ["15h","16h","17h","18h","19h"].map(function(h){
+          return ["V6/renders/sol_verao_"+h+"_anotado.png", "Cerca do Fernando — verão, "+h];
+        }),
+        ["15h","16h","17h","18h","19h"].map(function(h){
+          return ["V6/renders/sol_inverno_"+h+"_anotado.png", "Cerca do Fernando — inverno, "+h];
+        })
+      )
     }
   ];
 

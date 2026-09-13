@@ -1,8 +1,9 @@
-# V3 — Quiosque atravessado no pé da piscina + estudo de insolação
+# V3 — "Quiosque com fundo para a casa da mãe" + estudo de insolação
 
-Variante do projeto para avaliar a **incidência de sol** com o quiosque
-**girado 90° e atravessado na extremidade rasa (sul) da piscina**, com o
-lado aberto voltado para a água.
+Nome dado pelo usuário: nesta posição o fundo do quiosque fica voltado
+para a casa da mãe. Variante do projeto para avaliar a **incidência de
+sol** com o quiosque **girado 90° e atravessado na extremidade rasa (sul)
+da piscina**, com o lado aberto voltado para a água.
 
 ## O que muda
 
