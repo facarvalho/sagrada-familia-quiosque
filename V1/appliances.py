@@ -1,7 +1,9 @@
 """
-Geladeira e fogão encostados na parede sul, entre os pilares 1 (0,0) e
-2 (4,0) - completando a área gourmet (bancada com pia/churrasqueira fica
-na parede leste, entre pilares 2 e 3).
+Pia, fogão e geladeira, todos na parede SUL (entre os pilares 1 e 2), em
+fileira ao lado da janela (ver counter.py p/ a pia + wall.py p/ a janela):
+pia sob a janela, fogão ao lado da pia, geladeira ao lado do fogão -
+fogão e geladeira ficam então lado a lado (paralelos), como pedido pelo
+usuário. A bancada da parede leste (x=4) ficou só com a churrasqueira.
 """
 import bpy
 
@@ -45,22 +47,11 @@ def build(ns):
     mat_inox = _mat("Material_Eletro_Inox", (0.72, 0.73, 0.75, 1.0), roughness=0.3, metallic=0.85)
     mat_preto = _mat("Material_Eletro_Preto", (0.05, 0.05, 0.05, 1.0), roughness=0.4)
 
-    Y_WALL = 1.53  # face interna da parede sul (y=1,5 +- espessura/2)
+    Y_WALL = 1.53  # face interna da parede sul (mesma cota da pia, counter.py)
 
-    # --- Geladeira (perto do Pilar 2, ao lado da área gourmet) --------------
-    fr_w, fr_d, fr_h = 0.68, 0.65, 1.80
-    fr_cx, fr_cy = 2.85, Y_WALL + fr_d / 2.0
-    _box("Geladeira_Corpo", fr_cx, fr_cy, altura_piso + fr_h / 2.0, fr_w, fr_d, fr_h, mat_inox)
-    _box("Geladeira_Linha_Divisoria", fr_cx, fr_cy - fr_d / 2.0 - 0.005, altura_piso + fr_h * 0.62,
-         fr_w - 0.04, 0.01, 0.02, mat_preto)
-    _box("Geladeira_Puxador_1", fr_cx + fr_w / 2.0 - 0.04, fr_cy - fr_d / 2.0 - 0.02,
-         altura_piso + fr_h * 0.8, 0.03, 0.03, 0.35, mat_preto)
-    _box("Geladeira_Puxador_2", fr_cx + fr_w / 2.0 - 0.04, fr_cy - fr_d / 2.0 - 0.02,
-         altura_piso + fr_h * 0.35, 0.03, 0.03, 0.30, mat_preto)
-
-    # --- Fogão (entre a geladeira e o Pilar 1) ------------------------------
+    # --- Fogão (ao lado da pia, que fica em x=2,2 - counter.py) ------------
     st_w, st_d, st_h = 0.60, 0.60, 0.90
-    st_cx, st_cy = 1.6, Y_WALL + st_d / 2.0
+    st_cx, st_cy = 2.925, Y_WALL + st_d / 2.0
     _box("Fogao_Corpo", st_cx, st_cy, altura_piso + st_h / 2.0, st_w, st_d, st_h, mat_inox)
     _box("Fogao_Cooktop", st_cx, st_cy, altura_piso + st_h + 0.01, st_w - 0.02, st_d - 0.02, 0.02, mat_preto)
     for i, sx in enumerate((-1, 1)):
@@ -69,5 +60,16 @@ def build(ns):
                  altura_piso + st_h + 0.02, 0.06, 0.01, mat_preto)
     _box("Fogao_Forno_Porta", st_cx, st_cy - st_d / 2.0 - 0.005, altura_piso + st_h * 0.35,
          st_w - 0.06, 0.01, st_h * 0.55, mat_preto)
+
+    # --- Geladeira (ao lado do fogão - fogão e geladeira ficam paralelos) --
+    fr_w, fr_d, fr_h = 0.68, 0.65, 1.80
+    fr_cx, fr_cy = 3.615, Y_WALL + fr_d / 2.0
+    _box("Geladeira_Corpo", fr_cx, fr_cy, altura_piso + fr_h / 2.0, fr_w, fr_d, fr_h, mat_inox)
+    _box("Geladeira_Linha_Divisoria", fr_cx, fr_cy - fr_d / 2.0 - 0.005, altura_piso + fr_h * 0.62,
+         fr_w - 0.04, 0.01, 0.02, mat_preto)
+    _box("Geladeira_Puxador_1", fr_cx + fr_w / 2.0 - 0.04, fr_cy - fr_d / 2.0 - 0.02,
+         altura_piso + fr_h * 0.8, 0.03, 0.03, 0.35, mat_preto)
+    _box("Geladeira_Puxador_2", fr_cx + fr_w / 2.0 - 0.04, fr_cy - fr_d / 2.0 - 0.02,
+         altura_piso + fr_h * 0.35, 0.03, 0.03, 0.30, mat_preto)
 
     return {"fridge_pos": (fr_cx, fr_cy), "stove_pos": (st_cx, st_cy)}

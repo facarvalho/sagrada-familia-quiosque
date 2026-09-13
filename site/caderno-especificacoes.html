@@ -16,13 +16,17 @@
   .spec-row:last-child{ border-bottom:none; }
   .spec-row .l{ color:var(--ink-dim); }
   .spec-row .v{ text-align:right; font-family:"IBM Plex Mono",monospace; font-size:12.5px; }
+  .gal-strip{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:20px 0; }
+  .gal-strip figure{ margin:0; background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .gal-strip img{ width:100%; aspect-ratio:4/3; object-fit:cover; }
+  .gal-strip figcaption{ padding:8px 10px; font-size:12.5px; color:var(--ink-dim); }
 </style>
 </head>
 <body>
 <header class="site no-print">
   <div class="wrap bar">
     <a class="brand" href="index.html">
-      <span class="eyebrow">Sítio Harmonia · Alfenas, MG</span>
+      <span class="eyebrow">Sítio Sagrada Família · Alfenas, MG</span>
       <span class="name">Quiosque da Piscina</span>
     </a>
     <nav class="site">
@@ -76,6 +80,12 @@
         <div class="spec-row"><span class="l">Banheiros</span><span class="v">h 2,50 m, verga s/ portas</span></div>
         <div class="spec-row"><span class="l">Área total</span><span class="v">79,3 m²</span></div>
       </div>
+    </div>
+
+    <div class="gal-strip">
+      <figure><img src="../V1/renders/piso_quiosque_medidas.png" alt="Piso do quiosque e calçada, com medidas"><figcaption>Piso do quiosque + calçada — medidas</figcaption></figure>
+      <figure><img src="../V1/renders/planta_quiosque_anotada.png" alt="Planta geral cotada dos pilares"><figcaption>Planta geral — pilares P1–P10</figcaption></figure>
+      <figure><img src="../V1/renders/vista_aerea.png" alt="Vista aérea da propriedade com a piscina"><figcaption>Vista aérea — piscina + quiosque</figcaption></figure>
     </div>
   </section>
 

@@ -1,22 +1,48 @@
 """
-"Prova de sol": renderiza o projeto (piscina + quiosque, geometria e
-posições ORIGINAIS de projeto.py/extras.py - nada foi redimensionado)
-iluminado pela posição REAL do sol, calculada a partir das coordenadas
-geográficas do terreno (V1/cordenadas.kml -> V1/sun_geo.py).
+V6 - Quiosque na QUINA SUDESTE da laje da piscina (outro canto, a pedido do
+usuario) + prova de incidencia de sol REAL (verao/inverno), mesmo metodo de
+V1/render_sun_study.py (algoritmo NOAA + coordenadas geograficas reais do
+terreno, V1/sun_geo.py) - NAO usa o azimute/elevacao simplificado de
+V3/V4/V5.
 
-Gera 10 imagens: solstício de verão (21/12) e de inverno (21/06), às
-15h/16h/17h/18h/19h (horário de Brasília) — mesmo formato usado nas
-"visões" de posicionamento alternativo (V3/V4/V6), para comparar
-igual-a-igual. Inclui também o entorno real (cerca/café/terreno de
-V1/contexto_externo.py) e a piscina, na posição REAL atual do projeto (sem
-nenhuma rotação/translação — este é o projeto como está, não uma variante
-de posicionamento).
+--- De onde veio a posicao ------------------------------------------------
+O usuario marcou 3 pontos de referencia num novo KML ("Projeto sem titulo
+(1).kml"): p1, P8, p9 - mesmos nomes dos pilares originais, mas em outro
+lugar do terreno. Esses pontos foram convertidos de GPS para o referencial
+do projeto usando a MESMA calibracao ja validada em V1/sun_geo.py (ancora
+em P9, rotacao 133.7 graus, ~3cm de erro conhecido nessa ancora).
 
-Uso (bootstrap obrigatório, ver memória piscina-render-import-bootstrap):
+Ajuste por Procrustes 2D (rotacao+translacao, sem distorcer escala) usando
+os 3 pontos (P1,P8,P9 do projeto <-> p1,P8,p9 novos): rotacao otima -87,5
+graus, erro RMS ~1,8 m (esperado - sao cliques aproximados sobre imagem de
+satelite, nao um levantamento GPS preciso como o par P1/P9 original).
+P8 e P9 (os dois pontos mais proximos entre si) bateram bem (~1-1,3 m);
+P1 (a 8 m de P9) teve o pior ajuste (~2,5 m) - provavelmente o clique menos
+preciso dos tres.
+
+Em vez de usar o ajuste ruidoso, foi adotada a leitura geometrica limpa que
+esses 3 pontos indicam: girar o quiosque -90 graus em Z e ancorar o pilar
+P9 (canto reentrante do "L") exatamente na quina SUDESTE da laje da
+piscina (Piso_Area_Piscina, x em [-9,0], y em [-7,9.5] -> quina SE = (0,-7)),
+o mesmo tipo de ancoragem "canto reentrante = quina da laje" que ja existe
+no projeto original (P9 casa com a quina NORDESTE). O lado aberto passa a
+apontar para o NORTE (de volta para a laje/piscina), em vez de para OESTE.
+
+Transformacao aplicada a todo objeto do quiosque (pilares, piso, telhado,
+paredes, moveis):
+    novo_ponto = Rot(-90 graus, Z) aplicado a (ponto - P9_original) + quina_SE
+    P9_original = (0.4, 9.5, 0) ; quina_SE = (0.0, -7.0, 0)
+
+Gera 6 imagens (verao 21/12 e inverno 21/06, as 13h/15h/17h, sol na posicao
+REAL do ceu para o terreno) em V6/renders/sol_{estacao}_{h}h.png, iguais em
+formato as de V1/renders/sol_*.png (mesma legenda depois, via
+V6/annotate_sun_study.py).
+
+Uso (bootstrap obrigatorio - ver memoria piscina-render-import-bootstrap):
   BL=~/opt/blender-4.2.23-linux-x64/blender
   $BL --background --factory-startup \
       --python-expr "__import__('sys').path.insert(0,'/home/fac/piscina')" \
-      --python V1/render_sun_study.py
+      --python V6/render_v6_sol.py
 """
 import bpy
 import os
@@ -26,16 +52,17 @@ import json
 import mathutils
 
 scriptdir = os.path.dirname(os.path.abspath(__file__))
-if scriptdir not in sys.path:
-    sys.path.insert(0, scriptdir)
 repo_root = os.path.dirname(scriptdir)
+v1dir = os.path.join(repo_root, "V1")
+if v1dir not in sys.path:
+    sys.path.insert(0, v1dir)
 if repo_root not in sys.path:
     sys.path.insert(0, repo_root)
 
 # ---------------------------------------------------------------------------
-# 1. CONSTRÓI O PROJETO (igual render_projeto.py)
+# 1. CONSTROI O PROJETO ORIGINAL (igual render_sun_study.py, nada mudado)
 # ---------------------------------------------------------------------------
-projeto_path = os.path.join(scriptdir, "projeto.py")
+projeto_path = os.path.join(v1dir, "projeto.py")
 with open(projeto_path, "r", encoding="utf-8") as f:
     _projeto_ns = {"__name__": "__main__"}
     exec(compile(f.read(), projeto_path, "exec"), _projeto_ns)
@@ -51,15 +78,52 @@ import V1.contexto_externo as contexto_externo
 contexto_externo.build(_projeto_ns)
 
 # ---------------------------------------------------------------------------
-# 2. SETA DE NORTE VERDADEIRO (referência visual em cena)
+# 2. QUIOSQUE NA QUINA SUDESTE DA LAJE (-90 graus em Z, P9 -> quina SE)
+# ---------------------------------------------------------------------------
+_manter = {"Piso_Area_Piscina", "Piscina_Cortador_Boolean"}
+def _e_piscina(nome):
+    return nome in _manter or nome.startswith("Piscina_")
+
+_quiosque = [o for o in bpy.data.objects
+             if o.type in {"MESH", "EMPTY"} and not _e_piscina(o.name)
+             and not o.name.startswith(("Cerca_", "Cafe_", "Terreno_"))]
+
+_pivot = mathutils.Vector((0.4, 9.5, 0.0))   # P9 original (canto reentrante do "L")
+_target = mathutils.Vector((0.0, -7.0, 0.0))  # quina SE da laje (Piso_Area_Piscina)
+_Rz = mathutils.Matrix.Rotation(math.radians(-90.0), 4, 'Z')
+_transform = mathutils.Matrix.Translation(_target) @ _Rz @ mathutils.Matrix.Translation(-_pivot)
+
+for obj in _quiosque:
+    obj.matrix_world = _transform @ obj.matrix_world
+bpy.context.view_layer.update()
+
+# --- Terreno (gramado) sob a nova area, para o quiosque nao "flutuar" e
+#     para receber as sombras do estudo. Mesmo recorte booleano da piscina.
+bpy.ops.mesh.primitive_plane_add(size=80.0, location=(-4.0, -8.0, -0.05))
+terreno = bpy.context.active_object
+terreno.name = "Terreno_V6"
+mat_terreno = bpy.data.materials.new("Material_Terreno_V6")
+mat_terreno.use_nodes = True
+_bsdf = mat_terreno.node_tree.nodes.get("Principled BSDF")
+_bsdf.inputs["Base Color"].default_value = (0.40, 0.46, 0.34, 1.0)
+_bsdf.inputs["Roughness"].default_value = 0.95
+terreno.data.materials.append(mat_terreno)
+_cutter = bpy.data.objects.get("Piscina_Cortador_Boolean")
+if _cutter:
+    _mb = terreno.modifiers.new(name="Corte_Piscina", type='BOOLEAN')
+    _mb.operation = 'DIFFERENCE'
+    _mb.object = _cutter
+
+# ---------------------------------------------------------------------------
+# 3. SETA DE NORTE VERDADEIRO (mesma logica de render_sun_study.py)
 # ---------------------------------------------------------------------------
 nx, ny = sun_geo.true_north_vector_project_xy()
-arrow_origin = mathutils.Vector((6.5, 3.0, 0.03))
+arrow_origin = mathutils.Vector((5.0, -5.5, 0.03))
 arrow_len = 2.2
 arrow_tip = arrow_origin + mathutils.Vector((nx, ny, 0.0)) * arrow_len
 
-mesh_arrow = bpy.data.meshes.new("Mesh_Seta_Norte")
-obj_arrow = bpy.data.objects.new("Seta_Norte_Verdadeiro", mesh_arrow)
+mesh_arrow = bpy.data.meshes.new("Mesh_Seta_Norte_V6")
+obj_arrow = bpy.data.objects.new("Seta_Norte_Verdadeiro_V6", mesh_arrow)
 bpy.context.collection.objects.link(obj_arrow)
 perp = mathutils.Vector((-ny, nx, 0.0))
 w = 0.18
@@ -71,29 +135,33 @@ p5 = arrow_tip - perp * (w * 2.2) - mathutils.Vector((nx, ny, 0.0)) * 0.35
 verts = [p1, p2, p3, p4, arrow_tip + mathutils.Vector((nx, ny, 0.0)) * 0.35, p5]
 mesh_arrow.from_pydata([tuple(v) for v in verts], [], [[0, 1, 2], [3, 4, 5]])
 mesh_arrow.update()
-mat_norte = bpy.data.materials.new("Material_Seta_Norte")
+mat_norte = bpy.data.materials.new("Material_Seta_Norte_V6")
 mat_norte.use_nodes = True
 mat_norte.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (1.0, 0.05, 0.05, 1.0)
 mat_norte.node_tree.nodes["Principled BSDF"].inputs["Roughness"].default_value = 0.6
 obj_arrow.data.materials.append(mat_norte)
 
 # ---------------------------------------------------------------------------
-# 3. CÂMERA (mesma composição de render_projeto.py, para comparar as 6 fotos)
+# 4. CAMERA - ponto de vista REAL pedido pelo usuario (lat -21.3530973,
+#    lon -45.9900076 -> convertido pro referencial do projeto com a mesma
+#    calibracao de V1/sun_geo.py, ancora P1/P9): (-3.93, 7.63), na borda
+#    norte do deck/piscina, olhando para o quiosque na nova posicao (quina
+#    SE) - a piscina fica em primeiro plano, o quiosque ao fundo.
 # ---------------------------------------------------------------------------
 cam_data = bpy.data.cameras.new("Camera_Render")
-cam_data.lens = 32
+cam_data.lens = 20   # mais aberta p/ pegar a cerca/cafe no entorno tambem
 cam_obj = bpy.data.objects.new("Camera_Render", cam_data)
 bpy.context.collection.objects.link(cam_obj)
 
-cam_location = mathutils.Vector((-16.0, -12.0, 9.0))
-target = mathutils.Vector((-2.0, 4.0, 0.8))
+cam_location = mathutils.Vector((-3.93, 7.63, 1.6))   # altura de olho humano
+target = mathutils.Vector((-2.5, -7.5, 0.8))          # centro do quiosque na nova posicao
 cam_obj.location = cam_location
 direction = target - cam_location
 cam_obj.rotation_euler = direction.to_track_quat('-Z', 'Y').to_euler()
 bpy.context.scene.camera = cam_obj
 
 # ---------------------------------------------------------------------------
-# 4. MUNDO (fundo plano = luz de preenchimento, igual render_projeto.py)
+# 5. MUNDO (fundo fraco, igual render_sun_study.py - sombra tem que aparecer)
 # ---------------------------------------------------------------------------
 world = bpy.context.scene.world
 if world is None:
@@ -105,10 +173,6 @@ nt.nodes.clear()
 bg_node = nt.nodes.new("ShaderNodeBackground")
 out_node = nt.nodes.new("ShaderNodeOutputWorld")
 bg_node.inputs["Color"].default_value = (0.55, 0.62, 0.72, 1.0)
-# Fraco de propósito: aqui o objetivo é a "prova de sol" mostrar sombra
-# nítida e correta (não uma foto bonita) - se o fundo domina como
-# preenchimento onidirecional (era 1.1 no render_projeto.py), a sombra do
-# quiosque sobre o deck/piscina praticamente desaparece.
 bg_node.inputs["Strength"].default_value = 0.3
 nt.links.new(bg_node.outputs["Background"], out_node.inputs["Surface"])
 
@@ -117,7 +181,7 @@ scene_view.view_transform = 'Standard'
 scene_view.exposure = 0.0
 
 # ---------------------------------------------------------------------------
-# 5. RENDER (Cycles, com denoiser OIDN se disponível - blender 4.2.23 LTS)
+# 6. RENDER (Cycles, denoiser OIDN se disponivel)
 # ---------------------------------------------------------------------------
 scene = bpy.context.scene
 scene.render.engine = 'CYCLES'
@@ -148,7 +212,7 @@ except TypeError:
 print(f"Denoiser disponivel: {has_denoiser}, samples={scene.cycles.samples}")
 
 # ---------------------------------------------------------------------------
-# 6. SOL: 6 combinações (verao/inverno x 13h/15h/17h)
+# 7. SOL: 6 combinacoes (verao/inverno x 13h/15h/17h), posicao REAL (NOAA)
 # ---------------------------------------------------------------------------
 sun_data = bpy.data.lights.new("Sol", type='SUN')
 sun_data.angle = math.radians(3.0)
@@ -162,13 +226,12 @@ CENAS = [("verao", 2026, 12, 21, h, 0) for h in HORAS] \
 out_dir = os.path.join(scriptdir, "renders")
 os.makedirs(out_dir, exist_ok=True)
 
-# posição de tela (px) da ponta da seta de norte, para a legenda 2D
 region = bpy.context.scene.render
 from bpy_extras.object_utils import world_to_camera_view
 co2d = world_to_camera_view(bpy.context.scene, cam_obj, arrow_tip)
 arrow_tip_px = (co2d.x * region.resolution_x, (1 - co2d.y) * region.resolution_y)
 
-meta = {"cenas": []}
+meta = {"cenas": [], "posicao": "V6 - quina sudeste da laje (-90 graus, P9 ancorado em (0,-7))"}
 
 for estacao, y, m, d, h, mi in CENAS:
     azimuth, elevation = sun_geo.solar_position(y, m, d, h, mi)
@@ -176,19 +239,9 @@ for estacao, y, m, d, h, mi in CENAS:
     travel_dir = mathutils.Vector((-dx, -dy, -dz))
     sun_obj.rotation_euler = travel_dir.to_track_quat('-Z', 'Y').to_euler()
 
-    # energia/cor: sol precisa DOMINAR sobre o preenchimento do fundo (0.3)
-    # para lançar sombra nítida e visível - sol baixo = mais quente. Sol
-    # abaixo do horizonte (elevacao <= 0): sem luz direta, fundo escurece.
-    if elevation <= 0.0:
-        sun_data.energy = 0.0
-        bg_node.inputs["Strength"].default_value = 0.05
-        bg_node.inputs["Color"].default_value = (0.05, 0.06, 0.09, 1.0)
-    else:
-        t = max(0.0, min(1.0, elevation / 70.0))
-        sun_data.energy = 5.0 + 3.0 * t
-        sun_data.color = (1.0, 0.55 + 0.35 * t, 0.35 + 0.45 * t)
-        bg_node.inputs["Strength"].default_value = 0.3
-        bg_node.inputs["Color"].default_value = (0.55, 0.62, 0.72, 1.0)
+    t = max(0.0, min(1.0, elevation / 70.0))
+    sun_data.energy = 5.0 + 3.0 * t
+    sun_data.color = (1.0, 0.55 + 0.35 * t, 0.35 + 0.45 * t)
 
     fname = f"sol_{estacao}_{h:02d}h.png"
     fpath = os.path.join(out_dir, fname)
@@ -211,4 +264,4 @@ meta["lon"] = sun_geo.LON
 with open(os.path.join(out_dir, "sun_study_meta.json"), "w", encoding="utf-8") as f:
     json.dump(meta, f, ensure_ascii=False, indent=2)
 
-print("ALLDONE_SUN_STUDY")
+print("ALLDONE_SUN_STUDY_V6")

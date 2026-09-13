@@ -1,52 +1,52 @@
-# V3 — "Quiosque com fundo para a casa da mãe" + estudo de insolação
+# Visão: Casa da Mãe
 
 Nome dado pelo usuário: nesta posição o fundo do quiosque fica voltado
-para a casa da mãe. Variante do projeto para avaliar a **incidência de
-sol** com o quiosque **girado 90° e atravessado na extremidade rasa (sul)
-da piscina**, com o lado aberto voltado para a água.
+para a casa da mãe. Reescrita em 13/09/2026 para usar dados reais (antes
+usava posição sintética + cálculo solar simplificado com coordenadas de
+São Paulo) — mesma metodologia da V6 ("cerca do Fernando").
+
+## De onde veio a posição
+
+O usuário deu o ponto GPS real do pilar P9 nesta posição:
+`-21.352973052981856, -45.99008896729865`. Convertido para o referencial
+do projeto com a mesma calibração de `V1/sun_geo.py` (âncora P1/P9,
+rotação 133,7°) → **(−8,03 ; −7,92)**.
 
 ## O que muda
 
-- O quiosque inteiro (pilares, piso em L, telhado meia-água, estrutura de
-  vigas e todos os módulos de `extras.py`) é **rotacionado −90° em Z** e
-  transladado para:
-  - centralizar o trecho de 12 m no eixo da piscina (`x = -4,5`);
-  - encostar o lado aberto logo ao sul da extremidade rasa (`y ≈ -5`).
-- A **piscina e o piso de concreto** ao redor permanecem no lugar.
-- Um **terreno (gramado)** é adicionado sob a área para o quiosque não
-  flutuar e para receber as sombras (recebe o mesmo recorte booleano da
-  piscina).
-- Nenhum arquivo do projeto original é alterado — `render_v3_sol.py`
-  executa `projeto.py` + `extras.py` + `fixes.py` e aplica a transformação
-  na cena já montada.
-- Câmera posicionada do lado da piscina (norte), olhando para o quiosque.
+`V3/render_v3_sol.py` agora só chama `V1/variant_sol_common.py`
+(compartilhado com V4 e V6):
+1. Constrói o projeto original (`projeto.py` + `extras.py` + `fixes.py`),
+   sem alterar nenhum arquivo original.
+2. Gira o quiosque **−90° em Z em torno do pilar P9 original** (0,4 ; 9,5)
+   e translada até o ponto real acima.
+3. Adiciona o entorno real — cerca, café e terreno
+   (`V1/contexto_externo.py`, dados do projeto de fibra óptica
+   `sagrada-familia-infra`) — **sem** girar/mover esses objetos junto (eles
+   já estão nas coordenadas reais certas).
+4. Câmera enquadrando quiosque + piscina (lente 20 mm).
 
 ## Estudo solar
 
-Gera **somente** a vista `projeto_render`, uma imagem por hora cheia das
-**10h às 19h**, com o Sol na posição real do céu (algoritmo NOAA).
-
-Local/data assumidos (edite as constantes no topo de `render_v3_sol.py` se
-o terreno for em outra cidade):
-
-| Parâmetro | Valor |
-|---|---|
-| Latitude | −23,55° (São Paulo/SP) |
-| Longitude | −46,63° |
-| Fuso | −3 (Brasília) |
-| Data | 2026-08-31 |
-
-Após o pôr do sol (18h/19h nesta data) o Sol fica abaixo do horizonte: a
-luz direta é desligada e a cena aparece em penumbra.
-
-Como o Sol no hemisfério sul cruza o céu pelo **norte**, e o quiosque
-fica ao **sul** da piscina, a sombra do quiosque cai para longe da água —
-a piscina recebe sol praticamente o dia todo nesta configuração.
+10 imagens: verão (solstício 21/12) e inverno (solstício 21/06), às
+**15h, 16h, 17h, 18h e 19h** (horário de Brasília), sol na posição real do
+céu (algoritmo NOAA, `V1/sun_geo.py`, coordenadas reais de Alfenas-MG).
+Saídas em `V3/renders/sol_{estacao}_{h}h.png`, com legenda
+(`_anotado.png`) via `V3/annotate_sun_study.py`.
 
 ## Como gerar
 
 ```bash
-blender --background --factory-startup --python V3/render_v3_sol.py
+BL=~/opt/blender-4.2.23-linux-x64/blender
+$BL --background --factory-startup \
+    --python-expr "__import__('sys').path.insert(0,'/home/fac/piscina')" \
+    --python V3/render_v3_sol.py
+python3 V3/annotate_sun_study.py
 ```
 
-Saídas em `V3/renders/projeto_render_10h.png` … `projeto_render_19h.png`.
+## Ressalva
+
+Só um ponto (P9) foi dado nesta posição — a rotação de −90° foi assumida
+por analogia com a V6 (mesma faixa sul da propriedade), não derivada de
+múltiplos pontos como na V6. Suficiente para uma prova de incidência de
+sol; para posicionamento definitivo de obra, medir mais pontos no local.

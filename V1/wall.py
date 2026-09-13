@@ -68,6 +68,8 @@ def build(ns):
     altura_piso = ns["altura_piso"]
 
     mat_muro = _mat("Material_Muro_Tendinoso", (0.80, 0.78, 0.72, 1.0), roughness=0.97)
+    mat_vidro = _mat("Material_Janela_Vidro", (0.75, 0.85, 0.88, 0.35), roughness=0.05, metallic=0.0)
+    mat_caixilho = _mat("Material_Janela_Caixilho", (0.18, 0.18, 0.19, 1.0), roughness=0.4, metallic=0.6)
 
     p1 = pilares_coords[0]
     p2 = pilares_coords[1]
@@ -84,9 +86,46 @@ def build(ns):
     def wall_segment(name, a, b):
         _panel(name, a, b, Z0, zt(a[0]), zt(b[0]), WT, mat_muro)
 
-    wall_segment("Parede_Sul_1_2", p1, p2)
+    # --- Parede sul (P1-P2), com janela sobre a pia nova (ver counter.py) --
+    # Pia na parede sul centrada em x=2,2 (mesma posição em counter.py) -
+    # janela de 1,10 m de largura, peitoril a 1,00 m, verga a 2,00 m.
+    WIN_CX = 2.2
+    WIN_W = 1.10
+    WIN_X0, WIN_X1 = WIN_CX - WIN_W / 2.0, WIN_CX + WIN_W / 2.0
+    WIN_SILL = Z0 + 1.00
+    WIN_TOP = Z0 + 2.00
+    y_sul = p1[1]
+
+    wall_segment("Parede_Sul_1_Janela", p1, (WIN_X0, y_sul, 0.0))
+    wall_segment("Parede_Sul_Janela_2", (WIN_X1, y_sul, 0.0), p2)
+    _panel("Parede_Sul_Peitoril", (WIN_X0, y_sul, 0.0), (WIN_X1, y_sul, 0.0),
+           Z0, WIN_SILL, WIN_SILL, WT, mat_muro)
+    _panel("Parede_Sul_Verga", (WIN_X0, y_sul, 0.0), (WIN_X1, y_sul, 0.0),
+           WIN_TOP, zt(WIN_X0), zt(WIN_X1), WT, mat_muro)
+
+    # vidro + caixilho da janela
+    win_cz = (WIN_SILL + WIN_TOP) / 2.0
+    bpy.ops.mesh.primitive_cube_add(size=1.0, location=(WIN_CX, y_sul, win_cz))
+    obj_vidro = bpy.context.active_object
+    obj_vidro.name = "Janela_Sul_Vidro"
+    obj_vidro.scale = (WIN_W - 0.06, WT + 0.02, WIN_TOP - WIN_SILL - 0.06)
+    obj_vidro.data.materials.append(mat_vidro)
+
+    frame_t = 0.04
+    for name, cx, cy, cz, sx, sy, sz in [
+        ("Janela_Sul_Caixilho_Sup", WIN_CX, y_sul, WIN_TOP - 0.03, WIN_W, WT + 0.03, frame_t),
+        ("Janela_Sul_Caixilho_Inf", WIN_CX, y_sul, WIN_SILL + 0.03, WIN_W, WT + 0.03, frame_t),
+        ("Janela_Sul_Caixilho_Esq", WIN_X0 + 0.03, y_sul, win_cz, frame_t, WT + 0.03, WIN_TOP - WIN_SILL),
+        ("Janela_Sul_Caixilho_Dir", WIN_X1 - 0.03, y_sul, win_cz, frame_t, WT + 0.03, WIN_TOP - WIN_SILL),
+    ]:
+        bpy.ops.mesh.primitive_cube_add(size=1.0, location=(cx, cy, cz))
+        o = bpy.context.active_object
+        o.name = name
+        o.scale = (sx, sy, sz)
+        o.data.materials.append(mat_caixilho)
+
     wall_segment("Parede_Leste_2_3", p2, p3)
     wall_segment("Parede_Leste_3_4", p3, p4)
     wall_segment("Parede_Leste_4_5", p4, p5)
 
-    return {"top_z": zt(4.0)}
+    return {"top_z": zt(4.0), "janela_sul": {"cx": WIN_CX, "sill": WIN_SILL, "top": WIN_TOP}}

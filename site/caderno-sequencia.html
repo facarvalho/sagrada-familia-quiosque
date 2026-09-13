@@ -13,13 +13,17 @@
   .steps li{ counter-increment:step; display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--line); }
   .steps li:last-child{ border-bottom:none; }
   .steps li::before{ content:counter(step,decimal-leading-zero); font-family:"Big Shoulders Display",sans-serif; font-weight:800; font-size:22px; color:var(--accent); min-width:36px; }
+  .gal-strip{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:20px 0; }
+  .gal-strip figure{ margin:0; background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .gal-strip img{ width:100%; aspect-ratio:4/3; object-fit:cover; }
+  .gal-strip figcaption{ padding:8px 10px; font-size:12.5px; color:var(--ink-dim); }
 </style>
 </head>
 <body>
 <header class="site no-print">
   <div class="wrap bar">
     <a class="brand" href="index.html">
-      <span class="eyebrow">Sítio Harmonia · Alfenas, MG</span>
+      <span class="eyebrow">Sítio Sagrada Família · Alfenas, MG</span>
       <span class="name">Quiosque da Piscina</span>
     </a>
     <nav class="site">
@@ -47,7 +51,6 @@
 
   <section style="margin-top:28px">
     <ol class="steps">
-      <li>Escavação e execução da casca/impermeabilização da piscina esmeralda.</li>
       <li>Radier único (piso do quiosque + calçada perimetral) + cinta de amarração no trecho livre.</li>
       <li>Pedestais de concreto (Ø 0,30 m) nas 10 posições, com chumbadores para a chapa U de cada pilar.</li>
       <li>Montagem dos 10 pilares de eucalipto (12/14) sobre as chapas U fixadas nos pedestais.</li>
@@ -57,12 +60,19 @@
       <li>Paredes e rede hidrossanitária dos banheiros (ala): esgoto sanitário dos vasos → fossa; água servida das duchas + pia comunitária → represa.</li>
       <li>Portas dos 4 boxes + construção da pia comunitária.</li>
       <li>Bancada, pia, churrasqueira, geladeira e fogão da área gourmet.</li>
-      <li>Lâmina d'água e acabamento da piscina.</li>
       <li>Mobiliário: mesa, bar, sala de estar, TV. Limpeza geral e vistoria final.</li>
     </ol>
+    <p class="subhead" style="margin-top:24px">Referência visual (modelo 3D — ainda não são fotos de obra em andamento)</p>
+    <div class="gal-strip">
+      <figure><img src="../V1/renders/piso_quiosque_medidas.png" alt="Piso e cinta do quiosque"><figcaption>1–2. Radier + pedestais</figcaption></figure>
+      <figure><img src="../V1/renders/telhado_quiosque_medidas.png" alt="Estrutura do telhado"><figcaption>3–5. Estrutura + telhado</figcaption></figure>
+      <figure><img src="../V1/renders/esgoto_quiosque_medidas.png" alt="Rede hidrossanitária"><figcaption>7. Hidrossanitário</figcaption></figure>
+      <figure><img src="../V1/renders/vista_corredor_cozinha.png" alt="Área gourmet finalizada"><figcaption>9–10. Área gourmet + mobiliário</figcaption></figure>
+    </div>
+
     <div class="note" style="margin-top:20px">
       <h3>Observação</h3>
-      <p style="margin:0">Este caderno reflete o projeto 3D e o levantamento de materiais até o momento da emissão. Medidas devem ser conferidas em campo antes da execução. Consultar responsável técnico para o dimensionamento estrutural definitivo das vigas, terças e fundações.</p>
+      <p style="margin:0">A piscina já existe (construída) e não faz parte do escopo desta obra — a sequência acima cobre só o quiosque. Este caderno reflete o projeto 3D e o levantamento de materiais até o momento da emissão. Medidas devem ser conferidas em campo antes da execução. Consultar responsável técnico para o dimensionamento estrutural definitivo das vigas, terças e fundações.</p>
     </div>
   </section>
 

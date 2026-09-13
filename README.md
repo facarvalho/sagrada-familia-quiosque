@@ -1,6 +1,6 @@
 # Quiosque da Piscina Esmeralda
 
-Projeto executivo do quiosque ao lado da piscina — Sítio Harmonia, Alfenas-MG.
+Projeto executivo do quiosque ao lado da piscina — Sítio Sagrada Família, Alfenas-MG.
 Modelo 3D em Blender/Python, plantas técnicas, passeio em vídeo e
 levantamento de materiais por fase de obra.
 
@@ -20,17 +20,17 @@ levantamento de materiais por fase de obra.
   levantamento atual). `V1/comeco/` é a versão "esqueleto" (fase de obra,
   sem acabamento). `V1/contexto_externo.py` modela a cerca/café/terreno
   reais da propriedade (dados do projeto `sagrada-familia-infra`).
-- **`V3/`** — "Quiosque com fundo para a casa da mãe": estudo de
-  insolação com o quiosque na quina nordeste da laje, cálculo solar
-  simplificado, coordenadas de São Paulo (placeholder).
-- **`V4/`** — "Quiosque com fundo para a área de plantio de milho/abóbora":
-  variante espelhada (quina noroeste), mesmo cálculo simplificado de V3.
-- **`V6/`** — "Quiosque com fundo para a cerca do Fernando": posição vinda
-  de pontos GPS reais marcados pelo usuário, com prova de sol real
-  (algoritmo NOAA, coordenadas reais de Alfenas-MG), câmera num ponto de
-  vista real da propriedade, e cerca/café/terreno reais ao redor. Substitui
-  a antiga `V5/` (mesma posição, com dados reais em vez de placeholder) —
-  a V5 foi removida do repositório.
+- **`V3/`, `V4/`, `V6/`** — três posições reais alternativas do quiosque
+  ao redor da laje da piscina, todas com a mesma metodologia (dados vindos
+  de `V1/variant_sol_common.py`): ponto GPS real do pilar P9 (dado pelo
+  usuário) → giro −90° em Z a partir do projeto original → prova de sol
+  real (algoritmo NOAA, coordenadas reais de Alfenas-MG) às
+  15h/16h/17h/18h/19h em verão e inverno → entorno real (cerca/café/terreno
+  do projeto de fibra óptica `sagrada-familia-infra`, via
+  `V1/contexto_externo.py`). Nomeadas pelo que fica atrás do quiosque em
+  cada uma: **V3** = casa da mãe, **V4** = plantio de milho/abóbora,
+  **V6** = cerca do vizinho Fernando (substitui a antiga `V5/`, que usava
+  posição/cálculo placeholder — removida do repositório).
 - **Não existe `V2`** — a numeração pulou de V1 direto para V3 na sessão em
   que os estudos de posicionamento foram feitos.
 - **`regerar_tudo.sh`** — regenera todos os renders/plantas/PDF do V1 (e as

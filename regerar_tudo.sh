@@ -1,5 +1,6 @@
 #!/bin/bash
-# Regenera TODOS os renders/documentos do projeto (V1 + V3/V4/V5).
+# Regenera TODOS os renders/documentos do projeto (V1 + as 3 visões:
+# casa-da-mae, milho-abobora, cerca-fernando).
 # Retomavel: pula etapas cujo arquivo de saida ja existe e e mais novo que
 # o marcador .regerar_tudo.START (criado no inicio de cada execucao completa).
 #
@@ -39,6 +40,7 @@ echo "===== INICIO $(date) =====" | tee -a "$LOG"
 step $R/piso_quiosque_medidas.png       python3 V1/render_piso_medidas.py
 step $R/telhado_quiosque_medidas.png    python3 V1/render_telhado_medidas.py
 step $R/banheiro_planta_medidas.png     python3 V1/render_banheiro_medidas.py
+step $R/esgoto_quiosque_medidas.png     python3 V1/render_esgoto_medidas.py
 
 # --- Planta tecnica -------------------------------------------------------
 step $R/planta_quiosque_base.png      $BL V1/render_floorplan.py
@@ -61,10 +63,17 @@ step $R/vista_360_fisheye.png         $BL V1/render_360_fisheye.py
 step V1/Caderno_de_Obra.pdf           python3 -m V1.gerar_pdf
 step $R/passeio_quiosque.mp4          $BL V1/render_walkthrough.py
 
-# --- Outras versoes (estudo de insolacao) -----------------------------
-step V3/renders/projeto_render_10h.png $BL V3/render_v3_sol.py
-step V4/renders/projeto_render_10h.png $BL V4/render_v4_sol.py
-step V5/renders/projeto_render_10h.png $BL V5/render_v5_sol.py
+# --- Estudo de sol da posicao atual (V1) --------------------------------
+step $R/sol_verao_13h.png             $BL V1/render_sun_study.py
+step $R/sol_verao_13h_anotado.png     python3 V1/annotate_sun_study.py
+
+# --- Outras visoes (posicao real + estudo de insolacao completo) -------
+step visao-casa-da-mae/renders/sol_verao_15h.png     $BL visao-casa-da-mae/render_v3_sol.py
+step visao-casa-da-mae/renders/sol_verao_15h_anotado.png   python3 visao-casa-da-mae/annotate_sun_study.py
+step visao-milho-abobora/renders/sol_verao_15h.png   $BL visao-milho-abobora/render_v4_sol.py
+step visao-milho-abobora/renders/sol_verao_15h_anotado.png python3 visao-milho-abobora/annotate_sun_study.py
+step visao-cerca-fernando/renders/sol_verao_15h.png  $BL visao-cerca-fernando/render_v6_sol.py
+step visao-cerca-fernando/renders/sol_verao_15h_anotado.png python3 visao-cerca-fernando/annotate_sun_study.py
 
 echo "===== FIM $(date) =====" | tee -a "$LOG"
 touch regerar_tudo.DONE

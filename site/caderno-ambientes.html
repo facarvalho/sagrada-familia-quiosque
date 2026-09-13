@@ -16,13 +16,17 @@
   .spec-row:last-child{ border-bottom:none; }
   .spec-row .l{ color:var(--ink-dim); }
   .spec-row .v{ text-align:right; font-family:"IBM Plex Mono",monospace; font-size:12.5px; }
+  .gal-strip{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:20px 0; }
+  .gal-strip figure{ margin:0; background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .gal-strip img{ width:100%; aspect-ratio:4/3; object-fit:cover; }
+  .gal-strip figcaption{ padding:8px 10px; font-size:12.5px; color:var(--ink-dim); }
 </style>
 </head>
 <body>
 <header class="site no-print">
   <div class="wrap bar">
     <a class="brand" href="index.html">
-      <span class="eyebrow">Sítio Harmonia · Alfenas, MG</span>
+      <span class="eyebrow">Sítio Sagrada Família · Alfenas, MG</span>
       <span class="name">Quiosque da Piscina</span>
     </a>
     <nav class="site">
@@ -68,6 +72,14 @@
       <div class="spec-card"><h4>Bar (P3-4)</h4>
         <div class="spec-row"><span class="l">Mesas altas</span><span class="v">2 un., 2 banquetas cada</span></div>
       </div>
+    </div>
+
+    <div class="gal-strip">
+      <figure><img src="../V1/renders/banheiro_planta_medidas.png" alt="Planta dos banheiros com medidas"><figcaption>Banheiros — planta e medidas</figcaption></figure>
+      <figure><img src="../V1/renders/banheiro_ducha_interior.png" alt="Interior da ducha"><figcaption>Interior da ducha</figcaption></figure>
+      <figure><img src="../V1/renders/banheiro_lavabo_interior.png" alt="Interior do lavabo"><figcaption>Interior do lavabo</figcaption></figure>
+      <figure><img src="../V1/renders/vista_corredor_cozinha.png" alt="Área gourmet — geladeira, fogão e bancada"><figcaption>Área gourmet (geladeira/fogão na parede leste)</figcaption></figure>
+      <figure><img src="../V1/renders/vista_area_pia.png" alt="Área da pia / bancada gourmet"><figcaption>Bancada gourmet (de P9 para P2)</figcaption></figure>
     </div>
   </section>
 

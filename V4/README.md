@@ -1,55 +1,55 @@
-# V4 — "Quiosque com fundo para a área de plantio de milho/abóbora"
+# Visão: Milho/Abóbora
 
 Nome dado pelo usuário: nesta posição o fundo do quiosque fica voltado
-para a área de plantio de milho/abóbora. Variante para avaliar a
-**incidência de sol** com o quiosque na **quina noroeste** da laje de
-concreto da piscina — a "outra perna do X" em relação à V3 (que abraça a
-quina nordeste).
+para a área de plantio de milho/abóbora. Reescrita em 13/09/2026 para usar
+dados reais (antes usava espelhamento sintético + cálculo solar
+simplificado com coordenadas de São Paulo) — mesma metodologia da V6
+("cerca do Fernando").
+
+## De onde veio a posição
+
+O usuário deu o ponto GPS real do pilar P9 nesta posição:
+`-21.353027909607615, -45.990141938058045`. Convertido para o referencial
+do projeto com a mesma calibração de `V1/sun_geo.py` (âncora P1/P9,
+rotação 133,7°) → **(0,13 ; −7,70)** — só ~0,7 m do alvo calculado por
+Procrustes para a V6, o que confirma (por dois métodos independentes) que
+aquela conta estava correta.
 
 ## O que muda
 
-- O quiosque é **espelhado em torno do eixo vertical (N–S) da laje**
-  (`x = centro da laje`). Como no projeto original o canto reentrante do
-  "L" já coincidia com a quina NE, ele passa a coincidir **exatamente**
-  com a quina NW.
-- A perna principal do "L" fica **paralela à da V3**, só que ao longo da
-  borda **oeste** da laje; o lado aberto continua voltado para a piscina
-  (agora para leste).
-- Piscina e piso de concreto permanecem no lugar. Um terreno (gramado) é
-  adicionado para receber as sombras.
-- Nenhum arquivo do projeto original é alterado.
+`V4/render_v4_sol.py` agora só chama `V1/variant_sol_common.py`
+(compartilhado com V3 e V6):
+1. Constrói o projeto original (`projeto.py` + `extras.py` + `fixes.py`),
+   sem alterar nenhum arquivo original.
+2. Gira o quiosque **−90° em Z em torno do pilar P9 original** (0,4 ; 9,5)
+   e translada até o ponto real acima.
+3. Adiciona o entorno real — cerca, café e terreno
+   (`V1/contexto_externo.py`, dados do projeto de fibra óptica
+   `sagrada-familia-infra`) — **sem** girar/mover esses objetos junto (eles
+   já estão nas coordenadas reais certas).
+4. Câmera enquadrando quiosque + piscina (lente 20 mm).
 
 ## Estudo solar
 
-Vista `projeto_render`, uma imagem por hora cheia das **07h às 18h**, com
-o Sol na posição real do céu (algoritmo NOAA).
-
-| Parâmetro | Valor |
-|---|---|
-| Latitude | −23,55° (São Paulo/SP) |
-| Longitude | −46,63° |
-| Fuso | −3 (Brasília) |
-| Data | 2026-08-31 |
-
-Saídas: `V4/renders/projeto_render_7h.png` … `projeto_render_18h.png`.
-
-## Leitura da insolação (V4 × V3)
-
-Com o quiosque a **oeste** da piscina:
-- **Manhã (07h–12h):** sol nasce a leste/nordeste, entra pelo lado aberto
-  e ilumina o interior; a sombra do quiosque cai para oeste, **fora da
-  água** → piscina ensolarada.
-- **Tarde (a partir de ~14h):** o sol vai para oeste, passa **atrás** do
-  quiosque e a sombra da cobertura/pilares avança **sobre a piscina**,
-  cobrindo a parte oeste da lâmina d'água já às 15h–16h e quase toda ela
-  às 17h.
-- **18h:** sol abaixo do horizonte (penumbra).
-
-É o inverso da V3 (quina NE), em que a piscina fica no sol à tarde e a
-sombra só a alcança de manhã cedo.
+10 imagens: verão (solstício 21/12) e inverno (solstício 21/06), às
+**15h, 16h, 17h, 18h e 19h** (horário de Brasília), sol na posição real do
+céu (algoritmo NOAA, `V1/sun_geo.py`, coordenadas reais de Alfenas-MG).
+Saídas em `V4/renders/sol_{estacao}_{h}h.png`, com legenda
+(`_anotado.png`) via `V4/annotate_sun_study.py`.
 
 ## Como gerar
 
 ```bash
-blender --background --factory-startup --python V4/render_v4_sol.py
+BL=~/opt/blender-4.2.23-linux-x64/blender
+$BL --background --factory-startup \
+    --python-expr "__import__('sys').path.insert(0,'/home/fac/piscina')" \
+    --python V4/render_v4_sol.py
+python3 V4/annotate_sun_study.py
 ```
+
+## Ressalva
+
+Só um ponto (P9) foi dado nesta posição — a rotação de −90° foi assumida
+por analogia com a V6 (mesma faixa sul da propriedade), não derivada de
+múltiplos pontos. Suficiente para uma prova de incidência de sol; para
+posicionamento definitivo de obra, medir mais pontos no local.

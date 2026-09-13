@@ -44,25 +44,35 @@
       ]
     },
     {
-      id: "v3", label: "Quiosque com fundo p/ casa da mãe",
-      items: ["10h","11h","12h","13h","14h","15h","16h","17h","18h","19h"].map(function(h){
-        return ["V3/renders/projeto_render_"+h+".png", "Fundo p/ casa da mãe — "+h];
-      })
-    },
-    {
-      id: "v4", label: "Quiosque com fundo p/ milho/abóbora",
-      items: ["7h","8h","9h","10h","11h","12h","13h","14h","15h","16h","17h","18h"].map(function(h){
-        return ["V4/renders/projeto_render_"+h+".png", "Fundo p/ milho/abóbora — "+h];
-      })
-    },
-    {
-      id: "v6", label: "Quiosque com fundo p/ cerca do Fernando",
+      id: "visao-casa-da-mae", label: "Visão: casa da mãe",
       items: [].concat(
         ["15h","16h","17h","18h","19h"].map(function(h){
-          return ["V6/renders/sol_verao_"+h+"_anotado.png", "Cerca do Fernando — verão, "+h];
+          return ["visao-casa-da-mae/renders/sol_verao_"+h+"_anotado.png", "Casa da mãe — verão, "+h];
         }),
         ["15h","16h","17h","18h","19h"].map(function(h){
-          return ["V6/renders/sol_inverno_"+h+"_anotado.png", "Cerca do Fernando — inverno, "+h];
+          return ["visao-casa-da-mae/renders/sol_inverno_"+h+"_anotado.png", "Casa da mãe — inverno, "+h];
+        })
+      )
+    },
+    {
+      id: "visao-milho-abobora", label: "Visão: milho/abóbora",
+      items: [].concat(
+        ["15h","16h","17h","18h","19h"].map(function(h){
+          return ["visao-milho-abobora/renders/sol_verao_"+h+"_anotado.png", "Milho/abóbora — verão, "+h];
+        }),
+        ["15h","16h","17h","18h","19h"].map(function(h){
+          return ["visao-milho-abobora/renders/sol_inverno_"+h+"_anotado.png", "Milho/abóbora — inverno, "+h];
+        })
+      )
+    },
+    {
+      id: "visao-cerca-fernando", label: "Visão: cerca do Fernando",
+      items: [].concat(
+        ["15h","16h","17h","18h","19h"].map(function(h){
+          return ["visao-cerca-fernando/renders/sol_verao_"+h+"_anotado.png", "Cerca do Fernando — verão, "+h];
+        }),
+        ["15h","16h","17h","18h","19h"].map(function(h){
+          return ["visao-cerca-fernando/renders/sol_inverno_"+h+"_anotado.png", "Cerca do Fernando — inverno, "+h];
         })
       )
     }
