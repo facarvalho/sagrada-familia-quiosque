@@ -50,9 +50,9 @@
       })
     },
     {
-      id: "v4", label: "V4 — quina noroeste",
+      id: "v4", label: "Quiosque com fundo p/ milho/abóbora",
       items: ["7h","8h","9h","10h","11h","12h","13h","14h","15h","16h","17h","18h"].map(function(h){
-        return ["V4/renders/projeto_render_"+h+".png", "V4 (quina NW) — "+h];
+        return ["V4/renders/projeto_render_"+h+".png", "Fundo p/ milho/abóbora — "+h];
       })
     },
     {

@@ -23,8 +23,8 @@ levantamento de materiais por fase de obra.
 - **`V3/`** — "Quiosque com fundo para a casa da mãe": estudo de
   insolação com o quiosque na quina nordeste da laje, cálculo solar
   simplificado, coordenadas de São Paulo (placeholder).
-- **`V4/`** — variante espelhada (quina noroeste), mesmo cálculo
-  simplificado de V3.
+- **`V4/`** — "Quiosque com fundo para a área de plantio de milho/abóbora":
+  variante espelhada (quina noroeste), mesmo cálculo simplificado de V3.
 - **`V6/`** — "Quiosque com fundo para a cerca do Fernando": posição vinda
   de pontos GPS reais marcados pelo usuário, com prova de sol real
   (algoritmo NOAA, coordenadas reais de Alfenas-MG), câmera num ponto de

@@ -1,8 +1,10 @@
-# V4 — Quiosque na quina noroeste da laje ("outra perna do X")
+# V4 — "Quiosque com fundo para a área de plantio de milho/abóbora"
 
-Variante para avaliar a **incidência de sol** com o quiosque na **quina
-noroeste** da laje de concreto da piscina — a "outra perna do X" em
-relação à V3 (que abraça a quina nordeste).
+Nome dado pelo usuário: nesta posição o fundo do quiosque fica voltado
+para a área de plantio de milho/abóbora. Variante para avaliar a
+**incidência de sol** com o quiosque na **quina noroeste** da laje de
+concreto da piscina — a "outra perna do X" em relação à V3 (que abraça a
+quina nordeste).
 
 ## O que muda
 
