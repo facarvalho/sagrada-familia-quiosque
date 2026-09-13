@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sequência de Execução</title>
+<meta name="description" content="Sequência de execução recomendada — página 6 de 6 do caderno de obra.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/caderno.css">
+<style>
+  .steps{ counter-reset:step; list-style:none; margin:0; padding:0; }
+  .steps li{ counter-increment:step; display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--line); }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{ content:counter(step,decimal-leading-zero); font-family:"Big Shoulders Display",sans-serif; font-weight:800; font-size:22px; color:var(--accent); min-width:36px; }
+</style>
+</head>
+<body>
+<header class="site no-print">
+  <div class="wrap bar">
+    <a class="brand" href="index.html">
+      <span class="eyebrow">Sítio Harmonia · Alfenas, MG</span>
+      <span class="name">Quiosque da Piscina</span>
+    </a>
+    <nav class="site">
+      <a href="index.html">Início</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="video.html">Vídeo</a>
+      <a href="caderno.html" class="active">Caderno de Obra</a>
+      <a href="orcamento.html">Orçamento</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="subhead">Caderno de obra · página 6 de 6</p>
+  <h1>Sequência de Execução Recomendada</h1>
+
+  <nav class="pager no-print" aria-label="Páginas do caderno">
+    <a href="caderno.html">1. Vista geral</a>
+    <a href="caderno-especificacoes.html">2. Especificações</a>
+    <a href="caderno-telhado.html">3. Telhado</a>
+    <a href="caderno-ambientes.html">4. Ambientes</a>
+    <a href="caderno-galeria.html">5. Galeria</a>
+    <a href="caderno-sequencia.html" class="active">6. Sequência</a>
+  </nav>
+
+  <section style="margin-top:28px">
+    <ol class="steps">
+      <li>Escavação e execução da casca/impermeabilização da piscina esmeralda.</li>
+      <li>Radier único (piso do quiosque + calçada perimetral) + cinta de amarração no trecho livre.</li>
+      <li>Pedestais de concreto (Ø 0,30 m) nas 10 posições, com chumbadores para a chapa U de cada pilar.</li>
+      <li>Montagem dos 10 pilares de eucalipto (12/14) sobre as chapas U fixadas nos pedestais.</li>
+      <li>Vigas transversais (12/14) e terças (10/12), formando o caimento de 15% para oeste.</li>
+      <li>Assentamento das 12 telhas sanduíche PIR 30 mm sobre as terças.</li>
+      <li>Paredes de fechamento em muro tendinoso — sul e leste do corpo, até o telhado.</li>
+      <li>Paredes e rede hidrossanitária dos banheiros (ala): esgoto sanitário dos vasos → fossa; água servida das duchas + pia comunitária → represa.</li>
+      <li>Portas dos 4 boxes + construção da pia comunitária.</li>
+      <li>Bancada, pia, churrasqueira, geladeira e fogão da área gourmet.</li>
+      <li>Lâmina d'água e acabamento da piscina.</li>
+      <li>Mobiliário: mesa, bar, sala de estar, TV. Limpeza geral e vistoria final.</li>
+    </ol>
+    <div class="note" style="margin-top:20px">
+      <h3>Observação</h3>
+      <p style="margin:0">Este caderno reflete o projeto 3D e o levantamento de materiais até o momento da emissão. Medidas devem ser conferidas em campo antes da execução. Consultar responsável técnico para o dimensionamento estrutural definitivo das vigas, terças e fundações.</p>
+    </div>
+  </section>
+
+  <div class="page-nav no-print">
+    <a class="btn" href="caderno-galeria.html">← Galeria</a>
+    <a class="btn primary" href="orcamento.html">Ver orçamento por fase →</a>
+  </div>
+</main>
+
+<footer class="site no-print">
+  <div class="wrap">Página 6 de 6 · Conteúdo espelha o Caderno_de_Obra.pdf gerado por V1/gerar_pdf.py.</div>
+</footer>
+</body>
+</html>

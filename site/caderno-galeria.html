@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galeria de Pranchas</title>
+<meta name="description" content="Galeria de pranchas — página 5 de 6 do caderno de obra.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/caderno.css">
+<style>
+  .gal-strip{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:16px 0; }
+  .gal-strip figure{ margin:0; background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .gal-strip img{ width:100%; aspect-ratio:4/3; object-fit:cover; }
+  .gal-strip figcaption{ padding:8px 10px; font-size:12.5px; color:var(--ink-dim); }
+</style>
+</head>
+<body>
+<header class="site no-print">
+  <div class="wrap bar">
+    <a class="brand" href="index.html">
+      <span class="eyebrow">Sítio Harmonia · Alfenas, MG</span>
+      <span class="name">Quiosque da Piscina</span>
+    </a>
+    <nav class="site">
+      <a href="index.html">Início</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="video.html">Vídeo</a>
+      <a href="caderno.html" class="active">Caderno de Obra</a>
+      <a href="orcamento.html">Orçamento</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="subhead">Caderno de obra · página 5 de 6</p>
+  <h1>Galeria de Pranchas</h1>
+  <p style="color:var(--ink-dim)">Ver todas em tamanho grande, com slider e por categoria, na <a href="galeria.html">página da galeria</a>.</p>
+
+  <nav class="pager no-print" aria-label="Páginas do caderno">
+    <a href="caderno.html">1. Vista geral</a>
+    <a href="caderno-especificacoes.html">2. Especificações</a>
+    <a href="caderno-telhado.html">3. Telhado</a>
+    <a href="caderno-ambientes.html">4. Ambientes</a>
+    <a href="caderno-galeria.html" class="active">5. Galeria</a>
+    <a href="caderno-sequencia.html">6. Sequência</a>
+  </nav>
+
+  <section style="margin-top:28px">
+    <div class="gal-strip" id="galStrip"></div>
+  </section>
+
+  <div class="page-nav no-print">
+    <a class="btn" href="caderno-ambientes.html">← Ambientes</a>
+    <a class="btn" href="caderno-sequencia.html">Sequência de execução →</a>
+  </div>
+</main>
+
+<footer class="site no-print">
+  <div class="wrap">Página 5 de 6 · Conteúdo espelha o Caderno_de_Obra.pdf gerado por V1/gerar_pdf.py.</div>
+</footer>
+<script>
+(function(){
+  var items = [
+    ["V1/renders/projeto_render.png", "Vista geral do projeto"],
+    ["V1/renders/planta_quiosque_anotada.png", "Planta técnica — pilares, terças e vigas"],
+    ["V1/renders/piso_quiosque_medidas.png", "Piso + calçada — medidas"],
+    ["V1/renders/telhado_quiosque_medidas.png", "Telhado — telha sanduíche PIR, terças"],
+    ["V1/renders/banheiro_planta_medidas.png", "Banheiros — planta e medidas"],
+    ["V1/renders/esgoto_quiosque_medidas.png", "Rede hidrossanitária"],
+    ["V1/renders/vista_entrada.png", "Vista da entrada"],
+    ["V1/renders/vista_aerea.png", "Vista aérea"],
+    ["V1/renders/vista_corredor.png", "Corredor"],
+    ["V1/renders/vista_area_pia.png", "Área da pia / bancada gourmet"],
+    ["V1/renders/banheiro_ducha_interior.png", "Interior da ducha"],
+    ["V1/renders/banheiro_lavabo_interior.png", "Interior do lavabo"],
+    ["V1/renders/vista_15m_T2_V1.png", "Vista externa — eixo T2, 15 m ao norte"],
+    ["V1/renders/vista_10m_entre_P6_P2.png", "Vista externa — 10 m entre P6 e P2"],
+    ["V1/renders/vista_360_fisheye.png", "Vista 360° (fisheye)"]
+  ];
+  var strip = document.getElementById("galStrip");
+  items.forEach(function(it){
+    var fig = document.createElement("figure");
+    var img = document.createElement("img");
+    img.src = "../" + it[0]; img.alt = it[1]; img.loading = "lazy";
+    var cap = document.createElement("figcaption");
+    cap.textContent = it[1];
+    fig.appendChild(img); fig.appendChild(cap);
+    strip.appendChild(fig);
+  });
+})();
+</script>
+</body>
+</html>

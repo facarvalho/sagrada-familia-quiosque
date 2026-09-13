@@ -1,0 +1,13 @@
+.pager{ display:flex; flex-wrap:wrap; gap:6px; margin:18px 0 8px; }
+.pager a{
+  font-family:"IBM Plex Mono",monospace; font-size:12px; text-decoration:none;
+  border:1px solid var(--line); border-radius:999px; padding:7px 13px; color:var(--ink-dim);
+  background:var(--paper-raised);
+}
+.pager a:hover{ border-color:var(--accent); color:var(--ink); }
+.pager a.active{ background:var(--accent); border-color:var(--accent); color:#fff; }
+
+.page-nav{
+  display:flex; justify-content:space-between; align-items:center; gap:12px;
+  margin-top:36px; padding-top:20px; border-top:1px solid var(--line);
+}
