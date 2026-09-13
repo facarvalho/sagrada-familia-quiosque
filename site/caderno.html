@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caderno de Obra</title>
+<meta name="description" content="Especificações técnicas, estrutura, ambientes e sequência de execução do quiosque.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .spec-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden; margin:18px 0 8px; }
+  .spec-card{ background:var(--paper-raised); padding:16px 18px; }
+  .spec-card h4{ margin:0 0 10px; font-family:"IBM Plex Mono",monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-strong); }
+  .spec-row{ display:flex; justify-content:space-between; gap:14px; padding:5px 0; border-bottom:1px dashed var(--line); font-size:13.5px; }
+  .spec-row:last-child{ border-bottom:none; }
+  .spec-row .l{ color:var(--ink-dim); }
+  .spec-row .v{ text-align:right; font-family:"IBM Plex Mono",monospace; font-size:12.5px; }
+  .steps{ counter-reset:step; list-style:none; margin:0; padding:0; }
+  .steps li{ counter-increment:step; display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--line); }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{ content:counter(step,decimal-leading-zero); font-family:"Big Shoulders Display",sans-serif; font-weight:800; font-size:22px; color:var(--accent); min-width:36px; }
+  .gal-strip{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin:16px 0; }
+  .gal-strip figure{ margin:0; background:var(--paper-raised); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .gal-strip img{ width:100%; aspect-ratio:4/3; object-fit:cover; }
+  .gal-strip figcaption{ padding:8px 10px; font-size:12.5px; color:var(--ink-dim); }
+  .toc{ display:flex; flex-wrap:wrap; gap:6px; margin:18px 0 8px; }
+  .toc a{ font-family:"IBM Plex Mono",monospace; font-size:12px; text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:6px 12px; color:var(--ink-dim); }
+  .toc a:hover{ border-color:var(--accent); color:var(--ink); }
+</style>
+</head>
+<body>
+<header class="site no-print">
+  <div class="wrap bar">
+    <a class="brand" href="index.html">
+      <span class="eyebrow">Sítio Harmonia · Alfenas, MG</span>
+      <span class="name">Quiosque da Piscina</span>
+    </a>
+    <nav class="site">
+      <a href="index.html">Início</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="video.html">Vídeo</a>
+      <a href="caderno.html" class="active">Caderno de Obra</a>
+      <a href="orcamento.html">Orçamento</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="subhead">Piscina Esmeralda &amp; Quiosque — projeto executivo</p>
+  <h1>Caderno de Obra</h1>
+  <p style="max-width:62ch; color:var(--ink-dim)">Versão navegável do caderno técnico: vista geral, especificações, estrutura do telhado, ambientes, galeria de pranchas e a sequência de execução recomendada.</p>
+
+  <div style="display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 8px" class="no-print">
+    <a class="btn primary" href="../V1/Caderno_de_Obra.pdf">↓ Baixar PDF (22 páginas)</a>
+    <button class="btn" onclick="window.print()">Exportar esta página em PDF</button>
+    <a class="btn" href="orcamento.html">Ver orçamento por fase →</a>
+  </div>
+
+  <nav class="toc no-print">
+    <a href="#geral">Vista geral</a>
+    <a href="#specs">Especificações</a>
+    <a href="#telhado">Telhado</a>
+    <a href="#ambientes">Ambientes</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#sequencia">Sequência de execução</a>
+  </nav>
+
+  <section id="geral" style="margin-top:36px">
+    <h2>1. Vista geral</h2>
+    <div class="hero-img"><img src="../V1/renders/projeto_render.png" alt="Vista geral do modelo 3D"></div>
+  </section>
+
+  <section id="specs" style="margin-top:40px">
+    <h2>2. Especificações técnicas gerais</h2>
+    <div class="spec-grid">
+      <div class="spec-card"><h4>Piscina Esmeralda</h4>
+        <div class="spec-row"><span class="l">Dimensões (larg. × compr.)</span><span class="v">3,70 × 10,50 m</span></div>
+        <div class="spec-row"><span class="l">Profundidade</span><span class="v">1,30 m (rasa) a 1,70 m (funda)</span></div>
+        <div class="spec-row"><span class="l">Volume aproximado</span><span class="v">~54 m³</span></div>
+        <div class="spec-row"><span class="l">Centro (x, y)</span><span class="v">−3,67 ; −0,15 (georreferenciado)</span></div>
+        <div class="spec-row"><span class="l">Nível da lâmina d'água</span><span class="v">−0,10 m do piso</span></div>
+      </div>
+      <div class="spec-card"><h4>Piso do quiosque</h4>
+        <div class="spec-row"><span class="l">Piso principal</span><span class="v">4,00 × 10,50 m</span></div>
+        <div class="spec-row"><span class="l">Ala (banheiros)</span><span class="v">~2,65 × 2,50 m</span></div>
+        <div class="spec-row"><span class="l">Espessura do piso</span><span class="v">0,10 m</span></div>
+        <div class="spec-row"><span class="l">Radier (piso+calçada)</span><span class="v">59,38 m² — laje única</span></div>
+      </div>
+      <div class="spec-card"><h4>Pilares de eucalipto (10 un.)</h4>
+        <div class="spec-row"><span class="l">Bitola</span><span class="v">12/14 (Ø ~13 cm)</span></div>
+        <div class="spec-row"><span class="l">Pedestal de concreto</span><span class="v">Ø 0,30 m ; −0,30 a +0,50 m</span></div>
+        <div class="spec-row"><span class="l">Topo (leste, alto)</span><span class="v">2,60 m sobre pedestal</span></div>
+        <div class="spec-row"><span class="l">Topo (oeste, recuada)</span><span class="v">2,06 m sobre pedestal</span></div>
+        <div class="spec-row"><span class="l">Topo (ala, baixo)</span><span class="v">1,66 m sobre pedestal</span></div>
+      </div>
+      <div class="spec-card"><h4>Paredes de fechamento</h4>
+        <div class="spec-row"><span class="l">Material</span><span class="v">Muro tendinoso</span></div>
+        <div class="spec-row"><span class="l">Corpo principal</span><span class="v">sul + leste, até o telhado</span></div>
+        <div class="spec-row"><span class="l">Banheiros</span><span class="v">h 2,50 m, verga s/ portas</span></div>
+        <div class="spec-row"><span class="l">Área total</span><span class="v">79,3 m²</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="telhado" style="margin-top:40px">
+    <h2>3. Estrutura do telhado</h2>
+    <p style="color:var(--ink-dim); max-width:62ch">Telhado em meia-água, caimento de 15% escoando para oeste, em direção à piscina.</p>
+    <div class="spec-grid">
+      <div class="spec-card"><h4>Caimento</h4>
+        <div class="spec-row"><span class="l">Sistema</span><span class="v">Meia-água</span></div>
+        <div class="spec-row"><span class="l">Inclinação</span><span class="v">15% (~8,5°)</span></div>
+        <div class="spec-row"><span class="l">Sentido</span><span class="v">Para oeste (piscina)</span></div>
+        <div class="spec-row"><span class="l">Lado alto</span><span class="v">Leste (x = 4)</span></div>
+        <div class="spec-row"><span class="l">Desnível no vão de 4,0 m</span><span class="v">0,60 m</span></div>
+      </div>
+      <div class="spec-card"><h4>Telhas e estrutura</h4>
+        <div class="spec-row"><span class="l">Telha</span><span class="v">Sanduíche PIR 30 mm, útil 1,00 m</span></div>
+        <div class="spec-row"><span class="l">Quantidade</span><span class="v">12 telhas: 8×4,45 m + 4×7,43 m</span></div>
+        <div class="spec-row"><span class="l">Comprar / peso</span><span class="v">65,32 m² / ~606 kg</span></div>
+        <div class="spec-row"><span class="l">Vigas transversais</span><span class="v">Eucalipto 12/14, 6 un.</span></div>
+        <div class="spec-row"><span class="l">Terças</span><span class="v">Eucalipto 10/12: T1–T3 11,00 m + T4 3,50 m</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ambientes" style="margin-top:40px">
+    <h2>4. Ambientes e mobiliário</h2>
+    <div class="spec-grid">
+      <div class="spec-card"><h4>Banheiros (ala, P6-7-8-9)</h4>
+        <div class="spec-row"><span class="l">Cabines</span><span class="v">4 (1,30×1,15 m)</span></div>
+        <div class="spec-row"><span class="l">Portas</span><span class="v">0,60×1,90 m</span></div>
+        <div class="spec-row"><span class="l">Lava-mãos</span><span class="v">Pia comunitária, 3 bicas</span></div>
+        <div class="spec-row"><span class="l">Piso</span><span class="v">Caixa de brita</span></div>
+      </div>
+      <div class="spec-card"><h4>Área gourmet (P1-2-3)</h4>
+        <div class="spec-row"><span class="l">Bancada</span><span class="v">Pia + churrasqueira</span></div>
+        <div class="spec-row"><span class="l">Geladeira/fogão</span><span class="v">Parede sul, P1-P2</span></div>
+        <div class="spec-row"><span class="l">Mesa</span><span class="v">8 lugares + bancos</span></div>
+      </div>
+      <div class="spec-card"><h4>Sala de estar (P4-5-6)</h4>
+        <div class="spec-row"><span class="l">Mobiliário</span><span class="v">2 sofás + mesa de centro</span></div>
+        <div class="spec-row"><span class="l">TV</span><span class="v">Parede leste, P4-P5</span></div>
+      </div>
+      <div class="spec-card"><h4>Bar (P3-4)</h4>
+        <div class="spec-row"><span class="l">Mesas altas</span><span class="v">2 un., 2 banquetas cada</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria" style="margin-top:40px">
+    <h2>5. Galeria de pranchas</h2>
+    <p style="color:var(--ink-dim)">Ver todas em tamanho grande, com slider, na <a href="galeria.html">página da galeria</a>.</p>
+    <div class="gal-strip" id="galStrip"></div>
+  </section>
+
+  <section id="sequencia" style="margin-top:40px">
+    <h2>6. Sequência de execução recomendada</h2>
+    <ol class="steps">
+      <li>Escavação e execução da casca/impermeabilização da piscina esmeralda.</li>
+      <li>Radier único (piso do quiosque + calçada perimetral) + cinta de amarração no trecho livre.</li>
+      <li>Pedestais de concreto (Ø 0,30 m) nas 10 posições, com chumbadores para a chapa U de cada pilar.</li>
+      <li>Montagem dos 10 pilares de eucalipto (12/14) sobre as chapas U fixadas nos pedestais.</li>
+      <li>Vigas transversais (12/14) e terças (10/12), formando o caimento de 15% para oeste.</li>
+      <li>Assentamento das 12 telhas sanduíche PIR 30 mm sobre as terças.</li>
+      <li>Paredes de fechamento em muro tendinoso — sul e leste do corpo, até o telhado.</li>
+      <li>Paredes e rede hidrossanitária dos banheiros (ala): esgoto sanitário dos vasos → fossa; água servida das duchas + pia comunitária → represa.</li>
+      <li>Portas dos 4 boxes + construção da pia comunitária.</li>
+      <li>Bancada, pia, churrasqueira, geladeira e fogão da área gourmet.</li>
+      <li>Lâmina d'água e acabamento da piscina.</li>
+      <li>Mobiliário: mesa, bar, sala de estar, TV. Limpeza geral e vistoria final.</li>
+    </ol>
+    <div class="note" style="margin-top:20px">
+      <h3>Observação</h3>
+      <p style="margin:0">Este caderno reflete o projeto 3D e o levantamento de materiais até o momento da emissão. Medidas devem ser conferidas em campo antes da execução. Consultar responsável técnico para o dimensionamento estrutural definitivo das vigas, terças e fundações.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site no-print">
+  <div class="wrap">Conteúdo espelha o Caderno_de_Obra.pdf gerado por V1/gerar_pdf.py — mesmo modelo 3D, mesmas medidas.</div>
+</footer>
+<script>
+(function(){
+  var items = [
+    ["V1/renders/projeto_render.png", "Vista geral do projeto"],
+    ["V1/renders/planta_quiosque_anotada.png", "Planta técnica — pilares, terças e vigas"],
+    ["V1/renders/piso_quiosque_medidas.png", "Piso + calçada — medidas"],
+    ["V1/renders/telhado_quiosque_medidas.png", "Telhado — telha sanduíche PIR, terças"],
+    ["V1/renders/banheiro_planta_medidas.png", "Banheiros — planta e medidas"],
+    ["V1/renders/esgoto_quiosque_medidas.png", "Rede hidrossanitária"],
+    ["V1/renders/vista_entrada.png", "Vista da entrada"],
+    ["V1/renders/vista_aerea.png", "Vista aérea"],
+    ["V1/renders/vista_corredor.png", "Corredor"],
+    ["V1/renders/vista_area_pia.png", "Área da pia / bancada gourmet"],
+    ["V1/renders/banheiro_ducha_interior.png", "Interior da ducha"],
+    ["V1/renders/banheiro_lavabo_interior.png", "Interior do lavabo"],
+    ["V1/renders/vista_15m_T2_V1.png", "Vista externa — eixo T2, 15 m ao norte"],
+    ["V1/renders/vista_10m_entre_P6_P2.png", "Vista externa — 10 m entre P6 e P2"],
+    ["V1/renders/vista_360_fisheye.png", "Vista 360° (fisheye)"]
+  ];
+  var strip = document.getElementById("galStrip");
+  items.forEach(function(it){
+    var fig = document.createElement("figure");
+    var img = document.createElement("img");
+    img.src = "../" + it[0]; img.alt = it[1]; img.loading = "lazy";
+    var cap = document.createElement("figcaption");
+    cap.textContent = it[1];
+    fig.appendChild(img); fig.appendChild(cap);
+    strip.appendChild(fig);
+  });
+})();
+</script>
+</body>
+</html>

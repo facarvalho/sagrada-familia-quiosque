@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orçamento por Fase</title>
+<meta name="description" content="Levantamento de materiais do quiosque, organizado nas 5 fases de execução.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .sum-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden; margin:20px 0 8px; }
+  .sum-cell{ background:var(--paper-raised); padding:16px 18px; }
+  .sum-cell .n{ font-family:"Big Shoulders Display",sans-serif; font-weight:800; font-size:28px; color:var(--accent); font-variant-numeric:tabular-nums; line-height:1; }
+  .sum-cell .u{ font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-dim); margin-left:4px; }
+  .sum-cell .l{ font-size:12px; color:var(--ink-dim); margin-top:4px; }
+</style>
+</head>
+<body>
+<header class="site no-print">
+  <div class="wrap bar">
+    <a class="brand" href="index.html">
+      <span class="eyebrow">Sítio Harmonia · Alfenas, MG</span>
+      <span class="name">Quiosque da Piscina</span>
+    </a>
+    <nav class="site">
+      <a href="index.html">Início</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="video.html">Vídeo</a>
+      <a href="caderno.html">Caderno de Obra</a>
+      <a href="orcamento.html" class="active">Orçamento</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="subhead">Levantamento de materiais · sem mão de obra · organizado por fase de execução</p>
+  <h1>Orçamento por Fase</h1>
+  <p style="max-width:62ch; color:var(--ink-dim)">Só os materiais, item a item, para cotar com fornecedores. Premissas e memória de cálculo completas (inclusive a verificação estrutural das bitolas de madeira) estão no <a href="caderno.html">caderno de obra</a>.</p>
+
+  <div class="sum-grid">
+    <div class="sum-cell"><div class="n">7,0<span class="u">m³</span></div><div class="l">concreto estrutural (fase 1)</div></div>
+    <div class="sum-cell"><div class="n">84,5<span class="u">m</span></div><div class="l">eucalipto roliço (fase 2)</div></div>
+    <div class="sum-cell"><div class="n">65,3<span class="u">m²</span></div><div class="l">telha PIR a comprar (fase 3)</div></div>
+    <div class="sum-cell"><div class="n">79,3<span class="u">m²</span></div><div class="l">muro tendinoso (fase 4)</div></div>
+    <div class="sum-cell"><div class="n">4<span class="u">un.</span></div><div class="l">portas + pia comunitária (fase 5)</div></div>
+    <div class="sum-cell"><div class="n">59,4<span class="u">m²</span></div><div class="l">radier total (piso+calçada)</div></div>
+  </div>
+
+  <div class="note" style="margin:24px 0">
+    <h3>Premissas</h3>
+    <ul style="margin:0; padding-left:20px">
+      <li>Concreto: FCK 20 MPa; traço não-usinado 1:2:3 a ≈300 kg cimento/m³.</li>
+      <li>Malha pop de referência Q92 (2,45×6,00 m) — confirmar bitola com o calculista.</li>
+      <li>Madeira: eucalipto roliço tratado, comprimentos fechados de 0,50 em 0,50 m.</li>
+      <li>Fossa séptica biodigestora 1.300 ℓ + sumidouro — dimensão final depende de teste de infiltração (não feito).</li>
+      <li>Água servida (duchas + pia comunitária) segue separada para uma represa existente, não passa pela fossa.</li>
+    </ul>
+  </div>
+
+  <!-- FASE 1 -->
+  <section class="phase" id="fase1">
+    <div class="phase-head"><div class="phase-num">1</div><div><h2>Fundação &amp; hidráulica</h2><p class="subhead" style="margin:0">Radier, canaleta perimetral, fixação dos pilares, água/esgoto</p></div></div>
+    <div class="table-scroll">
+    <table class="mat">
+      <caption>Radier (piso + calçada, laje única), pedestais e cinta perimetral</caption>
+      <thead><tr><th>Item</th><th>Especificação</th><th class="qty">Quantidade</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag concrete">laje</span> Piso do quiosque</td><td>Área coberta, em L</td><td class="qty">47,63 m²</td></tr>
+        <tr><td><span class="tag concrete">laje</span> Calçada perimetral</td><td>Sul (0,50 m) + Norte (1,00 m) + Ala Oeste (1,00 m), mesma concretagem</td><td class="qty">11,75 m²</td></tr>
+        <tr class="sub"><td colspan="3">Radier total (10 cm): <b>59,38 m² → 5,94 m³</b></td></tr>
+        <tr><td><span class="tag concrete">laje</span> Malha pop</td><td>Tela soldada Q92, 2,45×6,00 m/folha</td><td class="qty">5 folhas · 73,5 m²</td></tr>
+        <tr><td><span class="tag concrete">fundação</span> Pedestais de concreto</td><td>10 un., Ø30 cm, 0,80 m</td><td class="qty">0,57 m³</td></tr>
+        <tr><td><span class="tag concrete">cinta</span> Bloco canaleta 9×19×39</td><td>27,75 m livres (38,50 m do contorno − 10,75 m junto ao piso existente)</td><td class="qty">75 un.</td></tr>
+        <tr><td><span class="tag metal">ferragem</span> Vergalhão CA-50 Ø3/8"</td><td>2 varões longitudinais</td><td class="qty">62 m</td></tr>
+        <tr><td><span class="tag metal">ferragem</span> Grampo/estribo</td><td>A cada 0,50 m</td><td class="qty">≈56 un.</td></tr>
+        <tr><td><span class="tag concrete">enchimento</span> Graute da canaleta</td><td>—</td><td class="qty">0,35 m³</td></tr>
+        <tr class="sub"><td colspan="3">Concreto estrutural total: <b>7,0 m³</b> — cimento 2.100 kg (42 sacos), areia 4,3 m³, brita 5,5 m³ (se não-usinado).</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="table-scroll" style="margin-top:16px">
+    <table class="mat">
+      <caption>Drenagem pluvial (água da chuva do telhado) — separada da rede sanitária</caption>
+      <thead><tr><th>Item</th><th>Especificação</th><th class="qty">Quantidade</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag concrete">canaleta</span> Canaleta de concreto aberta</td><td>Seção 18×22 cm, c/ grelha de ferro</td><td class="qty">8,5 m</td></tr>
+        <tr><td><span class="tag water">calha</span> Tubo de queda PVC Ø75 mm</td><td>Calha → canaleta</td><td class="qty">1 un. · ≈2,7 m</td></tr>
+        <tr><td><span class="tag water">pluvial</span> Tubo PVC Ø100 mm enterrado</td><td>Canaleta → caixa de inspeção</td><td class="qty">12,3 m</td></tr>
+        <tr><td><span class="tag concrete">caixa</span> Caixa de inspeção pluvial</td><td>0,45×0,45×0,55 m</td><td class="qty">1 un.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="table-scroll" style="margin-top:16px">
+    <table class="mat">
+      <caption>Fixação dos pés-de-pilar e rede hidrossanitária — esgoto separado em 2 destinos</caption>
+      <thead><tr><th>Item</th><th>Especificação</th><th class="qty">Quantidade</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag metal">fixação</span> Chumbador parabolt 3/8"×100 mm</td><td>2 por pedestal, para a chapa U</td><td class="qty">20 un.</td></tr>
+        <tr><td><span class="tag water">água fria</span> Tubo PVC 25/20 mm</td><td>Ramal principal + ramais aos 8 pontos</td><td class="qty">≈35 m</td></tr>
+        <tr><td><span class="tag water">esgoto sanitário</span> Tubo PVC 100 mm</td><td>2 vasos + pia da bancada → fossa</td><td class="qty">≈14 m</td></tr>
+        <tr><td><span class="tag water">esgoto sanitário</span> Fossa séptica biodigestora</td><td>1.300 ℓ, carga reduzida (só vasos+cozinha)</td><td class="qty">1 un.</td></tr>
+        <tr><td><span class="tag water">esgoto sanitário</span> Sumidouro</td><td>Anéis Ø1,50 m, prof. ≈2,00 m</td><td class="qty">1 un.</td></tr>
+        <tr><td><span class="tag water">água servida</span> Tubo PVC 40 mm</td><td>2 duchas + pia comunitária → represa (não passa pela fossa)</td><td class="qty">≈8 m + ramal até a represa (a medir)</td></tr>
+        <tr><td><span class="tag water">caixas</span> Passagem/inspeção 40×40</td><td>1 antes da fossa + 1 antes da represa</td><td class="qty">2 un.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- FASE 2 -->
+  <section class="phase" id="fase2">
+    <div class="phase-head"><div class="phase-num">2</div><div><h2>Estrutura de madeira</h2><p class="subhead" style="margin:0">Pilares, vigas e terças em eucalipto roliço</p></div></div>
+    <div class="table-scroll">
+    <table class="mat">
+      <caption>Lista de corte — comprimento de compra arredondado a cada 0,50 m</caption>
+      <thead><tr><th>Peça</th><th>Bitola</th><th>Comprimento real</th><th>Comprimento de compra</th><th class="qty">Qtd.</th></tr></thead>
+      <tbody>
+        <tr><td>Pilar P2,P3,P4,P5 (leste, alto)</td><td>12/14</td><td>2,60 m</td><td>3,00 m</td><td class="qty">4 un.</td></tr>
+        <tr><td>Pilar P1,P6,P9,P10 (recuada)</td><td>12/14</td><td>2,06 m</td><td>2,50 m</td><td class="qty">4 un.</td></tr>
+        <tr><td>Pilar P7,P8 (ala, baixo)</td><td>12/14</td><td>1,66 m</td><td>2,00 m</td><td class="qty">2 un.</td></tr>
+        <tr><td>Viga V1,V2 (transversal)</td><td>12/14</td><td>4,00 m</td><td>4,00 m</td><td class="qty">2 un.</td></tr>
+        <tr><td>Viga V3,V4 (transversal)</td><td>12/14</td><td>3,60 m</td><td>4,00 m</td><td class="qty">2 un.</td></tr>
+        <tr><td>Viga V5,V6 (ala)</td><td>12/14</td><td>2,65 m</td><td>3,00 m</td><td class="qty">2 un.</td></tr>
+        <tr><td>Terça T1,T2,T3 (corpo)</td><td>10/12</td><td>11,00 m</td><td>11,00 m (emenda/poste longo)</td><td class="qty">3 un.</td></tr>
+        <tr><td>Terça T4 (ala)</td><td>10/12</td><td>3,50 m</td><td>3,50 m</td><td class="qty">1 un.</td></tr>
+        <tr class="sub"><td colspan="5">Total: <b>84,5 m</b> — 48,0 m em 12/14 (pilares+vigas) + 36,5 m em 10/12 (terças). Bitolas confirmadas por verificação estrutural simplificada — ver caderno.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="table-scroll" style="margin-top:16px">
+    <table class="mat">
+      <caption>Fixação metálica</caption>
+      <thead><tr><th>Item</th><th>Especificação</th><th class="qty">Quantidade</th></tr></thead>
+      <tbody>
+        <tr><td>Chapa U ajustável</td><td>Aço galv. ≈3 mm, tora Ø12/14</td><td class="qty">10 un.</td></tr>
+        <tr><td>Parafuso passante 3/8"×150 mm</td><td>2 por chapa, c/ porca e arruela</td><td class="qty">20 un.</td></tr>
+        <tr><td>Cantoneira/suporte U</td><td>Uniões viga-pilar e terça-viga</td><td class="qty">26 un.</td></tr>
+        <tr><td>Parafuso autobrocante / prego 17×27</td><td>4 por união</td><td class="qty">≈104 un.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- FASE 3 -->
+  <section class="phase" id="fase3">
+    <div class="phase-head"><div class="phase-num">3</div><div><h2>Cobertura</h2><p class="subhead" style="margin:0">Telha sanduíche PIR sobre as terças</p></div></div>
+    <div class="table-scroll">
+    <table class="mat">
+      <thead><tr><th>Item</th><th>Especificação</th><th class="qty">Quantidade</th></tr></thead>
+      <tbody>
+        <tr><td>Telha campo sul (corpo)</td><td>PIR 30 mm, 1,00×4,45 m</td><td class="qty">8 un.</td></tr>
+        <tr><td>Telha campo norte (corpo+ala)</td><td>PIR 30 mm, 1,00×7,43 m</td><td class="qty">4 un.</td></tr>
+        <tr class="sub"><td colspan="3">Área de compra 65,32 m² · útil 62,50 m² · peso ≈606 kg</td></tr>
+        <tr><td>Parafuso autobrocante c/ vedação EPDM</td><td>4 linhas de terça, espaçamento ≈30 cm</td><td class="qty">≈150 un.</td></tr>
+        <tr><td>Fita/mastique de vedação</td><td>1 rolo por telha</td><td class="qty">12 rolos</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- FASE 4 -->
+  <section class="phase" id="fase4">
+    <div class="phase-head"><div class="phase-num">4</div><div><h2>Paredes — muro tendinoso</h2><p class="subhead" style="margin:0">Fechamento sul/leste do corpo e banheiros</p></div></div>
+    <div class="table-scroll">
+    <table class="mat">
+      <thead><tr><th>Item</th><th>Especificação</th><th class="qty">Quantidade</th></tr></thead>
+      <tbody>
+        <tr><td>Fechamento corpo (sul+leste)</td><td>4 painéis</td><td class="qty">46,7 m²</td></tr>
+        <tr><td>Paredes/divisórias do banheiro</td><td>Perímetro + central + 2 partições</td><td class="qty">32,6 m²</td></tr>
+        <tr class="sub"><td colspan="3">Área total: <b>79,3 m²</b></td></tr>
+        <tr><td>Malha/tela metálica tensionada</td><td>Núcleo estrutural</td><td class="qty">79,3 m²</td></tr>
+        <tr><td>Varão CA-60 Ø1/4"</td><td>Horizontal, espaçamento 25 cm</td><td class="qty">≈350 m</td></tr>
+        <tr><td>Arame recozido</td><td>Amarração</td><td class="qty">≈16 kg</td></tr>
+        <tr><td>Argamassa de reboco</td><td>2 faces × 2 cm, sobre 158,6 m²</td><td class="qty">3,2 m³</td></tr>
+        <tr class="sub"><td colspan="3">Traço 1:4 — ≈900 kg cimento (18 sacos) + 3,5 m³ areia fina.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- FASE 5 -->
+  <section class="phase" id="fase5">
+    <div class="phase-head"><div class="phase-num">5</div><div><h2>Portas &amp; pia comunitária</h2><p class="subhead" style="margin:0">Fechamento dos vãos e bancada de lava-mãos</p></div></div>
+    <div class="table-scroll">
+    <table class="mat">
+      <thead><tr><th>Item</th><th>Especificação</th><th class="qty">Quantidade</th></tr></thead>
+      <tbody>
+        <tr><td>Portas dos boxes</td><td>0,60×1,90 m — 2 duchas + 2 sanitários</td><td class="qty">4 un.</td></tr>
+        <tr><td>Dobradiças</td><td>3 por porta</td><td class="qty">12 un.</td></tr>
+        <tr><td>Fechadura/trinco</td><td>1 por porta</td><td class="qty">4 un.</td></tr>
+        <tr><td>Parafusos de fixação</td><td>≈12 por porta</td><td class="qty">≈48 un.</td></tr>
+        <tr><td>Bancada da pia (alvenaria/argamassa)</td><td>1,80×0,44 m</td><td class="qty">≈0,5 m³</td></tr>
+        <tr><td>Cuba embutida</td><td>—</td><td class="qty">1 un.</td></tr>
+        <tr><td>Torneiras/bicas comunitárias</td><td>Ligadas ao ramal de 20 mm da fase 1</td><td class="qty">3 un.</td></tr>
+        <tr><td>Saboneteira + papeleira</td><td>—</td><td class="qty">2 un.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <div class="note" style="margin-top:12px">
+    <h3>Pendências</h3>
+    <ul style="margin:0; padding-left:20px">
+      <li>Porta/portão de acesso no corpo principal — hoje só a ala tem vãos modelados.</li>
+      <li>Traço de concreto e bitola da malha pop a confirmar com responsável técnico.</li>
+      <li>Distâncias reais até a fossa e até a represa — medir em campo.</li>
+      <li>Teste de infiltração do solo para fechar o dimensionamento do sumidouro.</li>
+    </ul>
+  </div>
+</main>
+
+<footer class="site no-print">
+  <div class="wrap">Levantamento baseado no modelo 3D atual (V1/projeto.py, roof_frame.py, calcadas.py, wall.py, bathroom.py, counter.py).</div>
+</footer>
+</body>
+</html>

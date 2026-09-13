@@ -1,3 +1,10 @@
+> **SUPERADO (13/09/2026):** este documento é de 28/08/2026, anterior à
+> revisão do telhado (telha sanduíche PIR), das paredes (muro tendinoso),
+> da rede hidrossanitária e da verificação estrutural das bitolas de
+> madeira. O levantamento atual, por fase de obra, está em
+> [`site/orcamento.html`](../site/orcamento.html) (publicado também no
+> GitHub Pages do projeto). Mantido aqui como registro histórico.
+
 # Levantamento de Materiais — Área do Quiosque
 
 Planilha para cotação, item a item. Emitida em 28/08/2026.

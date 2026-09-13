@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Passeio 3D</title>
+<meta name="description" content="Vídeo do passeio pelo modelo 3D do quiosque.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="index.html">
+      <span class="eyebrow">Sítio Harmonia · Alfenas, MG</span>
+      <span class="name">Quiosque da Piscina</span>
+    </a>
+    <nav class="site">
+      <a href="index.html">Início</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="video.html" class="active">Vídeo</a>
+      <a href="caderno.html">Caderno de Obra</a>
+      <a href="orcamento.html">Orçamento</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="subhead">Passeio renderizado · Blender/Cycles, 1280×720, 20 fps</p>
+  <h1>Passeio pelo Quiosque</h1>
+  <p style="max-width:62ch; color:var(--ink-dim)">Chegada pela piscina → duchas (portas abrem para fora) → sanitário (abre a tampa do vaso) → tour até a pia da bancada, abre a torneira → geladeira → acende o fogão → lava as mãos na pia comunitária → liga a TV.</p>
+
+  <video class="responsive" controls preload="metadata" poster="../V1/renders/vista_entrada.png">
+    <source src="../V1/renders/passeio_quiosque.mp4" type="video/mp4">
+    Seu navegador não suporta vídeo HTML5. <a href="../V1/renders/passeio_quiosque.mp4">Baixe o vídeo</a>.
+  </video>
+
+  <div class="note" style="margin-top:24px">
+    <h3>Limitações conhecidas</h3>
+    <p style="margin:0">Modelo em fase de projeto: planos de chão/teto do banheiro ficam abstratos por ~1s durante a panorâmica, a pia comunitária não tem cuba modelada em detalhe e as chamas do fogão são estilizadas (cones emissivos).</p>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">Renderizado com Blender 4.2.23 LTS (Cycles + OpenImageDenoiser), ~28 amostras.</div>
+</footer>
+</body>
+</html>

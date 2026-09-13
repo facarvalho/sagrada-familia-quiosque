@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galeria do Quiosque</title>
+<meta name="description" content="Todas as vistas renderizadas do projeto, em slider por categoria.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="index.html">
+      <span class="eyebrow">Sítio Harmonia · Alfenas, MG</span>
+      <span class="name">Quiosque da Piscina</span>
+    </a>
+    <nav class="site">
+      <a href="index.html">Início</a>
+      <a href="galeria.html" class="active">Galeria</a>
+      <a href="video.html">Vídeo</a>
+      <a href="caderno.html">Caderno de Obra</a>
+      <a href="orcamento.html">Orçamento</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="subhead">36 renders do projeto atual + 35 do estudo de posicionamento (V3/V4/V5)</p>
+  <h1>Galeria</h1>
+
+  <div class="group-tabs" id="groupTabs"></div>
+
+  <div class="slider">
+    <div class="slide-stage">
+      <img id="stageImg" src="" alt="">
+      <button class="slide-nav prev" id="prevBtn" aria-label="Anterior">&larr;</button>
+      <button class="slide-nav next" id="nextBtn" aria-label="Próxima">&rarr;</button>
+    </div>
+    <div class="slide-info">
+      <span class="cap" id="slideCap"></span>
+      <span class="count" id="slideCount"></span>
+    </div>
+    <div class="thumbs" id="thumbs"></div>
+  </div>
+
+  <p class="subhead" style="margin-top:14px">Use as setas do teclado (&larr; &rarr;) ou clique nas miniaturas. As abas acima trocam de categoria — inclusive as variantes de posicionamento V3/V4/V5 (estudo de insolação por hora).</p>
+</main>
+
+<footer class="site">
+  <div class="wrap">Imagens geradas com Blender/Cycles a partir do modelo 3D do projeto (V1/, V3/, V4/, V5/).</div>
+</footer>
+<script src="assets/gallery.js"></script>
+</body>
+</html>
