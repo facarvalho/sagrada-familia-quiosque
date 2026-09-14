@@ -10,7 +10,7 @@ canto da piscina"), com **prova de incidência de sol real** (verão e
 inverno) — diferente de V3/V4/V5 (antigas), que usam um azimute/elevação solar
 simplificado e coordenadas de São Paulo (placeholder). A V6 usa o mesmo
 algoritmo NOAA e as mesmas coordenadas geográficas reais do terreno
-(Alfenas-MG) de `V1/render_sun_study.py` / `V1/sun_geo.py`.
+(Alfenas-MG) de `renders/scripts/render_sun_study.py` / `nucleo/sun_geo.py`.
 
 ## De onde veio a posição
 
@@ -20,7 +20,7 @@ nomes de pilares do projeto original, num lugar diferente do terreno.
 
 Esses pontos foram convertidos de GPS para o referencial do projeto com a
 mesma calibração já validada (âncora em P9, rotação 133,7°, escala derivada
-do par P1↔P9 original — ver `V1/sun_geo.py` e a memória
+do par P1↔P9 original — ver `nucleo/sun_geo.py` e a memória
 `piscina-georreferenciamento`). Um ajuste de Procrustes 2D (rotação +
 translação, sem distorcer escala) usando os 3 pontos correspondentes
 (P1/P8/P9 do projeto ↔ p1/P8/p9 novos) deu rotação ótima de **−87,5°** com
@@ -75,7 +75,7 @@ python3 visao-cerca-fernando/annotate_sun_study.py
 
 ## Contexto externo (cerca, café, terreno)
 
-A pedido do usuário, a cena inclui também `V1/contexto_externo.py`:
+A pedido do usuário, a cena inclui também `arquitetonico/contexto_externo.py`:
 - **Cerca**: postes P7–P13 do projeto de fibra óptica
   (https://facarvalho.github.io/sagrada-familia-infra/mapa.html — o
   usuário confirmou que o caminho da fibra segue a divisa da propriedade)

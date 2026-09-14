@@ -4,44 +4,44 @@
     {
       id: "plantas", label: "Plantas técnicas",
       items: [
-        ["V1/renders/planta_quiosque_anotada.png", "Planta geral — pilares, terças e vigas, cotada"],
-        ["V1/renders/piso_quiosque_medidas.png", "Piso do quiosque + calçada — medidas"],
-        ["V1/renders/telhado_quiosque_medidas.png", "Projeto do telhado — telha sanduíche PIR, terças"],
-        ["V1/renders/banheiro_planta_medidas.png", "Banheiros da ala — planta e medidas (caixa de brita)"],
-        ["V1/renders/esgoto_quiosque_medidas.png", "Rede hidrossanitária — água fria, esgoto e represa"]
+        ["renders/planta_quiosque_anotada.png", "Planta geral — pilares, terças e vigas, cotada"],
+        ["renders/piso_quiosque_medidas.png", "Piso do quiosque + calçada — medidas"],
+        ["renders/telhado_quiosque_medidas.png", "Projeto do telhado — telha sanduíche PIR, terças"],
+        ["renders/banheiro_planta_medidas.png", "Banheiros da ala — planta e medidas (caixa de brita)"],
+        ["renders/esgoto_quiosque_medidas.png", "Rede hidrossanitária — água fria, esgoto e represa"]
       ]
     },
     {
       id: "externas", label: "Vistas externas",
       items: [
-        ["V1/renders/projeto_render.png", "Vista geral do projeto"],
-        ["V1/renders/vista_entrada.png", "Vista da entrada, do lado da piscina"],
-        ["V1/renders/vista_aerea.png", "Vista aérea 3/4 da propriedade"],
-        ["V1/renders/vista_15m_T2_V1.png", "Vista externa — eixo da terça T2, 15 m ao norte"],
-        ["V1/renders/vista_10m_entre_P6_P2.png", "Vista externa — 10 m entre P6 e P2"],
-        ["V1/renders/vista_360_fisheye.png", "Vista 360° (fisheye) do interior"]
+        ["renders/projeto_render.png", "Vista geral do projeto"],
+        ["renders/vista_entrada.png", "Vista da entrada, do lado da piscina"],
+        ["renders/vista_aerea.png", "Vista aérea 3/4 da propriedade"],
+        ["renders/vista_15m_T2_V1.png", "Vista externa — eixo da terça T2, 15 m ao norte"],
+        ["renders/vista_10m_entre_P6_P2.png", "Vista externa — 10 m entre P6 e P2"],
+        ["renders/vista_360_fisheye.png", "Vista 360° (fisheye) do interior"]
       ]
     },
     {
       id: "interior", label: "Interiores",
       items: [
-        ["V1/renders/vista_corredor.png", "Vista interna do corredor"],
-        ["V1/renders/vista_corredor_cozinha.png", "Corredor olhando para a cozinha"],
-        ["V1/renders/vista_area_pia.png", "Área da pia / bancada gourmet (de P9 para P2)"],
-        ["V1/renders/banheiro_ducha_interior.png", "Interior da ducha"],
-        ["V1/renders/banheiro_lavabo_interior.png", "Interior do lavabo"]
+        ["renders/vista_corredor.png", "Vista interna do corredor"],
+        ["renders/vista_corredor_cozinha.png", "Corredor olhando para a cozinha"],
+        ["renders/vista_area_pia.png", "Área da pia / bancada gourmet (de P9 para P2)"],
+        ["renders/banheiro_ducha_interior.png", "Interior da ducha"],
+        ["renders/banheiro_lavabo_interior.png", "Interior do lavabo"]
       ]
     },
     {
       id: "sol", label: "Estudo solar",
-      items: [
-        ["V1/renders/sol_verao_13h_anotado.png", "Verão, 13h"],
-        ["V1/renders/sol_verao_15h_anotado.png", "Verão, 15h"],
-        ["V1/renders/sol_verao_17h_anotado.png", "Verão, 17h"],
-        ["V1/renders/sol_inverno_13h_anotado.png", "Inverno, 13h"],
-        ["V1/renders/sol_inverno_15h_anotado.png", "Inverno, 15h"],
-        ["V1/renders/sol_inverno_17h_anotado.png", "Inverno, 17h"]
-      ]
+      items: [].concat(
+        ["15h","16h","17h","18h","19h"].map(function(h){
+          return ["renders/sol_verao_"+h+"_anotado.png", "Verão, "+h];
+        }),
+        ["15h","16h","17h","18h","19h"].map(function(h){
+          return ["renders/sol_inverno_"+h+"_anotado.png", "Inverno, "+h];
+        })
+      )
     },
     {
       id: "visao-casa-da-mae", label: "Visão: casa da mãe",

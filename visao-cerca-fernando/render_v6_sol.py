@@ -1,15 +1,15 @@
 """
 V6 - Quiosque na QUINA SUDESTE da laje da piscina (outro canto, a pedido do
 usuario) + prova de incidencia de sol REAL (verao/inverno), mesmo metodo de
-V1/render_sun_study.py (algoritmo NOAA + coordenadas geograficas reais do
-terreno, V1/sun_geo.py) - NAO usa o azimute/elevacao simplificado de
+renders/scripts/render_sun_study.py (algoritmo NOAA + coordenadas geograficas reais do
+terreno, nucleo/sun_geo.py) - NAO usa o azimute/elevacao simplificado de
 V3/V4/V5 (antigas).
 
 --- De onde veio a posicao ------------------------------------------------
 O usuario marcou 3 pontos de referencia num novo KML ("Projeto sem titulo
 (1).kml"): p1, P8, p9 - mesmos nomes dos pilares originais, mas em outro
 lugar do terreno. Esses pontos foram convertidos de GPS para o referencial
-do projeto usando a MESMA calibracao ja validada em V1/sun_geo.py (ancora
+do projeto usando a MESMA calibracao ja validada em nucleo/sun_geo.py (ancora
 em P9, rotacao 133.7 graus, ~3cm de erro conhecido nessa ancora).
 
 Ajuste por Procrustes 2D (rotacao+translacao, sem distorcer escala) usando
@@ -35,7 +35,7 @@ paredes, moveis):
 
 Gera 6 imagens (verao 21/12 e inverno 21/06, as 13h/15h/17h, sol na posicao
 REAL do ceu para o terreno) em visao-cerca-fernando/renders/sol_{estacao}_{h}h.png, iguais em
-formato as de V1/renders/sol_*.png (mesma legenda depois, via
+formato as de renders/sol_*.png (mesma legenda depois, via
 visao-cerca-fernando/annotate_sun_study.py).
 
 Uso (bootstrap obrigatorio - ver memoria piscina-render-import-bootstrap):
@@ -53,28 +53,28 @@ import mathutils
 
 scriptdir = os.path.dirname(os.path.abspath(__file__))
 repo_root = os.path.dirname(scriptdir)
-v1dir = os.path.join(repo_root, "V1")
-if v1dir not in sys.path:
-    sys.path.insert(0, v1dir)
+arq_dir = os.path.join(repo_root, "arquitetonico")
+if arq_dir not in sys.path:
+    sys.path.insert(0, arq_dir)
 if repo_root not in sys.path:
     sys.path.insert(0, repo_root)
 
 # ---------------------------------------------------------------------------
 # 1. CONSTROI O PROJETO ORIGINAL (igual render_sun_study.py, nada mudado)
 # ---------------------------------------------------------------------------
-projeto_path = os.path.join(v1dir, "projeto.py")
+projeto_path = os.path.join(arq_dir, "projeto.py")
 with open(projeto_path, "r", encoding="utf-8") as f:
     _projeto_ns = {"__name__": "__main__"}
     exec(compile(f.read(), projeto_path, "exec"), _projeto_ns)
 
-import V1.extras as extras
+import arquitetonico.extras as extras
 extras.build_all(_projeto_ns)
 
-import V1.fixes as fixes
+import arquitetonico.fixes as fixes
 fixes.apply_all()
 
-import V1.sun_geo as sun_geo
-import V1.contexto_externo as contexto_externo
+import nucleo.sun_geo as sun_geo
+import arquitetonico.contexto_externo as contexto_externo
 contexto_externo.build(_projeto_ns)
 
 # ---------------------------------------------------------------------------
@@ -86,7 +86,7 @@ def _e_piscina(nome):
 
 _quiosque = [o for o in bpy.data.objects
              if o.type in {"MESH", "EMPTY"} and not _e_piscina(o.name)
-             and not o.name.startswith(("Cerca_", "Cafe_", "Terreno_"))]
+             and not o.name.startswith(("Cerca_", "Cafe_", "Terreno_", "CasaMae_"))]
 
 _pivot = mathutils.Vector((0.4, 9.5, 0.0))   # P9 original (canto reentrante do "L")
 _target = mathutils.Vector((0.0, -7.0, 0.0))  # quina SE da laje (Piso_Area_Piscina)
@@ -144,7 +144,7 @@ obj_arrow.data.materials.append(mat_norte)
 # ---------------------------------------------------------------------------
 # 4. CAMERA - ponto de vista REAL pedido pelo usuario (lat -21.3530973,
 #    lon -45.9900076 -> convertido pro referencial do projeto com a mesma
-#    calibracao de V1/sun_geo.py, ancora P1/P9): (-3.93, 7.63), na borda
+#    calibracao de nucleo/sun_geo.py, ancora P1/P9): (-3.93, 7.63), na borda
 #    norte do deck/piscina, olhando para o quiosque na nova posicao (quina
 #    SE) - a piscina fica em primeiro plano, o quiosque ao fundo.
 # ---------------------------------------------------------------------------
