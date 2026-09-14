@@ -12,7 +12,9 @@ Pontos de consumo/esgoto (coordenadas derivadas de bathroom.py / counter.py):
   - Ducha 1 (-1,29 ; 10,175)   Ducha 2 (-1,29 ; 11,325)
   - Sanit. 1 (-0,59 ; 10,175)  Sanit. 2 (-0,59 ; 11,325)   [vaso, caixa acoplada]
   - Pia comunitária (-0,90 ; 9,32)
-  - Pia da bancada (3,675 ; 2,65)
+  - Pia da bancada/cozinha (2,20 ; 1,805) — parede SUL, sob a janela
+    (revisão 14/09/2026: bancada de alvenaria única com a churrasqueira;
+    saiu da parede leste, ver counter.py/wall.py)
 
 Fossa séptica biodigestora 1.300 L + sumidouro: posição esquemática ao
 norte da Calçada Norte (y > 13,0) — local definitivo a medir em campo.
@@ -62,7 +64,7 @@ D2Y = (BYM + BY1) / 2.0
 DUCHA_X = BXM - WT / 2.0 - 0.35
 VASO_X = BXM + WT / 2.0 + 0.27
 PIA_COM = (-0.90, 9.32)
-PIA_BAN = (3.675, 2.65)
+PIA_BAN = (2.20, 1.805)  # parede sul, sob a janela (counter.py: PIA_SUL_CX/pia_cy)
 
 # fossa/sumidouro (posição esquemática)
 FOSSA = (1.0, 14.2)
@@ -78,7 +80,7 @@ REPRESA = (-3.5, 15.1)
 REP_R = 0.85
 
 WX0, WX1 = -4.5, 4.3
-WY0, WY1 = 8.9, 16.6
+WY0, WY1 = 0.9, 16.6
 MARGIN = 210
 SCALE = 120
 
@@ -130,6 +132,25 @@ wall_rect(BXM - WT / 2, BXM + WT / 2, BY0, BY1)
 wall_rect(BX0, BXM, BYM - WT / 2, BYM + WT / 2)
 wall_rect(BXM, BX1, BYM - WT / 2, BYM + WT / 2)
 
+# --- Contexto: parede sul/leste do corpo (cozinha) + janela + bancada ------
+# (muro tendinoso — wall.py; bancada de alvenaria — counter.py)
+Y_SUL = 1.5
+WIN_X0, WIN_X1 = 1.65, 2.75
+WALL_WT = 0.05
+wall_rect(0.4 - WALL_WT / 2, WIN_X0, Y_SUL - WALL_WT / 2, Y_SUL + WALL_WT / 2)
+wall_rect(WIN_X1, 4.0 + WALL_WT / 2, Y_SUL - WALL_WT / 2, Y_SUL + WALL_WT / 2)
+wall_rect(4.0 - WALL_WT / 2, 4.0 + WALL_WT / 2, Y_SUL, 5.5)
+d.rectangle([wx(WIN_X0), wy(Y_SUL) - 6, wx(WIN_X1), wy(Y_SUL) + 6],
+            fill=(150, 200, 220, 150), outline=(60, 60, 60, 200), width=1)
+
+BANC_SUL_X0, BANC_SUL_X1 = 0.75, 3.75
+PIA_SUL_Y_WALL, PIA_SUL_DEPTH = 1.53, 0.55
+d.rectangle([wx(BANC_SUL_X0), wy(PIA_SUL_Y_WALL + PIA_SUL_DEPTH),
+             wx(BANC_SUL_X1), wy(PIA_SUL_Y_WALL)],
+            fill=(210, 205, 195, 110), outline=(150, 145, 135), width=1)
+d.text((wx(BANC_SUL_X1) - 4, wy(PIA_SUL_Y_WALL + PIA_SUL_DEPTH) - 25),
+       "bancada de alvenaria (pia + churrasqueira)", font=F_TINY, fill=(110, 105, 95), anchor="ra")
+
 # --- Pilares (referência, pontos vermelhos) -------------------------------
 PILARES = [(0.4, 1.5), (4.0, 1.5), (4.0, 5.5), (4.0, 9.5), (4.0, 12.0),
            (0.4, 12.0), (-2.25, 12.0), (-2.25, 9.5), (0.4, 9.5), (0.4, 5.5)]
@@ -138,10 +159,17 @@ for px_, py_ in PILARES:
 
 
 # --- Roteamento das tubulações (esquemático, ortogonal) -------------------
-def pline(pts, color, width):
+TOTALS = {"agua_fria": 0.0, "esgoto_sanitario": 0.0, "agua_servida": 0.0}
+
+
+def pline(pts, color, width, categoria=None):
     for i in range(len(pts) - 1):
         d.line([(wx(pts[i][0]), wy(pts[i][1])), (wx(pts[i + 1][0]), wy(pts[i + 1][1]))],
                fill=color, width=width)
+        if categoria:
+            ax, ay = pts[i]
+            bx, by = pts[i + 1]
+            TOTALS[categoria] += ((bx - ax) ** 2 + (by - ay) ** 2) ** 0.5
 
 
 TRUNK_Y = 13.6
@@ -152,9 +180,16 @@ X_DUCHA_AG, X_DUCHA_CZ = DUCHA_X - 0.06, DUCHA_X + 0.06
 X_VASO_AG, X_VASO_ES = VASO_X - 0.06, VASO_X + 0.06
 X_PIA_AG, X_PIA_CZ = PIA_COM[0] - 0.06, PIA_COM[0] + 0.06
 
+# ramal da pia da cozinha: corre junto à parede leste (x=3,9, entre a
+# fileira de pilares e a geladeira/fogão) por baixo do piso, até a altura
+# do coletor da ala (y=13,6), depois vira para a pia (parede sul).
+KITCHEN_X = 3.9
+X_KITCHEN_AG, X_KITCHEN_ES = KITCHEN_X - 0.06, KITCHEN_X + 0.06
+ESG_ROW_Y = TRUNK_Y + 0.15   # linha de esgoto da cozinha, deslocada da água fria
+
 # --- água fria: ramal principal ao longo de y=13,6 ------------------------
-agua_trunk = [(X_DUCHA_AG, TRUNK_Y), (3.675, TRUNK_Y)]
-pline(agua_trunk, BLUE, 5)
+agua_trunk = [(X_DUCHA_AG, TRUNK_Y), (X_KITCHEN_AG, TRUNK_Y)]
+pline(agua_trunk, BLUE, 5, "agua_fria")
 agua_ramais = [
     [(X_DUCHA_AG, TRUNK_Y), (X_DUCHA_AG, D1Y)],
     [(X_DUCHA_AG, D2Y), (X_DUCHA_AG, TRUNK_Y)],
@@ -163,34 +198,52 @@ agua_ramais = [
     [(X_PIA_AG, TRUNK_Y), (X_PIA_AG, PIA_COM[1]), (PIA_COM[0], PIA_COM[1])],
 ]
 for r in agua_ramais:
-    pline(r, BLUE, 3)
+    pline(r, BLUE, 3, "agua_fria")
 d.line([(wx(X_DUCHA_AG), wy(TRUNK_Y) - 14), (wx(X_DUCHA_AG), wy(TRUNK_Y))], fill=BLUE, width=3)
 d.polygon([(wx(X_DUCHA_AG) - 8, wy(TRUNK_Y) - 14), (wx(X_DUCHA_AG) + 8, wy(TRUNK_Y) - 14), (wx(X_DUCHA_AG), wy(TRUNK_Y) - 30)],
           fill=BLUE)
 d.text((wx(X_DUCHA_AG) - 62, wy(TRUNK_Y) - 52), "entrada de água\n(ponto a definir)", font=F_TINY, fill=BLUE)
 
-# --- esgoto SANITÁRIO: só os 2 vasos -> fossa -----------------------------
+# --- água fria: ramal da pia da cozinha (parede sul) ------------------------
+FIX_KITCHEN_AG = (PIA_BAN[0] - 0.06, PIA_BAN[1])
+kitchen_agua = [FIX_KITCHEN_AG, (X_KITCHEN_AG, PIA_BAN[1]), (X_KITCHEN_AG, TRUNK_Y)]
+pline(kitchen_agua, BLUE, 3, "agua_fria")
+
+# --- esgoto SANITÁRIO: só os 2 vasos -> fossa (pias NÃO entram aqui) ------
 esg_coletor = [(X_VASO_ES, TRUNK_Y), CAIXA_SANIT, FOSSA]
-pline(esg_coletor, BROWN, 6)
+pline(esg_coletor, BROWN, 6, "esgoto_sanitario")
 esg_ramais = [
     [(X_VASO_ES, D1Y), (X_VASO_ES, TRUNK_Y)],
     [(X_VASO_ES, D2Y), (X_VASO_ES, TRUNK_Y)],
 ]
 for r in esg_ramais:
-    pline(r, BROWN, 3)
+    pline(r, BROWN, 3, "esgoto_sanitario")
 pline([FOSSA, SUMIDOURO], GREEN, 6)
 
-# --- água servida (greywater): duchas + pia comunitária -> represa --------
-# NÃO passa pela fossa — vaso é o único ponto que vai para lá.
+# --- água servida (greywater): duchas + pia comunitária + pia da cozinha --
+# -> represa. NÃO passa pela fossa — vaso é o único ponto que vai para lá
+# (pedido do usuário: as duas pias, mesmo a da cozinha com gordura, vão
+# para a represa, não para a fossa).
 cinza_coletor = [(X_DUCHA_CZ, TRUNK_Y), CAIXA_CINZA, (REPRESA[0], TRUNK_Y), REPRESA]
-pline(cinza_coletor, GREY, 6)
+pline(cinza_coletor, GREY, 6, "agua_servida")
 cinza_ramais = [
     [(X_DUCHA_CZ, D1Y), (X_DUCHA_CZ, TRUNK_Y)],
     [(X_DUCHA_CZ, D2Y), (X_DUCHA_CZ, TRUNK_Y)],
     [(X_PIA_CZ, PIA_COM[1]), (X_PIA_CZ, TRUNK_Y), CAIXA_CINZA],
 ]
 for r in cinza_ramais:
-    pline(r, GREY, 3)
+    pline(r, GREY, 3, "agua_servida")
+
+# ramal da pia da cozinha: sobe até a altura do coletor (y=13,6), desloca
+# 0,15 m (ESG_ROW_Y) para não correr colado à água fria, e entra na caixa
+# de inspeção da água servida -> daí segue o mesmo trecho até a represa
+# (acima). Recomenda-se caixa de gordura antes desta ligação (ver ficha).
+FIX_KITCHEN_ES = (PIA_BAN[0] + 0.06, PIA_BAN[1])
+kitchen_greywater = [
+    FIX_KITCHEN_ES, (X_KITCHEN_ES, PIA_BAN[1]), (X_KITCHEN_ES, TRUNK_Y),
+    (X_KITCHEN_ES, ESG_ROW_Y), (CAIXA_CINZA[0], ESG_ROW_Y), CAIXA_CINZA,
+]
+pline(kitchen_greywater, GREY, 4, "agua_servida")
 
 # represa (lagoa/reservatório) — ícone esquemático
 d.ellipse([wx(REPRESA[0] - REP_R), wy(REPRESA[1] + REP_R * 0.6),
@@ -202,22 +255,8 @@ for _k in range(3):
            fill=(20, 90, 130, 140), width=2)
 d.text((wx(REPRESA[0]) - 40, wy(REPRESA[1] + REP_R * 0.6) + 6), "REPRESA", font=F_NOTE, fill=(15, 80, 120))
 d.text((wx(REPRESA[0]) - 78, wy(REPRESA[1] + REP_R * 0.6) + 28),
-       "água servida (duchas + pia)\nposição esquemática — local\nreal e distância a definir",
+       "água servida (duchas + 2 pias)\nposição esquemática — local\nreal e distância a definir",
        font=F_TINY, fill=(15, 80, 120))
-
-# pia da bancada (cozinha) fica ~11 m ao sul, fora do recorte -> ramal
-# INDEPENDENTE (não se junta ao coletor da ala), indicado por 2 setas que
-# saem de quadro, deslocadas uma da outra para não se sobreporem.
-_pbx_agua, _pbx_esg = 3.60, 3.80
-d.line([(wx(_pbx_agua), wy(TRUNK_Y) - 34), (wx(_pbx_agua), wy(TRUNK_Y) - 4)], fill=BLUE, width=4)
-d.polygon([(wx(_pbx_agua) - 7, wy(TRUNK_Y) - 34), (wx(_pbx_agua) + 7, wy(TRUNK_Y) - 34), (wx(_pbx_agua), wy(TRUNK_Y) - 48)],
-          fill=BLUE)
-d.line([(wx(_pbx_esg), wy(TRUNK_Y) - 34), (wx(_pbx_esg), wy(TRUNK_Y) - 4)], fill=BROWN, width=4)
-d.polygon([(wx(_pbx_esg) - 7, wy(TRUNK_Y) - 34), (wx(_pbx_esg) + 7, wy(TRUNK_Y) - 34), (wx(_pbx_esg), wy(TRUNK_Y) - 48)],
-          fill=BROWN)
-d.text((wx(_pbx_agua) - 200, wy(TRUNK_Y) - 100),
-       "PIA DA BANCADA (cozinha)\nramal independente\n~11 m ao sul, fora do recorte",
-       font=F_TINY, fill=(90, 90, 90), align="right")
 
 for cx_, cy_ in (CAIXA_CINZA, CAIXA_SANIT):
     d.rectangle([wx(cx_) - 7, wy(cy_) - 7, wx(cx_) + 7, wy(cy_) + 7], fill=(90, 90, 88, 230),
@@ -238,12 +277,16 @@ fixture(X_VASO_AG, D2Y, "", "", BLUE)
 fixture(X_VASO_ES, D2Y, "", "", BROWN)
 fixture(X_PIA_AG, PIA_COM[1], "", "", BLUE)
 fixture(X_PIA_CZ, PIA_COM[1], "", "", GREY)
+fixture(FIX_KITCHEN_AG[0], FIX_KITCHEN_AG[1], "", "", BLUE)
+fixture(FIX_KITCHEN_ES[0], FIX_KITCHEN_ES[1], "", "", GREY)
 
 d.text((wx(DUCHA_X) - 58, wy(D1Y) - 34), "DUCHA 1", font=F_TINY, fill=(20, 24, 30))
 d.text((wx(DUCHA_X) - 58, wy(D2Y) + 14), "DUCHA 2", font=F_TINY, fill=(20, 24, 30))
 d.text((wx(VASO_X) + 12, wy(D1Y) - 34), "SANIT. 1", font=F_TINY, fill=(20, 24, 30))
 d.text((wx(VASO_X) + 12, wy(D2Y) + 14), "SANIT. 2", font=F_TINY, fill=(20, 24, 30))
 d.text((wx(PIA_COM[0]) - 70, wy(PIA_COM[1]) - 30), "PIA COMUNITÁRIA", font=F_TINY, fill=(20, 24, 30))
+d.text((wx(PIA_BAN[0]) - 96, wy(PIA_BAN[1]) - 40),
+       "PIA DA COZINHA\n(parede sul, sob a janela)", font=F_TINY, fill=(20, 24, 30))
 
 # --- Fossa + sumidouro -----------------------------------------------------
 d.rectangle([wx(FOSSA[0] - FOSSA_W / 2), wy(FOSSA[1] + FOSSA_H / 2),
@@ -269,9 +312,11 @@ def _label(mx, my, text, color, font=F_DIM):
 
 
 # --- Rótulos de diâmetro nos trechos principais ---------------------------
-_label(wx(0.9), wy(TRUNK_Y) - 22, "água fria 25 mm", BLUE, F_TINY)
+_label(wx(-0.55), wy(TRUNK_Y) - 22, "água fria 25 mm", BLUE, F_TINY)
 _label(wx(FOSSA[0]) + 90, (wy(FOSSA[1]) + wy(CAIXA_SANIT[1])) / 2, "esgoto\nsanitário\n100 mm", BROWN, F_TINY)
 _label((wx(CAIXA_CINZA[0]) + wx(REPRESA[0] + 1.0)) / 2, wy(TRUNK_Y) + 24, "água servida 40 mm", GREY, F_TINY)
+_label(wx(X_KITCHEN_AG) - 46, wy((TRUNK_Y + PIA_BAN[1]) / 2), "água fria\n20 mm", BLUE, F_TINY)
+_label(wx(X_KITCHEN_ES) + 50, wy((TRUNK_Y + PIA_BAN[1]) / 2), "água servida\nc/ gordura\n40 mm", GREY, F_TINY)
 
 # --- Ficha lateral ----------------------------------------------------
 fx0 = wx(WX1) + 30
@@ -285,17 +330,20 @@ lines = [
     "",
     "REDE SEPARADA EM 2 DESTINOS (esgoto):",
     "  SANITÁRIO (só os 2 vasos) -> fossa -> sumidouro",
-    "  ÁGUA SERVIDA (2 duchas + pia comunitária) -> represa",
-    "  (a ducha NÃO passa pela fossa — só água de banho/sabão)",
-    "  Pia da bancada (cozinha, tem gordura): segue p/ a fossa",
-    "  — ver ramal independente à parte, no topo direito",
+    "  ÁGUA SERVIDA (2 duchas + pia comunitária + pia da",
+    "  cozinha) -> represa — NENHUMA pia vai para a fossa",
+    "  (pedido do usuário; só os vasos usam a fossa)",
+    "  Pia da cozinha: ramal próprio de ~13 m ao longo da",
+    "  parede leste (x=3,9) até a caixa de água servida;",
+    "  RECOMENDA-SE caixa de gordura antes dessa ligação",
+    "  (a pia tem gordura — não modelada aqui, a definir)",
     "",
     "Água fria: PVC soldável 25 mm (ramal) / 20 mm (pontos)",
-    "Esgoto sanitário (vasos): PVC 100 mm",
-    "Água servida (duchas/pia): PVC 40 mm",
+    "Esgoto sanitário (só vasos): PVC 100 mm",
+    "Água servida (duchas/pias): PVC 40 mm",
     "",
-    "Fossa séptica biodigestora 1.300 L (só 2 vasos + pia da",
-    "  bancada — carga reduzida) + sumidouro Ø1,50 m",
+    "Fossa séptica biodigestora 1.300 L (só os 2 vasos —",
+    "  carga reduzida) + sumidouro Ø1,50 m",
     "  — dimensão final do sumidouro depende de teste",
     "  de infiltração do solo (não feito)",
     "",
@@ -309,6 +357,15 @@ lines = [
     "  ESQUEMÁTICAS — locais reais, distâncias e a ligação",
     "  até o ponto de água existente precisam ser medidos",
     "  em campo.",
+    "",
+    "COMPRIMENTOS MEDIDOS NESTE DESENHO (soma dos trechos",
+    "  desenhados, sem perda de corte/emenda):",
+    f"  Água fria (ramal principal + todos os ramais): {TOTALS['agua_fria']:.1f} m",
+    f"  Esgoto sanitário (só os 2 vasos -> fossa): {TOTALS['esgoto_sanitario']:.1f} m",
+    f"  Água servida (duchas + pia comunitária + pia da cozinha",
+    f"  -> represa, sem contar o trecho até a represa em si): {TOTALS['agua_servida']:.1f} m",
+    "  (não inclui o ramal represa->caixa nem entrada->trunk,",
+    "  que dependem de locais a medir em campo)",
 ]
 for i, ln in enumerate(lines):
     d.text((fx0 + 14, fy0 + 46 + i * 19), ln, font=F_TINY, fill=(20, 24, 30))
@@ -317,11 +374,12 @@ lg = fy0 + 46 + len(lines) * 19 + 10
 d.line([(fx0 + 14, lg), (fx0 + 30, lg)], fill=BLUE, width=4)
 d.text((fx0 + 38, lg - 9), "água fria", font=F_TINY, fill=(20, 24, 30))
 d.line([(fx0 + 14, lg + 22), (fx0 + 30, lg + 22)], fill=BROWN, width=4)
-d.text((fx0 + 38, lg + 13), "esgoto sanitário (vasos -> fossa)", font=F_TINY, fill=(20, 24, 30))
+d.text((fx0 + 38, lg + 13), "esgoto sanitário (só vasos -> fossa)", font=F_TINY, fill=(20, 24, 30))
 d.line([(fx0 + 14, lg + 44), (fx0 + 30, lg + 44)], fill=GREY, width=4)
-d.text((fx0 + 38, lg + 35), "água servida (duchas+pia -> represa)", font=F_TINY, fill=(20, 24, 30))
+d.text((fx0 + 38, lg + 35), "água servida (duchas+pias -> represa)", font=F_TINY, fill=(20, 24, 30))
 d.line([(fx0 + 14, lg + 66), (fx0 + 30, lg + 66)], fill=GREEN, width=4)
 d.text((fx0 + 38, lg + 57), "fossa / sumidouro", font=F_TINY, fill=(20, 24, 30))
 
 img.save(OUT)
 print("ESGOTO_MEDIDAS_OK:", OUT)
+print("TOTALS:", {k: round(v, 2) for k, v in TOTALS.items()})

@@ -6,9 +6,9 @@
       items: [
         ["renders/planta_quiosque_anotada.png", "Planta geral — pilares, terças e vigas, cotada"],
         ["renders/piso_quiosque_medidas.png", "Piso do quiosque + calçada — medidas"],
-        ["renders/telhado_quiosque_medidas.png", "Projeto do telhado — telha sanduíche PIR, terças"],
         ["renders/banheiro_planta_medidas.png", "Banheiros da ala — planta e medidas (caixa de brita)"],
-        ["renders/esgoto_quiosque_medidas.png", "Rede hidrossanitária — água fria, esgoto e represa"]
+        ["renders/esgoto_quiosque_medidas.png", "Rede hidrossanitária — água fria, esgoto e represa"],
+        ["renders/telhado_quiosque_medidas.png", "Projeto do telhado — telha sanduíche PIR, terças"]
       ]
     },
     {
