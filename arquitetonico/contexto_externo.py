@@ -62,11 +62,13 @@ CERCA_ORDEM = ["P7", "P8", "P9", "P10", "P11", "P12", "P13"]
 # visível perto da piscina (P9->P12) — ver docstring.
 CAFE_ORDEM = ["P9", "P10", "P11", "P12"]
 
-# Casa da mãe: centro/pegada aproximados, derivados de 3 pontos reais do
-# projeto de fibra óptica (roteador "MÃE" + câmeras "Mãe Cozinha"/"Mãe
-# Varanda"), convertidos pra XY do projeto com a mesma calibração de
-# nucleo/sun_geo.py — ver docstring do módulo.
-CASA_MAE_CENTRO = (-31.85, -3.63)
+# Casa da mãe: centro/pegada aproximados. Posição confirmada diretamente
+# pelo usuário (13/09/2026, GPS -21.352877824002647, -45.989957740052),
+# convertida pra XY do projeto com a mesma calibração de nucleo/sun_geo.py
+# — mais precisa que a estimativa anterior (baseada em 3 pontos indiretos
+# do projeto de fibra óptica — roteador/câmeras "MÃE" — que ficava ~11 m
+# fora do ponto real dado pelo usuário).
+CASA_MAE_CENTRO = (-27.59, -13.44)
 CASA_MAE_LARGURA = 12.0   # X, m (aproximado — não é levantamento da casa)
 CASA_MAE_PROFUND = 12.0   # Y, m
 

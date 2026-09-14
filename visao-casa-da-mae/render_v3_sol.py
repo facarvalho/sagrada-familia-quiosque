@@ -15,12 +15,11 @@ prova de sol real (NOAA, nucleo/sun_geo.py) às 15h/16h/17h/18h/19h, verão e
 inverno.
 
 Câmera customizada (diferente do offset genérico das outras visões): a
-casa da mãe tem posição real conhecida (3 pontos do projeto de fibra
-óptica — roteador "MÃE" + câmeras "Mãe Cozinha"/"Mãe Varanda",
-convertidos pra XY do projeto, ver arquitetonico/contexto_externo.py) a
-~28 m daqui, direção ~184° (quase -X). A câmera fica do lado OPOSTO da
-casa (a ~3,5°, "atrás" do quiosque em relação à casa) olhando de volta
-pro quiosque, pra casa aparecer ao fundo, atrás do quiosque, como pedido.
+casa da mãe tem posição real confirmada pelo usuário (GPS
+-21.352877824002647, -45.989957740052, ver arquitetonico/contexto_externo.py)
+a ~20,3 m daqui, direção ~196° (SO). A câmera fica do lado OPOSTO da casa
+(a ~15,8°, "atrás" do quiosque em relação à casa) olhando de volta pro
+quiosque, pra casa aparecer ao fundo, atrás do quiosque, como pedido.
 
 Uso:
   BL=~/opt/blender-4.2.23-linux-x64/blender
@@ -41,11 +40,11 @@ import nucleo.variant_sol_common as common
 TARGET = (-8.031770738245125, -7.919110538381107)
 OUT_DIR = os.path.join(scriptdir, "renders")
 
-# Câmera do lado oposto da casa (ver docstring): casa real a ~184° daqui,
-# então a câmera fica a ~3,5°, olhando de volta pro quiosque com a casa
+# Câmera do lado oposto da casa (ver docstring): casa real a ~196° daqui,
+# então a câmera fica a ~15,8°, olhando de volta pro quiosque com a casa
 # aparecendo atrás dele.
 import math as _math
-_ang = _math.radians(3.5)
+_ang = _math.radians(15.766662122322742)
 _dist = 32.0
 CAM_OFFSET = (_dist * _math.cos(_ang), _dist * _math.sin(_ang), 15.0)
 
