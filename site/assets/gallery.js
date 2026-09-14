@@ -40,6 +40,19 @@
       ]
     },
     {
+      id: "fase-esqueleto", label: "Fase inicial (esqueleto)",
+      items: [
+        ["renders/fase_esqueleto_estrutura.png", "Estrutura de pilares e vigas, sem telhado"],
+        ["renders/fase_esqueleto_telhado.png", "Telhado montado, sem paredes"],
+        ["renders/fase_esqueleto_detalhe_estrutura.png", "Detalhe da ligação entre pilares, vigas e terças"],
+        ["renders/fase_esqueleto_fileira_pilares.png", "Fileira de pilares vista de dentro, com a piscina ao lado"],
+        ["renders/fase_esqueleto_corredor.png", "Corredor aberto, sem paredes, olhando pra piscina"],
+        ["renders/fase_esqueleto_lateral.png", "Vista lateral do esqueleto, ao lado da piscina"],
+        ["renders/fase_esqueleto_entrada.png", "Vista de entrada do esqueleto"],
+        ["renders/fase_esqueleto_aerea.png", "Vista aérea 3/4 do esqueleto"]
+      ]
+    },
+    {
       id: "visao-casa-da-mae", label: "Visão: casa da mãe",
       items: [].concat(
         ["15h","16h","17h","18h","19h"].map(function(h){
