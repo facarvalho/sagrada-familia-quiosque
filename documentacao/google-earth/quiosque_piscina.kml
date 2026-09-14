@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Quiosque da Piscina - Sitio Sagrada Familia</name>
+  <description>Modelo 3D do projeto do quiosque (piso, pilares, telhado,
+  paredes, banheiros, area gourmet), posicionado na coordenada GPS real
+  e orientado para o norte verdadeiro (heading calculado a partir do
+  levantamento em nucleo/sun_geo.py). A piscina ja existe e esta incluida
+  no modelo so como referencia visual.</description>
+  <Placemark>
+    <name>Quiosque (projeto)</name>
+    <Model id="quiosque_model">
+      <altitudeMode>clampToGround</altitudeMode>
+      <Location>
+        <longitude>-45.9900959555</longitude>
+        <latitude>-21.3530755653</latitude>
+        <altitude>0</altitude>
+      </Location>
+      <Orientation>
+        <heading>133.7000</heading>
+        <tilt>0</tilt>
+        <roll>0</roll>
+      </Orientation>
+      <Scale>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
+      </Scale>
+      <Link>
+        <href>quiosque_piscina.dae</href>
+      </Link>
+    </Model>
+  </Placemark>
+</Document>
+</kml>
