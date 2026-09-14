@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Quiosque da Piscina - Sitio Sagrada Familia (blocos)</name>
+  <description>Modelo 3D simplificado (poligonos extrudados nativos do
+  KML - piso, pilares, paredes e telhado inclinado), na posicao GPS real.
+  Funciona no Google Earth Web (navegador). Versao com todos os detalhes
+  (mobilia, banheiros, etc) esta em quiosque_piscina.kmz, mas essa exige
+  o Google Earth Pro (desktop) por causa do modelo 3D (COLLADA).</description>
+
+  <Style id="style_piso">
+    <PolyStyle><color>ffd9d9d9</color><outline>0</outline></PolyStyle>
+  </Style>
+  <Style id="style_deck">
+    <PolyStyle><color>ffe8e8e8</color><outline>0</outline></PolyStyle>
+  </Style>
+  <Style id="style_piscina">
+    <PolyStyle><color>ffe8c49a</color><outline>0</outline></PolyStyle>
+  </Style>
+  <Style id="style_pilar">
+    <PolyStyle><color>ff2e6ea3</color></PolyStyle>
+    <LineStyle><color>ff1a4a75</color><width>1</width></LineStyle>
+  </Style>
+  <Style id="style_parede">
+    <PolyStyle><color>d9b8c4cc</color></PolyStyle>
+    <LineStyle><color>ff8f9daf</color><width>1</width></LineStyle>
+  </Style>
+  <Style id="style_telhado">
+    <PolyStyle><color>ff5f6b7a</color><outline>1</outline></PolyStyle>
+    <LineStyle><color>ff3d4552</color><width>2</width></LineStyle>
+  </Style>
+
+  <Placemark>
+    <name>Piso do quiosque</name>
+    <styleUrl>#style_piso</styleUrl>
+    <Polygon>
+      <extrude>0</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990085102,-21.353085039,0.030 -45.990112037,-21.353112186,0.030 -45.990036059,-21.353178501,0.030 -45.989993974,-21.353136084,0.030 -45.990012063,-21.353120295,0.030 -45.990027214,-21.353135565,0.030 -45.990085102,-21.353085039,0.030</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Deck da piscina</name>
+    <styleUrl>#style_deck</styleUrl>
+    <Polygon>
+      <extrude>0</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990086003,-21.352970274,0.020 -45.990146607,-21.353031355,0.020 -45.990027214,-21.353135565,0.020 -45.989966611,-21.353074484,0.020 -45.990086003,-21.352970274,0.020</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Piscina (ja existe)</name>
+    <styleUrl>#style_piscina</styleUrl>
+    <Polygon>
+      <extrude>0</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990097834,-21.353004652,0.010 -45.990122076,-21.353029085,0.010 -45.990046822,-21.353094768,0.010 -45.990022581,-21.353070336,0.010 -45.990097834,-21.353004652,0.010</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Pilar 1</name>
+    <styleUrl>#style_pilar</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990087828,-21.353086902,2.500 -45.990088703,-21.353087784,2.500 -45.990087762,-21.353088605,2.500 -45.990086887,-21.353087723,2.500 -45.990087828,-21.353086902,2.500</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Pilar 2</name>
+    <styleUrl>#style_pilar</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990112069,-21.353111334,2.500 -45.990112945,-21.353112217,2.500 -45.990112004,-21.353113038,2.500 -45.990111129,-21.353112155,2.500 -45.990112069,-21.353111334,2.500</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Pilar 3</name>
+    <styleUrl>#style_pilar</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990083125,-21.353136597,2.500 -45.990084001,-21.353137479,2.500 -45.990083060,-21.353138301,2.500 -45.990082185,-21.353137418,2.500 -45.990083125,-21.353136597,2.500</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Pilar 4</name>
+    <styleUrl>#style_pilar</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990054182,-21.353161860,2.500 -45.990055057,-21.353162742,2.500 -45.990054117,-21.353163563,2.500 -45.990053241,-21.353162681,2.500 -45.990054182,-21.353161860,2.500</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Pilar 5</name>
+    <styleUrl>#style_pilar</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990036092,-21.353177650,2.500 -45.990036967,-21.353178532,2.500 -45.990036027,-21.353179353,2.500 -45.990035151,-21.353178471,2.500 -45.990036092,-21.353177650,2.500</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Pilar 6</name>
+    <styleUrl>#style_pilar</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990011851,-21.353153217,2.500 -45.990012726,-21.353154099,2.500 -45.990011785,-21.353154920,2.500 -45.990010910,-21.353154038,2.500 -45.990011851,-21.353153217,2.500</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Pilar 7</name>
+    <styleUrl>#style_pilar</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.989994006,-21.353135232,2.500 -45.989994882,-21.353136115,2.500 -45.989993941,-21.353136936,2.500 -45.989993066,-21.353136053,2.500 -45.989994006,-21.353135232,2.500</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Pilar 8</name>
+    <styleUrl>#style_pilar</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990012096,-21.353119443,2.500 -45.990012971,-21.353120325,2.500 -45.990012031,-21.353121146,2.500 -45.990011155,-21.353120264,2.500 -45.990012096,-21.353119443,2.500</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Pilar 9</name>
+    <styleUrl>#style_pilar</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990029940,-21.353137428,2.500 -45.990030816,-21.353138310,2.500 -45.990029875,-21.353139131,2.500 -45.990029000,-21.353138249,2.500 -45.990029940,-21.353137428,2.500</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Pilar 10</name>
+    <styleUrl>#style_pilar</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990058884,-21.353112165,2.500 -45.990059759,-21.353113047,2.500 -45.990058819,-21.353113868,2.500 -45.990057943,-21.353112986,2.500 -45.990058884,-21.353112165,2.500</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Parede Leste 2 3</name>
+    <styleUrl>#style_parede</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990111868,-21.353112016,3.380 -45.990112205,-21.353112356,3.380 -45.990083261,-21.353137619,3.380 -45.990082925,-21.353137279,3.380 -45.990111868,-21.353112016,3.380</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Parede Leste 3 4</name>
+    <styleUrl>#style_parede</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990082925,-21.353137279,3.380 -45.990083261,-21.353137619,3.380 -45.990054317,-21.353162881,3.380 -45.990053981,-21.353162542,3.380 -45.990082925,-21.353137279,3.380</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Parede Leste 4 5</name>
+    <styleUrl>#style_parede</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990053981,-21.353162542,3.380 -45.990054317,-21.353162881,3.380 -45.990036228,-21.353178671,3.380 -45.990035891,-21.353178331,3.380 -45.990053981,-21.353162542,3.380</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Parede Sul 1 Janela</name>
+    <styleUrl>#style_parede</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990087976,-21.353087596,3.027 -45.990096393,-21.353096079,3.027 -45.990096031,-21.353096395,3.027 -45.990087614,-21.353087911,3.027 -45.990087976,-21.353087596,3.027</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Parede Sul Janela 2</name>
+    <styleUrl>#style_parede</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990103800,-21.353103545,3.380 -45.990112217,-21.353112028,3.380 -45.990111856,-21.353112344,3.380 -45.990103438,-21.353103860,3.380 -45.990103800,-21.353103545,3.380</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Parede Sul Peitoril</name>
+    <styleUrl>#style_parede</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990096393,-21.353096079,1.000 -45.990103800,-21.353103545,1.000 -45.990103438,-21.353103860,1.000 -45.990096031,-21.353096395,1.000 -45.990096393,-21.353096079,1.000</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Parede Sul Verga</name>
+    <styleUrl>#style_parede</styleUrl>
+    <Polygon>
+      <extrude>1</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990096393,-21.353096079,3.193 -45.990103800,-21.353103545,3.193 -45.990103438,-21.353103860,3.193 -45.990096031,-21.353096395,3.193 -45.990096393,-21.353096079,3.193</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+  <Placemark>
+    <name>Telhado</name>
+    <styleUrl>#style_telhado</styleUrl>
+    <Polygon>
+      <extrude>0</extrude>
+      <altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs>
+        <LinearRing>
+          <coordinates>-45.990085102,-21.353085039,2.810 -45.990112037,-21.353112186,3.410 -45.990036059,-21.353178501,3.410 -45.989993974,-21.353136084,2.472 -45.990012063,-21.353120295,2.472 -45.990027214,-21.353135565,2.810 -45.990085102,-21.353085039,2.810</coordinates>
+        </LinearRing>
+      </outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+</Document>
+</kml>

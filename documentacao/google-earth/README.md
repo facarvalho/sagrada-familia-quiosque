@@ -1,48 +1,62 @@
 # Modelo 3D do quiosque para o Google Earth
 
-Gerado por `nucleo/export_google_earth.py` a partir do mesmo modelo 3D do
-projeto (`arquitetonico/projeto.py` + `extras.py` + `fixes.py`) — posição
-real (projeto atual, sem girar/mover), na coordenada GPS real e com a
-orientação (heading) calculada a partir do mesmo norte verdadeiro
-(133,7°) usado no resto do projeto (`nucleo/sun_geo.py`).
+Duas versões, dependendo de onde você vai abrir:
+
+| Arquivo | Onde funciona | O que tem |
+|---|---|---|
+| `quiosque_piscina_web.kml` | **Google Earth Web** (navegador) e Google Earth Pro | Massa simplificada: piso, 10 pilares, paredes, telhado inclinado (poligonos KML nativos, sem modelo importado) |
+| `quiosque_piscina.kmz` | **Só Google Earth Pro** (desktop) | Modelo completo: todos os móveis, banheiros, área gourmet, TV etc. (modelo 3D COLLADA) |
+
+O Google Earth Web **não suporta** modelo 3D importado (`<Model>`/COLLADA)
+— só o Google Earth Pro (app desktop) suporta. Por isso existem as duas
+versões.
 
 ## Como importar
 
-**Arquivo único (mais fácil):** `quiosque_piscina.kmz`
+**`quiosque_piscina_web.kml`** (recomendado pra abrir no navegador):
+- Google Earth Web (earth.google.com): "Projetos" → "Novo projeto" →
+  "Importar arquivo KML" → selecione o arquivo.
+- Google Earth Pro: Arquivo → Abrir, ou arraste o arquivo pra janela.
 
-- **Google Earth Web** (earth.google.com): abra "Projetos" → "Novo projeto"
-  → "Importar arquivo KML" → selecione `quiosque_piscina.kmz`.
-- **Google Earth Pro** (desktop): Arquivo → Abrir → selecione o `.kmz`,
-  ou simplesmente arraste o arquivo pra dentro da janela do programa.
+**`quiosque_piscina.kmz`** (só funciona no Google Earth Pro, desktop —
+grátis em earth.google.com/download-earth-pro): mesmo processo de
+importação, mas dá erro "Unsupported element: Model" se tentar no navegador.
 
-Os outros dois arquivos (`quiosque_piscina.kml` + `quiosque_piscina.dae`)
-são os mesmos dados sem compactar — o `.kmz` é só os dois zipados junto,
-não precisa deles separados a menos que quera editar o KML manualmente.
+## Posição e orientação
 
-## Se a orientação parecer errada
+Ambas as versões usam a mesma calibração: coordenada GPS real (a partir
+do contorno real do piso da piscina desenhado no Google Earth) e
+orientação pro norte verdadeiro (heading/rotação 133,7°, `nucleo/sun_geo.py`).
 
-O `heading` (133,7°) já reflete o norte verdadeiro medido nesta sessão
-(validado por 3 métodos independentes — ver memória
-`piscina-georreferenciamento`), mas a convenção de eixo "norte" de um
-Model KML depende de como o leitor interpreta o COLLADA exportado. Se ao
-abrir o modelo ficar girado (90°, 180° etc. errado), abra o
-`quiosque_piscina.kml` num editor de texto e ajuste só o valor dentro de
-`<heading>...</heading>` (linha ~20) — não precisa reexportar o `.dae`.
+Na versão `.kmz` (modelo COLLADA), se a orientação vier girada errada ao
+abrir no Google Earth Pro, abra o `quiosque_piscina.kml` (dentro do kmz,
+ou o arquivo solto) num editor de texto e ajuste só o valor dentro de
+`<heading>...</heading>` — não precisa reexportar o `.dae`.
 
-## Escopo do modelo
+## Escopo de cada versão
 
-Inclui todo o projeto atual: piso em L, pilares, telhado, paredes (muro
-tendinoso), banheiros, área gourmet (bancada de alvenaria, fogão,
-geladeira), sala de estar, mesas de bar, TV — e a piscina (já existente,
-incluída só como referência visual de posição, não faz parte do escopo
-da obra).
+**`_web.kml`** (poligonos nativos): piso em L, 10 pilares (extrudados),
+7 segmentos de parede (extrudados), telhado inclinado (um plano só,
+seguindo o caimento real de 15%), deck e piscina (referência visual).
+Pilares aparecem como postes quadrados (a extrusão KML não faz cilindro),
+não é uma réplica exata — é a massa/volumetria do projeto.
+
+**`.kmz`** (modelo COLLADA): tudo que o `_web.kml` tem, mais todos os
+móveis, banheiros, área gourmet completa (bancada de alvenaria, fogão,
+geladeira), sala de estar, mesas de bar, TV — o modelo 3D completo do
+projeto, com a geometria exata (pilares cilíndricos de verdade, etc).
 
 ## Regerar
 
 ```bash
-BL=~/opt/blender-4.2.23-linux-x64/blender   # precisa dessa build (a do
-                                              # sistema não tem o exportador COLLADA)
-$BL --background --factory-startup \
+# versão completa (precisa do Blender 4.2 LTS - o do sistema não tem
+# o exportador COLLADA):
+~/opt/blender-4.2.23-linux-x64/blender --background --factory-startup \
     --python-expr "__import__('sys').path.insert(0,'/home/fac/piscina')" \
     --python nucleo/export_google_earth.py
+
+# versão web (poligonos nativos, funciona com o Blender do sistema):
+blender --background --factory-startup \
+    --python-expr "__import__('sys').path.insert(0,'/home/fac/piscina')" \
+    --python nucleo/export_google_earth_web.py
 ```
