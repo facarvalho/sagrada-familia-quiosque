@@ -194,10 +194,11 @@ tampa = _cube("Tampa_Vaso_Anim", (lid_hinge_x + 0.20, cy_cab, altura_piso + 0.44
               (0.42, 0.32, 0.03), mat_louca)
 _origin_to(tampa, (lid_hinge_x, cy_cab, altura_piso + 0.445))
 
-# porta da geladeira - dobradica na aresta leste
-fridge_door = _cube("Geladeira_Porta_Anim", (fr_cx - 0.02, fr_cy + 0.335, altura_piso + 0.92),
-                    (0.64, 0.05, 1.62), mat_inox)
-_origin_to(fridge_door, (fr_cx + 0.32, fr_cy + 0.335, altura_piso + 0.92))
+# porta da geladeira - dobradica na aresta norte (parede leste agora,
+# geladeira abre pra dentro do quiosque = -X)
+fridge_door = _cube("Geladeira_Porta_Anim", (fr_cx - 0.335, fr_cy - 0.02, altura_piso + 0.92),
+                    (0.05, 0.64, 1.62), mat_inox)
+_origin_to(fridge_door, (fr_cx - 0.335, fr_cy + 0.32, altura_piso + 0.92))
 
 # chamas do fogao (4 bocas)
 flames = []

@@ -1,12 +1,13 @@
 """
-Área gourmet rústica encostada na parede leste, entre os pilares 2 e 3
-(x=4, y de 0 a 4 - lado oposto aos banheiros/ala). Inclui bancada com
-churrasqueira de bancada embutida (acabamento rústico: base de madeira e
-tampo em concreto/pedra bruta) e uma mesa rústica de 8 lugares com bancos.
-
-A pia trocou de lugar com a geladeira/fogão (ver appliances.py): agora fica
-na parede SUL, entre os pilares 1 e 2, com uma janela acima (wall.py) -
-não faz mais parte desta bancada leste, que ficou só com a churrasqueira.
+Área gourmet. Layout (pedido do usuário, reorganizado 14/09/2026):
+- Parede SUL (P1-P2, x 0,4-4,0): bancada de ALVENARIA em peça única
+  (Bancada_Sul_Alvenaria + Bancada_Sul_Tampo), ocupando o vão entre os
+  pilares (com folga pros pedestais) - pia embutida sob a janela
+  (wall.py) e churrasqueira embutida do lado do Pilar 2.
+- Parede LESTE (P2-P3, x=4,0): fogão e geladeira (ver appliances.py) -
+  saíram da parede sul pra dar lugar à churrasqueira.
+Mesa rústica de 8 lugares com bancos no meio do quiosque, independente
+dessas duas paredes.
 """
 import bpy
 import math
@@ -49,7 +50,7 @@ def _cyl(name, cx, cy, cz, radius, depth, mat, rotation=(0.0, 0.0, 0.0)):
 def build(ns):
     altura_piso = ns["altura_piso"]
 
-    mat_base = _mat("Material_Bancada_Base_Rustica", (0.30, 0.20, 0.12, 1.0), roughness=0.85)
+    mat_alvenaria = _mat("Material_Bancada_Alvenaria", (0.84, 0.81, 0.75, 1.0), roughness=0.88)
     mat_tampo = _mat("Material_Bancada_Tampo_Rustico", (0.47, 0.45, 0.42, 1.0), roughness=0.75)
     mat_metal = _mat("Material_Bancada_Metal", (0.75, 0.76, 0.78, 1.0), roughness=0.2, metallic=0.9)
     mat_grelha = _mat("Material_Churrasqueira_Grelha", (0.08, 0.08, 0.08, 1.0), roughness=0.35, metallic=0.6)
@@ -60,11 +61,13 @@ def build(ns):
         bsdf_brasa.inputs["Emission Strength"].default_value = 1.5
     mat_madeira_mesa = _mat("Material_Mesa_Rustica", (0.34, 0.22, 0.13, 1.0), roughness=0.8)
 
-    # --- Bancada encostada na parede leste (x=4), entre Pilar 2 (4; 1,5) e
-    # Pilar 3 (4; 5,5) - vao de 4,0 m ----------------------------------
-    # Geladeira/fogão saíram desta parede (foram pra parede sul, ao lado da
-    # pia - ver appliances.py), então a bancada voltou ao comprimento
-    # cheio; ficou só com a churrasqueira, na ponta norte.
+    # --- Parede LESTE (x=4), entre Pilar 2 (4; 1,5) e Pilar 3 (4; 5,5) -----
+    # Geladeira e fogão ficam aqui agora (ver appliances.py) - usuário pediu
+    # pra trocar: fogão/geladeira foram pra esta parede, churrasqueira foi
+    # pra parede sul junto com a pia. Sem bancada própria aqui (os dois
+    # ficam encostados na parede, como já era o padrão da pia/fogão antes).
+    # Constantes mantidas (sem bancada física) só pra compatibilizar com
+    # scripts de render que ainda usam esses valores pra enquadrar a câmera.
     Y0, Y1 = 2.1, 5.1
     DEPTH = 0.65
     X_WALL = 4.0
@@ -73,27 +76,30 @@ def build(ns):
     BASE_H = H_TOP - 0.05
 
     cx, cy = (X_FRONT + X_WALL) / 2.0, (Y0 + Y1) / 2.0
-    length = Y1 - Y0
 
-    _box("Bancada_Base", cx, cy, (altura_piso + BASE_H) / 2.0,
-         DEPTH, length, BASE_H - altura_piso, mat_base)
-
-    # --- Tampo contínuo (a pia saiu daqui - foi para a parede sul) ---------
-    _box("Bancada_Tampo", cx, cy, H_TOP - 0.02,
-         DEPTH + 0.06, length + 0.06, 0.04, mat_tampo)
-
-    # --- Pia nova, na parede SUL (entre P1 e P2), onde antes ficava a
-    #     geladeira/fogão - ver appliances.py. Janela acima dela: wall.py.
-    PIA_SUL_CX = 2.2
+    # --- Bancada de alvenaria única, na parede SUL (entre P1 e P2), com pia
+    #     + churrasqueira - usuário pediu pra virar UMA PEÇA SÓ, em alvenaria
+    #     (não madeira), ocupando o vão entre os pilares (com folga pros
+    #     pedestais). Pia sob a janela (wall.py); churrasqueira do lado do
+    #     Pilar 2. Geladeira/fogão saíram daqui - foram pra parede leste
+    #     (appliances.py).
     PIA_SUL_Y_WALL = 1.53   # face interna da parede sul (mesma cota de appliances.py)
     pia_sul_depth = 0.55
-    pia_sul_w = 0.75
     pia_sul_top = altura_piso + 0.90
+    BANC_SUL_X0, BANC_SUL_X1 = 0.75, 3.75   # folga de ~0,35 m dos pilares P1/P2
+    banc_sul_cx = (BANC_SUL_X0 + BANC_SUL_X1) / 2.0
+    banc_sul_width = BANC_SUL_X1 - BANC_SUL_X0
+    banc_sul_base_h = pia_sul_top - 0.05
     pia_cy = PIA_SUL_Y_WALL + pia_sul_depth / 2.0
-    _box("Pia_Sul_Base", PIA_SUL_CX, pia_cy, altura_piso + (pia_sul_top - 0.05 - altura_piso) / 2.0,
-         pia_sul_w, pia_sul_depth, (pia_sul_top - 0.05) - altura_piso, mat_base)
-    _box("Pia_Sul_Tampo", PIA_SUL_CX, pia_cy, pia_sul_top - 0.02,
-         pia_sul_w + 0.06, pia_sul_depth + 0.06, 0.04, mat_tampo)
+
+    _box("Bancada_Sul_Alvenaria", banc_sul_cx, pia_cy, altura_piso + (banc_sul_base_h - altura_piso) / 2.0,
+         banc_sul_width, pia_sul_depth, banc_sul_base_h - altura_piso, mat_alvenaria)
+    _box("Bancada_Sul_Tampo", banc_sul_cx, pia_cy, pia_sul_top - 0.02,
+         banc_sul_width + 0.06, pia_sul_depth + 0.06, 0.04, mat_tampo)
+
+    # --- Pia, embutida na bancada, sob a janela ----------------------------
+    PIA_SUL_CX = 2.2
+    pia_sul_w = 0.75
     _box("Pia_Sul_Cuba", PIA_SUL_CX, pia_cy, pia_sul_top - 0.075,
          pia_sul_w - 0.15, pia_sul_depth - 0.10, 0.09, mat_metal)
     _cyl("Pia_Sul_Coluna_Torneira", PIA_SUL_CX, PIA_SUL_Y_WALL + 0.06, pia_sul_top + 0.02,
@@ -101,19 +107,20 @@ def build(ns):
     _cyl("Pia_Sul_Bico_Torneira", PIA_SUL_CX, PIA_SUL_Y_WALL + 0.06 + 0.13, pia_sul_top + 0.16,
          0.013, 0.22, mat_metal, rotation=(math.radians(90), 0.0, 0.0))
 
-    # --- Churrasqueira de bancada, extremidade norte (perto do Pilar 3) -----
-    bbq_cy = Y1 - 0.65
-    bbq_cx = cx
-    _box("Churrasqueira_Corpo", bbq_cx, bbq_cy, H_TOP - 0.06,
-         0.46, 0.62, 0.14, mat_grelha)
+    # --- Churrasqueira, embutida na mesma bancada, do lado do Pilar 2 ------
+    CHUR_CX = 3.15
+    chur_top = pia_sul_top
+    bbq_cx, bbq_cy = CHUR_CX, pia_cy
+    _box("Churrasqueira_Corpo", bbq_cx, bbq_cy, chur_top - 0.06,
+         0.62, 0.46, 0.14, mat_grelha)
     n_bars = 6
     for i in range(n_bars):
         t = (i + 0.5) / n_bars - 0.5
-        _cyl(f"Churrasqueira_Barra_{i+1}", bbq_cx, bbq_cy + t * 0.5, H_TOP - 0.01,
-             0.012, 0.40, mat_grelha, rotation=(0.0, math.radians(90), 0.0))
-    _box("Churrasqueira_Brasa", bbq_cx, bbq_cy, H_TOP - 0.09,
-         0.36, 0.5, 0.02, mat_brasa)
-    _cyl("Churrasqueira_Chamine", X_WALL - 0.05, bbq_cy + 0.20, H_TOP + 0.30,
+        _cyl(f"Churrasqueira_Barra_{i+1}", bbq_cx + t * 0.5, bbq_cy, chur_top - 0.01,
+             0.012, 0.40, mat_grelha, rotation=(math.radians(90), 0.0, 0.0))
+    _box("Churrasqueira_Brasa", bbq_cx, bbq_cy, chur_top - 0.09,
+         0.5, 0.36, 0.02, mat_brasa)
+    _cyl("Churrasqueira_Chamine", bbq_cx + 0.20, PIA_SUL_Y_WALL + 0.05, chur_top + 0.30,
          0.05, 0.55, mat_metal)
 
     # ---------------------------------------------------------------------
