@@ -20,7 +20,14 @@
         ["renders/vista_15m_T2_V1.png", "Vista externa — eixo da terça T2, 15 m ao norte"],
         ["renders/vista_10m_entre_P6_P2.png", "Vista externa — 10 m entre P6 e P2"],
         ["renders/vista_360_fisheye.png", "Vista 360° (fisheye) do interior"]
-      ]
+      ].concat(
+        ["15h","16h","17h","18h","19h"].map(function(h){
+          return ["renders/sol_verao_"+h+"_anotado.png", "Estudo solar — verão, "+h];
+        }),
+        ["15h","16h","17h","18h","19h"].map(function(h){
+          return ["renders/sol_inverno_"+h+"_anotado.png", "Estudo solar — inverno, "+h];
+        })
+      )
     },
     {
       id: "interior", label: "Interiores",
@@ -33,17 +40,6 @@
       ]
     },
     {
-      id: "sol", label: "Estudo solar",
-      items: [].concat(
-        ["15h","16h","17h","18h","19h"].map(function(h){
-          return ["renders/sol_verao_"+h+"_anotado.png", "Verão, "+h];
-        }),
-        ["15h","16h","17h","18h","19h"].map(function(h){
-          return ["renders/sol_inverno_"+h+"_anotado.png", "Inverno, "+h];
-        })
-      )
-    },
-    {
       id: "visao-casa-da-mae", label: "Visão: casa da mãe",
       items: [].concat(
         ["15h","16h","17h","18h","19h"].map(function(h){
@@ -51,17 +47,6 @@
         }),
         ["15h","16h","17h","18h","19h"].map(function(h){
           return ["visao-casa-da-mae/renders/sol_inverno_"+h+"_anotado.png", "Casa da mãe — inverno, "+h];
-        })
-      )
-    },
-    {
-      id: "visao-milho-abobora", label: "Visão: milho/abóbora",
-      items: [].concat(
-        ["15h","16h","17h","18h","19h"].map(function(h){
-          return ["visao-milho-abobora/renders/sol_verao_"+h+"_anotado.png", "Milho/abóbora — verão, "+h];
-        }),
-        ["15h","16h","17h","18h","19h"].map(function(h){
-          return ["visao-milho-abobora/renders/sol_inverno_"+h+"_anotado.png", "Milho/abóbora — inverno, "+h];
         })
       )
     },

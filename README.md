@@ -38,18 +38,22 @@ provas de conceito, não o projeto real):
   + `renders/scripts/`, os scripts de render que não são específicos de
   uma disciplina (vistas 3D gerais, passeio em vídeo, estudo de sol da
   posição real).
-- **`visao-casa-da-mae/`, `visao-milho-abobora/`, `visao-cerca-fernando/`**
-  — três posições reais alternativas do quiosque ao redor da laje da
-  piscina (não são o projeto real — são provas de conceito de
-  posicionamento), todas com a mesma metodologia
-  (`nucleo/variant_sol_common.py`): ponto GPS real do pilar P9 (dado pelo
-  usuário) → giro −90° em Z a partir do projeto original → prova de sol
-  real (algoritmo NOAA, coordenadas reais de Alfenas-MG) às
-  15h/16h/17h/18h/19h em verão e inverno → entorno real (cerca/café/terreno
-  do projeto de fibra óptica `sagrada-familia-infra`, via
+- **`visao-casa-da-mae/`, `visao-cerca-fernando/`** — duas posições reais
+  alternativas do quiosque, sempre alinhadas a um canto real do MESMO
+  deck da piscina (`Piso_Area_Piscina`, fixo — é o quiosque que muda de
+  canto/orientação, não a piscina) — não são o projeto real, são provas
+  de conceito de posicionamento. Ponto GPS real (dado pelo usuário) usado
+  só pra achar a ORIENTAÇÃO (ângulo de giro em Z a partir do projeto
+  original — casa da mãe usa 180°, cerca do Fernando usa −90°); a posição
+  final é sempre o canto do deck mais próximo do ponto GPS convertido, não
+  o ponto GPS em si. Prova de sol real (algoritmo NOAA, coordenadas reais
+  de Alfenas-MG) às 15h/16h/17h/18h/19h em verão e inverno → entorno real
+  (cerca/café/terreno/casa do projeto de fibra óptica
+  `sagrada-familia-infra` + Google Earth, via
   `arquitetonico/contexto_externo.py`). Nomeadas pelo que fica atrás do
-  quiosque em cada uma. Eram `V3/`, `V4/` e `V6/` — a antiga `V5/` usava
-  posição/cálculo placeholder e foi removida do repositório.
+  quiosque em cada uma. Uma terceira visão ("milho/abóbora") foi removida
+  a pedido do usuário — exigiria mudar a posição do banheiro pra fazer
+  sentido nessa orientação, fora de escopo por ora.
 - **`visoes/fase-obra-comeco/`** — versão "esqueleto" da obra (só piso,
   calçada, pilares, vigas, terças e telhado, sem acabamento).
 - **`regerar_tudo.sh`** — regenera todos os renders/plantas/PDF (projeto

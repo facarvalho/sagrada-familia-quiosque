@@ -1,7 +1,7 @@
 #!/bin/bash
 # Regenera TODOS os renders/documentos do projeto (projeto real, organizado
-# por disciplina, + as 3 visões de posicionamento: casa-da-mae,
-# milho-abobora, cerca-fernando).
+# por disciplina, + as 2 visões de posicionamento: casa-da-mae,
+# cerca-fernando).
 # Retomavel: pula etapas cujo arquivo de saida ja existe e e mais novo que
 # o marcador .regerar_tudo.START (criado no inicio de cada execucao completa).
 #
@@ -69,11 +69,9 @@ step $R/sol_verao_15h.png             $BL renders/scripts/render_sun_study.py
 step $R/sol_verao_15h_anotado.png     python3 renders/scripts/annotate_sun_study.py
 
 # --- Outras visoes (posicao real + estudo de insolacao completo) -------
-step visao-casa-da-mae/renders/sol_verao_15h.png     $BL visao-casa-da-mae/render_v3_sol.py
+step visao-casa-da-mae/renders/sol_verao_15h.png     $BL visao-casa-da-mae/render_sol.py
 step visao-casa-da-mae/renders/sol_verao_15h_anotado.png   python3 visao-casa-da-mae/annotate_sun_study.py
-step visao-milho-abobora/renders/sol_verao_15h.png   $BL visao-milho-abobora/render_v4_sol.py
-step visao-milho-abobora/renders/sol_verao_15h_anotado.png python3 visao-milho-abobora/annotate_sun_study.py
-step visao-cerca-fernando/renders/sol_verao_15h.png  $BL visao-cerca-fernando/render_v6_sol.py
+step visao-cerca-fernando/renders/sol_verao_15h.png  $BL visao-cerca-fernando/render_sol.py
 step visao-cerca-fernando/renders/sol_verao_15h_anotado.png python3 visao-cerca-fernando/annotate_sun_study.py
 
 echo "===== FIM $(date) =====" | tee -a "$LOG"

@@ -1,6 +1,6 @@
 """
 Legenda 2D para as 6 imagens de visao-cerca-fernando/renders/sol_*.png (gerado por
-render_v6_sol.py) — mesma lógica de renders/scripts/annotate_sun_study.py, só apontando
+render_sol.py) — mesma lógica de renders/scripts/annotate_sun_study.py, só apontando
 para visao-cerca-fernando/renders.
 
 Roda com python3 puro (sem Blender): python3 visao-cerca-fernando/annotate_sun_study.py
@@ -59,4 +59,4 @@ for cena in meta["cenas"]:
     img.save(out_path)
     print(f"OK: {out_path}")
 
-print("ALLDONE_ANNOTATE_SUN_V6")
+print("ALLDONE_ANNOTATE_SUN_CERCA_FERNANDO")

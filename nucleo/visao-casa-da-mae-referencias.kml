@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document id="document">
+	<name>Untitled map project</name>
+	<gx:CascadingStyle kml:id="__managed_style_0E9BFBDCFD41D2E2A0FC_highlight">
+		<styleUrl>https://earth.google.com/balloon_components/base/1.1.0.0/card_template.kml#main</styleUrl>
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_0E9BFBDCFD41D2E2A0FC_normal">
+		<styleUrl>https://earth.google.com/balloon_components/base/1.1.0.0/card_template.kml#main</styleUrl>
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_0E9BFBDCFD41D2E2A0FC">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_0E9BFBDCFD41D2E2A0FC_normal</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_0E9BFBDCFD41D2E2A0FC_highlight</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark id="00A77167F741D2E2A0A0">
+		<name>casa da mae</name>
+		<LookAt>
+			<longitude>-45.98983516952512</longitude>
+			<latitude>-21.35289105963282</latitude>
+			<altitude>775.2804304480085</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>30.00000168649572</gx:fovy>
+			<range>119.7761781570444</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0E9BFBDCFD41D2E2A0FC</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-45.98996760742988,-21.35292915195791,0 -45.98997912605714,-21.35294299835839,0 -45.98992071570582,-21.35299065197691,0 -45.98983059195,-21.35288862343185,0 -45.98990780948062,-21.35282096797269,0 -45.98992596366207,-21.35283874088985,0 -45.98997370372464,-21.35279733409649,0 -45.99003721682931,-21.35287109209041,0 -45.98996760742988,-21.35292915195791,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="06D625152041D2E31F89">
+		<name>piso piscina</name>
+		<LookAt>
+			<longitude>-45.98983516952512</longitude>
+			<latitude>-21.35289105963282</latitude>
+			<altitude>775.2804304480085</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>30.00000168649572</gx:fovy>
+			<range>119.7761781570444</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0E9BFBDCFD41D2E2A0FC</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-45.99002249156514,-21.35313781731155,0 -45.98996998766656,-21.35307670124178,0 -45.99009254660934,-21.35297156333806,0 -45.9901414095965,-21.35302559618331,0 -45.99002249156514,-21.35313781731155,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="02F0DC00DF41D2E35FA3">
+		<name>p9</name>
+		<LookAt>
+			<longitude>-45.98983516952512</longitude>
+			<latitude>-21.35289105963282</latitude>
+			<altitude>775.2804304480085</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>30.00000168649572</gx:fovy>
+			<range>119.7761781570444</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0E9BFBDCFD41D2E2A0FC</styleUrl>
+		<Point>
+			<coordinates>-45.99009319534841,-21.35297096373041,776.8660821998155</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0983A2FF3141D2E38950">
+		<name>p1</name>
+		<LookAt>
+			<longitude>-45.98983516952512</longitude>
+			<latitude>-21.35289105963282</latitude>
+			<altitude>775.2804304480085</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>30.00000168649572</gx:fovy>
+			<range>119.7761781570444</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0E9BFBDCFD41D2E2A0FC</styleUrl>
+		<Point>
+			<coordinates>-45.99003371422486,-21.35302074053984,776.9465068667972</coordinates>
+		</Point>
+	</Placemark>
+</Document>
+</kml>

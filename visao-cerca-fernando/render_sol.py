@@ -1,9 +1,9 @@
 """
-V6 - Quiosque na QUINA SUDESTE da laje da piscina (outro canto, a pedido do
+Visão "cerca do Fernando" - Quiosque na QUINA SUDESTE da laje da piscina (outro canto, a pedido do
 usuario) + prova de incidencia de sol REAL (verao/inverno), mesmo metodo de
 renders/scripts/render_sun_study.py (algoritmo NOAA + coordenadas geograficas reais do
 terreno, nucleo/sun_geo.py) - NAO usa o azimute/elevacao simplificado de
-V3/V4/V5 (antigas).
+visões antigas (já removidas).
 
 --- De onde veio a posicao ------------------------------------------------
 O usuario marcou 3 pontos de referencia num novo KML ("Projeto sem titulo
@@ -42,7 +42,7 @@ Uso (bootstrap obrigatorio - ver memoria piscina-render-import-bootstrap):
   BL=~/opt/blender-4.2.23-linux-x64/blender
   $BL --background --factory-startup \
       --python-expr "__import__('sys').path.insert(0,'/home/fac/piscina')" \
-      --python visao-cerca-fernando/render_v6_sol.py
+      --python visao-cerca-fernando/render_sol.py
 """
 import bpy
 import os
@@ -101,8 +101,8 @@ bpy.context.view_layer.update()
 #     para receber as sombras do estudo. Mesmo recorte booleano da piscina.
 bpy.ops.mesh.primitive_plane_add(size=80.0, location=(-4.0, -8.0, -0.05))
 terreno = bpy.context.active_object
-terreno.name = "Terreno_V6"
-mat_terreno = bpy.data.materials.new("Material_Terreno_V6")
+terreno.name = "Terreno_CercaFernando"
+mat_terreno = bpy.data.materials.new("Material_Terreno_CercaFernando")
 mat_terreno.use_nodes = True
 _bsdf = mat_terreno.node_tree.nodes.get("Principled BSDF")
 _bsdf.inputs["Base Color"].default_value = (0.40, 0.46, 0.34, 1.0)
@@ -122,8 +122,8 @@ arrow_origin = mathutils.Vector((5.0, -5.5, 0.03))
 arrow_len = 2.2
 arrow_tip = arrow_origin + mathutils.Vector((nx, ny, 0.0)) * arrow_len
 
-mesh_arrow = bpy.data.meshes.new("Mesh_Seta_Norte_V6")
-obj_arrow = bpy.data.objects.new("Seta_Norte_Verdadeiro_V6", mesh_arrow)
+mesh_arrow = bpy.data.meshes.new("Mesh_Seta_Norte_CercaFernando")
+obj_arrow = bpy.data.objects.new("Seta_Norte_Verdadeiro_CercaFernando", mesh_arrow)
 bpy.context.collection.objects.link(obj_arrow)
 perp = mathutils.Vector((-ny, nx, 0.0))
 w = 0.18
@@ -135,7 +135,7 @@ p5 = arrow_tip - perp * (w * 2.2) - mathutils.Vector((nx, ny, 0.0)) * 0.35
 verts = [p1, p2, p3, p4, arrow_tip + mathutils.Vector((nx, ny, 0.0)) * 0.35, p5]
 mesh_arrow.from_pydata([tuple(v) for v in verts], [], [[0, 1, 2], [3, 4, 5]])
 mesh_arrow.update()
-mat_norte = bpy.data.materials.new("Material_Seta_Norte_V6")
+mat_norte = bpy.data.materials.new("Material_Seta_Norte_CercaFernando")
 mat_norte.use_nodes = True
 mat_norte.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (1.0, 0.05, 0.05, 1.0)
 mat_norte.node_tree.nodes["Principled BSDF"].inputs["Roughness"].default_value = 0.6
@@ -231,7 +231,7 @@ from bpy_extras.object_utils import world_to_camera_view
 co2d = world_to_camera_view(bpy.context.scene, cam_obj, arrow_tip)
 arrow_tip_px = (co2d.x * region.resolution_x, (1 - co2d.y) * region.resolution_y)
 
-meta = {"cenas": [], "posicao": "V6 - quina sudeste da laje (-90 graus, P9 ancorado em (0,-7))"}
+meta = {"cenas": [], "posicao": "Cerca do Fernando - quina sudeste da laje (-90 graus, P9 ancorado em (0,-7))"}
 
 for estacao, y, m, d, h, mi in CENAS:
     azimuth, elevation = sun_geo.solar_position(y, m, d, h, mi)
@@ -264,4 +264,4 @@ meta["lon"] = sun_geo.LON
 with open(os.path.join(out_dir, "sun_study_meta.json"), "w", encoding="utf-8") as f:
     json.dump(meta, f, ensure_ascii=False, indent=2)
 
-print("ALLDONE_SUN_STUDY_V6")
+print("ALLDONE_SUN_STUDY_CERCA_FERNANDO")

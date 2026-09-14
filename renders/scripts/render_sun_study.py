@@ -6,7 +6,7 @@ geográficas do terreno (nucleo/cordenadas.kml -> nucleo/sun_geo.py).
 
 Gera 10 imagens: solstício de verão (21/12) e de inverno (21/06), às
 15h/16h/17h/18h/19h (horário de Brasília) — mesmo formato usado nas
-"visões" de posicionamento alternativo (V3/V4/V6), para comparar
+"visões" de posicionamento alternativo (casa da mãe, cerca do Fernando), para comparar
 igual-a-igual. Inclui também o entorno real (cerca/café/terreno de
 arquitetonico/contexto_externo.py) e a piscina, na posição REAL atual do projeto (sem
 nenhuma rotação/translação — este é o projeto como está, não uma variante

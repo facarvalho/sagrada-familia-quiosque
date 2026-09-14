@@ -2,20 +2,22 @@
 
 Nome dado pelo usuário: o fundo do quiosque nesta posição fica voltado para
 a cerca que divide a propriedade do vizinho Fernando. Esta variante
-**substitui a antiga V5** (mesma posição real, que antes só existia com
-coordenadas/cálculo solar placeholder) — a pasta V5 foi removida do repo.
+**substitui uma tentativa anterior** (mesma posição real, que antes só
+existia com coordenadas/cálculo solar placeholder, depois removida do
+repo) e foi a primeira a usar dado 100% real.
 
 Variante de posicionamento pedida pelo usuário ("fazer o quiosque em outro
 canto da piscina"), com **prova de incidência de sol real** (verão e
-inverno) — diferente de V3/V4/V5 (antigas), que usam um azimute/elevação solar
-simplificado e coordenadas de São Paulo (placeholder). A V6 usa o mesmo
-algoritmo NOAA e as mesmas coordenadas geográficas reais do terreno
-(Alfenas-MG) de `renders/scripts/render_sun_study.py` / `nucleo/sun_geo.py`.
+inverno) — diferente das tentativas antigas (já removidas), que usavam um
+azimute/elevação solar simplificado e coordenadas de São Paulo
+(placeholder). Esta visão usa o mesmo algoritmo NOAA e as mesmas
+coordenadas geográficas reais do terreno (Alfenas-MG) de
+`renders/scripts/render_sun_study.py` / `nucleo/sun_geo.py`.
 
 ## De onde veio a posição
 
 O usuário marcou 3 pontos de referência num KML novo
-(`Projeto sem título (1).kml`, na raiz do repo): `p1`, `P8`, `p9` — mesmos
+(`nucleo/divisa-propriedade-fibra.kml`): `p1`, `P8`, `p9` — mesmos
 nomes de pilares do projeto original, num lugar diferente do terreno.
 
 Esses pontos foram convertidos de GPS para o referencial do projeto com a
@@ -69,7 +71,7 @@ céu (algoritmo NOAA, mesmas lat/lon do terreno). Saídas em
 BL=~/opt/blender-4.2.23-linux-x64/blender
 $BL --background --factory-startup \
     --python-expr "__import__('sys').path.insert(0,'/home/fac/piscina')" \
-    --python visao-cerca-fernando/render_v6_sol.py
+    --python visao-cerca-fernando/render_sol.py
 python3 visao-cerca-fernando/annotate_sun_study.py
 ```
 

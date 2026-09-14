@@ -1,21 +1,21 @@
 """
 Lógica compartilhada pelas variantes de posicionamento "com fundo para X"
 que usam dado real (GPS do usuário + posição solar NOAA + entorno real) -
-V6 ("cerca do Fernando") foi a primeira; esta função generaliza pra V3
-("casa da mãe") e V4 ("milho/abóbora"), que usam a mesma lógica de
-transformação (giro -90 graus em Z, ancorado no pilar P9) só que ancoradas
-em pontos reais diferentes.
+"cerca do Fernando" foi a primeira; esta função generaliza pra "casa da
+mãe", que usa a mesma lógica de transformação (giro em Z, ancorado no
+pilar P9, sempre alinhado a um canto real do deck da piscina), só que com
+ângulo e canto diferentes por posição.
 
 Cada variante:
   1. Constrói o projeto original (projeto.py + extras.py + fixes.py).
-  2. Gira o quiosque -90 graus em Z em torno de P9 original (0.4, 9.5) e
-     translada até o alvo real informado (target_xy).
+  2. Gira o quiosque em Z (rotation_deg) em torno de P9 original (0.4, 9.5)
+     e translada até o canto do deck informado (target_xy).
   3. Adiciona o contexto externo (cerca/café/terreno reais,
      arquitetonico/contexto_externo.py).
   4. Câmera enquadrando quiosque + piscina (lente larga).
   5. 10 renders: verão/inverno x 15h/16h/17h/18h/19h, sol na posição real
      (nucleo/sun_geo.py, NOAA), com legenda via annotate_sun_study (mesmo
-     padrão de V6/annotate_sun_study.py, mas parametrizável por pasta).
+     padrão de visao-cerca-fernando/annotate_sun_study.py, mas parametrizável por pasta).
 """
 import bpy
 import os
@@ -26,7 +26,7 @@ import mathutils
 
 
 def build_and_render(target_xy, out_dir, titulo_curto, cam_offset=(-23.0, -27.0, 15.0),
-                      cam_target_offset=(-2.5, -0.5, 0.8), lens=20):
+                      cam_target_offset=(-2.5, -0.5, 0.8), lens=20, rotation_deg=-90.0):
     scriptdir = os.path.dirname(os.path.abspath(out_dir))
     repo_root = "/home/fac/piscina"
     arq_dir = os.path.join(repo_root, "arquitetonico")
@@ -59,7 +59,7 @@ def build_and_render(target_xy, out_dir, titulo_curto, cam_offset=(-23.0, -27.0,
 
     _pivot = mathutils.Vector((0.4, 9.5, 0.0))
     _target = mathutils.Vector((target_xy[0], target_xy[1], 0.0))
-    _Rz = mathutils.Matrix.Rotation(math.radians(-90.0), 4, 'Z')
+    _Rz = mathutils.Matrix.Rotation(math.radians(rotation_deg), 4, 'Z')
     _transform = mathutils.Matrix.Translation(_target) @ _Rz @ mathutils.Matrix.Translation(-_pivot)
 
     for obj in _quiosque:

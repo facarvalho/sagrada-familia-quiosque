@@ -141,8 +141,13 @@ for i, coord in enumerate(pilares_coords):
 # ---------------------------------------------------------------------------
 # 4. PISO DO QUIOSQUE EM "L"
 # ---------------------------------------------------------------------------
-z_piso_superior = nivel_quiosque          # topo da laje = nivel do deck da piscina
+z_piso_superior = nivel_quiosque + 0.002  # topo da laje = nivel do deck da piscina
 z_piso_inferior = nivel_quiosque - esp_piso
+# ^ +2mm sobre nivel_quiosque: mesmo nivel "pratico" do deck da piscina
+# (nivel_piscina, sem degrau perceptivel), mas evita z-fighting (tarja
+# preta) onde o piso do quiosque e o deck real (Piso_Area_Piscina, que
+# fica fixo) se sobrepoem nas visoes de posicionamento alternativas
+# (cada uma encosta o quiosque num canto diferente do MESMO deck real).
 
 mesh_piso = bpy.data.meshes.new("Mesh_Piso_Quiosque_L")
 obj_piso = bpy.data.objects.new("Piso_Quiosque_L", mesh_piso)

@@ -63,7 +63,12 @@ bYM = info["bathroom"]["row_split"]
 pia_cx, pia_cy, pia_top = info["bathroom"]["pia_comunitaria"]
 cX_front, cX_wall, cY0, cY1 = info["counter"]["bounds"]
 c_top = info["counter"]["top_z"]
-c_sink_cy = cY0 + 0.55
+# Pia real (parede sul, ao lado do fogão/geladeira - counter.py) - a pia
+# NAO fica mais na bancada leste (so ficou a churrasqueira la).
+sink_cx = info["counter"]["pia_sul_cx"]
+sink_cy = info["counter"]["pia_sul_cy"]
+sink_top = info["counter"]["pia_sul_top"]
+sink_y_wall = info["counter"]["pia_sul_y_wall"]
 fr_cx, fr_cy = info["appliances"]["fridge_pos"]
 st_cx, st_cy = info["appliances"]["stove_pos"]
 tv_x, tv_y, tv_z = info["tv"]["position"]
@@ -77,7 +82,7 @@ dsouth, dnorth = cy_cab - 0.30, cy_cab + 0.30   # vao das portas da cabine norte
 add_point("Luz_Ducha", (bX0 + 0.25, cy_cab, altura_piso + 1.95), 14, soft=0.7)
 add_point("Luz_Sanitario", (bX1 - 0.20, cy_cab, altura_piso + 1.95), 13, soft=0.7)
 add_point("Luz_Corredor", (1.7, 7.6, altura_piso + 2.3), 22)
-add_point("Luz_Gourmet", (cX_wall - 1.0, c_sink_cy + 0.2, altura_piso + 2.25), 34)
+add_point("Luz_Gourmet", (sink_cx, sink_cy + 0.2, altura_piso + 2.25), 34)
 add_point("Luz_Cozinha", (2.3, 3.0, altura_piso + 2.25), 34)
 add_point("Luz_Pia_Comunitaria", (pia_cx, pia_cy - 0.9, altura_piso + 1.95), 20)
 add_point("Luz_Sala", (2.3, 10.75, altura_piso + 2.35), 26)
@@ -207,7 +212,7 @@ for i, sx in enumerate((-1, 1)):
         flames.append(o)
 
 # jatos de agua
-agua_bancada = _cyl("Agua_Torneira_Bancada", (cX_wall - 0.34, c_sink_cy, c_top - 0.06),
+agua_bancada = _cyl("Agua_Torneira_Pia_Sul", (sink_cx, sink_y_wall + 0.19, sink_top - 0.06),
                     0.011, 0.26, mat_agua)
 agua_pia = _cyl("Agua_Pia_Comunitaria", (pia_cx, bY0 - 0.18, pia_top - 0.02),
                 0.011, 0.34, mat_agua)
@@ -348,16 +353,16 @@ krot(tampa, 26.6, (0, math.radians(-95), 0))
 kw(27.4, (0.13, 11.32, 1.42), (wc_bowl_x, 11.34, 0.32))
 kw(28.2, (0.13, 11.32, 1.42), (wc_bowl_x, 11.34, 0.32))
 
-# 5) TOUR pelo corredor (desviando das mesas de bar) ate a bancada gourmet
+# 5) TOUR pelo corredor (desviando das mesas de bar) ate a pia da parede sul
 kw(30.2, (0.8, 10.4, 1.62), (0.9, 8.0, 1.5))
 kw(32.0, (0.9, 7.8, 1.62),  (2.3, 6.0, 1.45))
 kw(34.0, (2.5, 5.2, 1.55),  (3.3, 3.0, 1.3))
-kw(35.4, (2.85, 3.1, 1.42), (cX_wall - 0.32, c_sink_cy, 0.85))
+kw(35.4, (2.85, 3.1, 1.42), (sink_cx, sink_cy, 0.85))
 
-# 6) ABRE A TORNEIRA da bancada
+# 6) ABRE A TORNEIRA da pia
 kvis(agua_bancada, 0.0, False)
 kvis(agua_bancada, 36.0, True)
-kw(37.2, (2.85, 3.1, 1.42), (cX_wall - 0.32, c_sink_cy, 0.85))
+kw(37.2, (2.85, 3.1, 1.42), (sink_cx, sink_cy, 0.85))
 
 # 7) GELADEIRA - abre a porta (acende a luz interna)
 kw(38.6, (2.95, 3.2, 1.55), (fr_cx, fr_cy, 1.15))

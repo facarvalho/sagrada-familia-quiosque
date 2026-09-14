@@ -1,6 +1,6 @@
 """
 Legenda 2D para as 10 imagens de visao-casa-da-mae/renders/sol_*.png (gerado por
-render_v3_sol.py) — mesma lógica de visao-cerca-fernando/annotate_sun_study.py, apontando
+render_sol.py) — mesma lógica de visao-cerca-fernando/annotate_sun_study.py, apontando
 para visao-casa-da-mae/renders.
 
 Roda com python3 puro (sem Blender): python3 visao-casa-da-mae/annotate_sun_study.py
@@ -59,4 +59,4 @@ for cena in meta["cenas"]:
     img.save(out_path)
     print(f"OK: {out_path}")
 
-print("ALLDONE_ANNOTATE_SUN_V3")
+print("ALLDONE_ANNOTATE_SUN_CASA_DA_MAE")

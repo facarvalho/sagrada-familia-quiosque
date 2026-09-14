@@ -91,11 +91,11 @@ def build(ns):
     pia_sul_top = altura_piso + 0.90
     pia_cy = PIA_SUL_Y_WALL + pia_sul_depth / 2.0
     _box("Pia_Sul_Base", PIA_SUL_CX, pia_cy, altura_piso + (pia_sul_top - 0.05 - altura_piso) / 2.0,
-         pia_sul_depth, pia_sul_w, (pia_sul_top - 0.05) - altura_piso, mat_base)
+         pia_sul_w, pia_sul_depth, (pia_sul_top - 0.05) - altura_piso, mat_base)
     _box("Pia_Sul_Tampo", PIA_SUL_CX, pia_cy, pia_sul_top - 0.02,
-         pia_sul_depth + 0.06, pia_sul_w + 0.06, 0.04, mat_tampo)
+         pia_sul_w + 0.06, pia_sul_depth + 0.06, 0.04, mat_tampo)
     _box("Pia_Sul_Cuba", PIA_SUL_CX, pia_cy, pia_sul_top - 0.075,
-         pia_sul_depth - 0.10, pia_sul_w - 0.15, 0.09, mat_metal)
+         pia_sul_w - 0.15, pia_sul_depth - 0.10, 0.09, mat_metal)
     _cyl("Pia_Sul_Coluna_Torneira", PIA_SUL_CX, PIA_SUL_Y_WALL + 0.06, pia_sul_top + 0.02,
          0.015, 0.30, mat_metal)
     _cyl("Pia_Sul_Bico_Torneira", PIA_SUL_CX, PIA_SUL_Y_WALL + 0.06 + 0.13, pia_sul_top + 0.16,
@@ -150,4 +150,7 @@ def build(ns):
         "top_z": H_TOP,
         "table_center": (TABLE_CX, TABLE_CY),
         "pia_sul_cx": PIA_SUL_CX,
+        "pia_sul_cy": pia_cy,
+        "pia_sul_top": pia_sul_top,
+        "pia_sul_y_wall": PIA_SUL_Y_WALL,
     }

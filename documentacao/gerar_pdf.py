@@ -247,19 +247,19 @@ p = doc.new_page()
 p.text(MARGIN, P(50), "6. Sequência de Execução Recomendada", font="Helvetica-Bold", size=F_H1, color=INK)
 y = P(90)
 steps = [
-    "Escavação e execução da casca/impermeabilização da piscina esmeralda.",
-    "Execução do piso de concreto da área externa e piso do quiosque (principal + ala).",
-    "Execução das brocas e pedestais de concreto (Ø 0.30 m, de -0.30 a +0.50 m) nas 10 posições da planta.",
-    "Montagem dos 10 pilares de eucalipto 12/14 (tora de 2.00 m) sobre bases metálicas fixadas nos pedestais.",
-    "Montagem dos montantes (leste) e das vigas transversais 12/14, formando o caimento de 15% para oeste.",
-    "Montagem das terças 12/14 (T1 x=0,40 / T2 x=2,20 / T3 x=4,00 + T4 ala) e assentamento das 12 telhas sanduíche PIR 30 mm (largura útil 1,00 m).",
-    "Levantamento das paredes de fechamento em muro tendinoso (lados sul e leste, até o telhado).",
-    "Construção das paredes e instalação hidráulica dos banheiros (ala, pilares 6-7-8-9).",
-    "Instalação da bancada, pia, churrasqueira, geladeira e fogão (área gourmet, pilares 1-2-3).",
-    "Instalação da lâmina d'água e acabamento (azulejo) da piscina.",
-    "Montagem do mobiliário: mesa de 8 lugares, mesas de bar, sala de estar e TV.",
-    "Limpeza geral e vistoria final.",
+    "Radier único (piso do quiosque + calçada perimetral) + cinta de amarração no trecho livre.",
+    "Pedestais de concreto (Ø 0,30 m) nas 10 posições, com chumbadores para a chapa U de cada pilar.",
+    "Montagem dos 10 pilares de eucalipto (12/14) sobre as chapas U fixadas nos pedestais.",
+    "Vigas transversais (12/14) e terças (10/12), formando o caimento de 15% para oeste.",
+    "Assentamento das 12 telhas sanduíche PIR 30 mm sobre as terças.",
+    "Paredes de fechamento em muro tendinoso — sul e leste do corpo, até o telhado.",
+    "Paredes e rede hidrossanitária dos banheiros (ala): esgoto sanitário dos vasos → fossa; água servida das duchas + pia comunitária → represa.",
+    "Portas dos 4 boxes + construção da pia comunitária.",
+    "Bancada, pia, churrasqueira, geladeira e fogão da área gourmet.",
+    "Mobiliário: mesa, bar, sala de estar, TV. Limpeza geral e vistoria final.",
 ]
+# NOTA: a piscina já existe (construída) e não faz parte do escopo desta obra —
+# a sequência acima cobre só o quiosque (mesma nota em site/caderno-sequencia.html).
 STEP_INDENT = P(28) + 12
 max_w = PAGE_W - MARGIN - STEP_INDENT
 for i, st in enumerate(steps, start=1):
@@ -273,9 +273,10 @@ for i, st in enumerate(steps, start=1):
 _LAST_PAGE = TOTAL_PAGES
 
 p.text(MARGIN, PAGE_H - P(140), "Observação:", font="Helvetica-Bold", size=F_H2, color=INK)
-obs = ("Este caderno reflete o projeto 3D gerado até o momento da emissão. Medidas devem ser "
-       "conferidas em campo antes da execução. Consultar responsável técnico para dimensionamento "
-       "estrutural definitivo das vigas e fundações dos pilares.")
+obs = ("A piscina já existe (construída) e não faz parte do escopo desta obra — a sequência acima "
+       "cobre só o quiosque. Este caderno reflete o projeto 3D gerado até o momento da emissão. "
+       "Medidas devem ser conferidas em campo antes da execução. Consultar responsável técnico para "
+       "dimensionamento estrutural definitivo das vigas e fundações dos pilares.")
 ly = PAGE_H - P(115)
 for ln in wrap_text(obs, F_SMALL, PAGE_W - 2 * MARGIN):
     p.text(MARGIN, ly, ln, font="Helvetica", size=F_SMALL, color=MUTED)

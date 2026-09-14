@@ -18,6 +18,15 @@ distante) — a aproximação plana (equirretangular) e qualquer erro residual
 de rotação/escala tendem a compor com a distância; tratar como contexto
 visual aproximado, não como levantamento de divisa para fins legais/registro.
 
+Recalibração local (13/09/2026): o usuário desenhou no Google Earth o
+contorno real do "piso piscina" (4 vértices) — comparado com o retângulo
+conhecido do deck (Piso_Area_Piscina, 9x16,5 m, centro (-4.5,1.25) em
+projeto.py), um ajuste de 4 pontos (não só 2) dá rotação 132,94° / escala
+0,976, erro médio 0,6 m — consistente com os 133,7° já estabelecidos
+(a pequena diferença é ruído normal de traçado no Google Earth). Usado
+para recalcular a posição/pegada da casa da mãe com mais precisão (ver
+CASA_MAE_* abaixo).
+
 --- Escopo modelado --------------------------------------------------------
 Cerca: postes P7..P13 (o trecho mais próximo da piscina/quiosque, ~15-100 m
 de distância — os postes mais distantes, P1-P6 e P14-P20, ficam fora do
@@ -29,17 +38,10 @@ trecho P9-P12 (o que realmente pode aparecer num enquadramento próximo da
 piscina); indica "aqui começa o cafezal", não a plantação inteira.
 Terreno: chão de terra/grama cobrindo a área entre o quiosque/piscina e a
 cerca modelada.
-Casa da mãe: caixa simples (paredes + telhado de duas águas), posicionada
-pela média de 3 pontos reais do MESMO projeto de fibra óptica ("Mãe
-Cozinha", "Mãe Varanda", roteador "MÃE") — não é um levantamento
-arquitetônico da casa, só indica "a casa fica aqui, com essa pegada
-aproximada" para dar contexto real à visão "casa da mãe". Conversão pela
-mesma calibração (ver nucleo/sun_geo.py), refeita nesta sessão a partir de
-2 pares (GPS real, XY do projeto) já usados nas visões V3/V4 (âncoras
-válidas: erro de ~3 cm ao recalcular o poste P9 da cerca contra
-`POSTES["P9"]` acima). NÃO existe, nos dados do projeto de fibra, nenhum
-ponto nomeado para "milho/abóbora" — a visão milho-abóbora ainda não tem
-um fundo real modelado (ver `visao-milho-abobora/render_v4_sol.py`).
+Casa da mãe: caixa simples (paredes + telhado de duas águas), na posição
+real confirmada diretamente pelo usuário (GPS, 13/09/2026) — não é um
+levantamento arquitetônico da casa, só indica "a casa fica aqui, com essa
+pegada aproximada" para dar contexto real à visão "casa da mãe".
 """
 import bpy
 import bmesh
@@ -62,15 +64,15 @@ CERCA_ORDEM = ["P7", "P8", "P9", "P10", "P11", "P12", "P13"]
 # visível perto da piscina (P9->P12) — ver docstring.
 CAFE_ORDEM = ["P9", "P10", "P11", "P12"]
 
-# Casa da mãe: centro/pegada aproximados. Posição confirmada diretamente
-# pelo usuário (13/09/2026, GPS -21.352877824002647, -45.989957740052),
-# convertida pra XY do projeto com a mesma calibração de nucleo/sun_geo.py
-# — mais precisa que a estimativa anterior (baseada em 3 pontos indiretos
-# do projeto de fibra óptica — roteador/câmeras "MÃE" — que ficava ~11 m
-# fora do ponto real dado pelo usuário).
-CASA_MAE_CENTRO = (-27.59, -13.44)
-CASA_MAE_LARGURA = 12.0   # X, m (aproximado — não é levantamento da casa)
-CASA_MAE_PROFUND = 12.0   # Y, m
+# Casa da mãe: pegada REAL (polígono de 8 vértices desenhado pelo usuário
+# no Google Earth em cima da casa, 13/09/2026), convertida pra XY do
+# projeto com a recalibração local de 4 pontos (ver docstring do módulo).
+# Substitui a caixa genérica usada antes.
+CASA_MAE_POLIGONO = [
+    (-20.407, -1.253), (-18.520, -1.089), (-18.783, 6.739), (-33.051, 5.916),
+    (-33.071, -4.774), (-30.416, -4.813), (-30.396, -11.391), (-20.194, -10.675),
+]
+
 
 
 def _mat(name, color, roughness=0.9, metallic=0.0):
@@ -174,35 +176,31 @@ def build(ns=None):
                 copa.data.materials.append(mat_cafe_folha)
                 result["cafe"].append((tronco.name, copa.name))
 
-    # --- Casa da mãe (caixa simples, paredes + telhado 2 águas) ----------
+    # --- Casa da mãe (pegada REAL: polígono de 8 vértices, extrudado) ----
     mat_parede_mae = _mat("Material_Casa_Mae_Parede", (0.82, 0.78, 0.70, 1.0), roughness=0.85)
     mat_telhado_mae = _mat("Material_Casa_Mae_Telhado", (0.35, 0.30, 0.28, 1.0), roughness=0.6)
 
-    cx, cy = CASA_MAE_CENTRO
-    w, d = CASA_MAE_LARGURA, CASA_MAE_PROFUND
     pe_direito = 2.8
-    bpy.ops.mesh.primitive_cube_add(size=1.0, location=(cx, cy, pe_direito / 2.0))
-    paredes = bpy.context.active_object
-    paredes.name = "CasaMae_Paredes"
-    paredes.scale = (w, d, pe_direito)
+    bm = bmesh.new()
+    verts_lo = [bm.verts.new((x, y, 0.0)) for x, y in CASA_MAE_POLIGONO]
+    verts_hi = [bm.verts.new((x, y, pe_direito)) for x, y in CASA_MAE_POLIGONO]
+    n = len(CASA_MAE_POLIGONO)
+    for i in range(n):
+        j = (i + 1) % n
+        bm.faces.new((verts_lo[i], verts_lo[j], verts_hi[j], verts_hi[i]))
+    mesh_paredes = bpy.data.meshes.new("Mesh_CasaMae_Paredes")
+    bm.to_mesh(mesh_paredes)
+    bm.free()
+    paredes = bpy.data.objects.new("CasaMae_Paredes", mesh_paredes)
+    bpy.context.collection.objects.link(paredes)
     paredes.data.materials.append(mat_parede_mae)
 
-    bm = bmesh.new()
-    hw, hd, hr = w / 2.0 * 1.05, d / 2.0 * 1.05, 1.2
-    base_z = pe_direito
-    v0 = bm.verts.new((cx - hw, cy - hd, base_z))
-    v1 = bm.verts.new((cx + hw, cy - hd, base_z))
-    v2 = bm.verts.new((cx + hw, cy + hd, base_z))
-    v3 = bm.verts.new((cx - hw, cy + hd, base_z))
-    v4 = bm.verts.new((cx - hw, cy, base_z + hr))
-    v5 = bm.verts.new((cx + hw, cy, base_z + hr))
-    bm.faces.new((v0, v1, v5, v4))
-    bm.faces.new((v2, v3, v4, v5))
-    bm.faces.new((v1, v2, v5))
-    bm.faces.new((v3, v0, v4))
+    bm2 = bmesh.new()
+    verts_roof = [bm2.verts.new((x, y, pe_direito)) for x, y in CASA_MAE_POLIGONO]
+    bm2.faces.new(verts_roof)
     mesh_telhado = bpy.data.meshes.new("Mesh_CasaMae_Telhado")
-    bm.to_mesh(mesh_telhado)
-    bm.free()
+    bm2.to_mesh(mesh_telhado)
+    bm2.free()
     telhado = bpy.data.objects.new("CasaMae_Telhado", mesh_telhado)
     bpy.context.collection.objects.link(telhado)
     telhado.data.materials.append(mat_telhado_mae)
