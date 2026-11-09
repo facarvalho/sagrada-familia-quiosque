@@ -127,8 +127,8 @@ y = section(p, y, "Piso do Quiosque", [
 
 y = section(p, y, "Pilares de Eucalipto (10 unidades)", [
     ("Classe / diâmetro", "Eucalipto roliço 12/14 (Ø ~0.13 m)"),
-    ("Tora de madeira", "2.00 m, apoiada no topo do pedestal"),
-    ("Pedestal de concreto", "Ø 0.30 m, de -0.30 m a +0.50 m do piso"),
+    ("Tora de madeira", "2.50 m aparente + 1.00 m enterrado no solo"),
+    ("Engaste (sem pedestal)", "furo Ø 0.30 m × 1.10 m: 10 cm de brita + reaterro em concreto"),
     ("Topo dos pilares", "2.50 m (fileira oeste P1/P10/P9/P6: 2.56 m; ala P7/P8: ~2.16 m)"),
     ("Fileira oeste (P1,P10,P9,P6)", "recuada 0.40 m para dentro (x = 0.40)"),
 ])
@@ -248,9 +248,9 @@ p = doc.new_page()
 p.text(MARGIN, P(50), "6. Sequência de Execução Recomendada", font="Helvetica-Bold", size=F_H1, color=INK)
 y = P(90)
 steps = [
-    "Radier único (piso do quiosque + calçada perimetral) + cinta de amarração no trecho livre.",
-    "Pedestais de concreto (Ø 0,30 m) nas 10 posições, com chumbadores para a chapa U de cada pilar.",
-    "Montagem dos 10 pilares de eucalipto (12/14) sobre as chapas U fixadas nos pedestais.",
+    "Furação das 10 posições dos pilares (Ø 0,30 m × 1,10 m), com 10 cm de brita no fundo.",
+    "Pilares de eucalipto (12/14) enterrados 1,00 m, aprumados e chumbados com concreto (trecho enterrado impermeabilizado com tinta asfáltica).",
+    "Radier único (piso do quiosque + calçada perimetral), concretado em volta dos pilares, + cinta de amarração no trecho livre.",
     "Vigas transversais (12/14) e terças (10/12), formando o caimento de 15% para oeste.",
     "Assentamento das 12 telhas sanduíche PIR 30 mm sobre as terças.",
     "Paredes de fechamento em muro tendinoso — sul e leste do corpo, até o telhado.",

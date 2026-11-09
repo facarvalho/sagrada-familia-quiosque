@@ -26,18 +26,18 @@ centro_y_piscina = 1.25
 centro_x_piscina_agua = -3.67
 centro_y_piscina_agua = -0.15
 
-# --- Pilares: tora de eucalipto 12/14 sobre pedestal de concreto ---------
-# O pedestal (sapata cilíndrica de concreto) vai de 0,30 m abaixo do piso
-# até 0,50 m acima dele, para tirar a madeira do contato com o piso
-# molhado. A tora de eucalipto (2,00 m) começa no topo do pedestal; o topo
-# dos pilares fica nivelado em +2,50 m do piso (= altura_pilar, referência
-# usada pelo telhado e pelos módulos de extras.py).
+# --- Pilares: tora de eucalipto 12/14 engastada no solo -----------------
+# Sem pedestal de concreto nem chapa U (revisão 09/11/2026): a tora é
+# enterrada direto num furo no chão, com `prof_engaste` = 1,00 m abaixo do
+# piso (furo Ø30 cm, 10 cm de brita no fundo, reaterro em concreto). O
+# trecho aparente vai do piso até o topo, nivelado em +2,50 m
+# (= altura_pilar, referência usada pelo telhado e pelos módulos de
+# extras.py).
 raio_pilar = 0.065          # eucalipto roliço 12/14 (média ~13 cm)
-altura_tora = 2.0           # trecho de madeira, acima do pedestal
-altura_pedestal = 0.5       # concreto acima do piso
-prof_pedestal = 0.3         # concreto abaixo do piso
-raio_pedestal = 0.15        # sapata cilíndrica Ø30 cm
-altura_pilar = altura_pedestal + altura_tora   # 2.5 - topo dos pilares
+altura_tora = 2.5           # trecho aparente de madeira, acima do piso
+prof_engaste = 1.0          # trecho enterrado, abaixo do piso
+raio_furo = 0.15            # furo Ø30 cm, reaterro em concreto
+altura_pilar = altura_tora  # 2.5 - topo dos pilares
 nivel_quiosque = 0.0
 nivel_piscina = 0.0
 
@@ -107,19 +107,7 @@ pilares_coords = [
 ]
 
 for i, coord in enumerate(pilares_coords):
-    # Pedestal de concreto (sapata cilíndrica): de -prof_pedestal até
-    # +altura_pedestal em relação ao piso.
-    bpy.ops.mesh.primitive_cylinder_add(
-        radius=raio_pedestal,
-        depth=altura_pedestal + prof_pedestal,
-        location=(coord[0], coord[1],
-                  nivel_quiosque + (altura_pedestal - prof_pedestal) / 2.0)
-    )
-    pedestal = bpy.context.active_object
-    pedestal.name = f"Pedestal_Concreto_{i+1}"
-    pedestal.data.materials.append(mat_concreto_geral)
-
-    # Tora de eucalipto, apoiada no topo do pedestal.
+    # Tora de eucalipto aparente, do piso até o topo.
     #  - Pilares 7 e 8 (ala): encurtados p/ o topo seguir o caimento p/ oeste.
     #  - Pilares 1, 10, 9 e 6 (fileira oeste recuada 0,40 m): ALONGADOS
     #    (+caimento*recuo_oeste = +0,06 m) para o topo alcançar a face
@@ -131,12 +119,24 @@ for i, coord in enumerate(pilares_coords):
     bpy.ops.mesh.primitive_cylinder_add(
         radius=raio_pilar,
         depth=tora_i,
-        location=(coord[0], coord[1],
-                  nivel_quiosque + altura_pedestal + (tora_i / 2.0))
+        location=(coord[0], coord[1], nivel_quiosque + (tora_i / 2.0))
     )
     pilar = bpy.context.active_object
     pilar.name = f"Pilar_Eucalipto_{i+1}"
     pilar.data.materials.append(mat_madeira)
+
+    # Trecho enterrado (-prof_engaste até o piso). Objeto separado e fora do
+    # render: a cena não tem terreno sob a laje, então ele apareceria
+    # "pendurado" abaixo do piso nas bordas.
+    bpy.ops.mesh.primitive_cylinder_add(
+        radius=raio_pilar,
+        depth=prof_engaste,
+        location=(coord[0], coord[1], nivel_quiosque - prof_engaste / 2.0)
+    )
+    enterrado = bpy.context.active_object
+    enterrado.name = f"Pilar_Enterrado_{i+1}"
+    enterrado.data.materials.append(mat_madeira)
+    enterrado.hide_render = True
 
 # ---------------------------------------------------------------------------
 # 4. PISO DO QUIOSQUE EM "L"

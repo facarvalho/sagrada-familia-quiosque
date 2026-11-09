@@ -1,6 +1,6 @@
 # Cotação de Materiais — Fases 1, 2 e 3 (Fundação/Hidráulica, Estrutura, Cobertura)
 
-**Emitida em:** 22/09/2026 · **Atualizada em:** 30/09/2026 (preços locais)
+**Emitida em:** 22/09/2026 · **Atualizada em:** 30/09/2026 (preços locais) · **Revisão 09/11/2026:** pilares enterrados 1,00 m no solo (sem pedestal/chapa U)
 **Obra:** Quiosque de piscina — Alfenas, MG
 
 > **Nota importante:** os preços abaixo são **preços de referência coletados em lojas e
@@ -29,35 +29,55 @@
 
 ## FASE 1 — Fundação & hidráulica
 
-### Radier / pedestais / cinta
+### Radier / reaterro dos furos dos pilares / cinta
 
 > **Ajuste de espessura do radier (30/09/2026):** o radier passou de **10 cm para
 > 6 cm** de espessura. Isso reduz o volume do radier de 5,94 m³ para
-> **59,38 m² × 0,06 m = 3,5628 m³**. Somado aos pedestais (0,57 m³) e ao graute
+> **59,38 m² × 0,06 m = 3,5628 m³**. Somado ao reaterro dos furos dos pilares (0,57 m³ — antes eram os pedestais, ver revisão de 09/11/2026 abaixo) e ao graute
 > (0,35 m³), o concreto estrutural total cai de 7,0 m³ para **3,5628 + 0,57 + 0,35
 > = 4,4828 m³ → 4,5 m³ de compra** (era 7,0 m³). Cimento, areia e brita abaixo já
 > estão recalculados para os 4,5 m³, mantendo a mesma proporção por m³ de concreto
 > do levantamento original (traço 1:2:3, ≈300 kg cimento/m³ → **≈0,61 m³ de areia e
-> ≈0,79 m³ de brita por m³ de concreto**). Nessa quantidade menor, comprar areia e
-> brita **avulsas** (por m³) passou a ser mais barato do que fechar caminhão cheio.
+> ≈0,79 m³ de brita por m³ de concreto**).
+>
+> **Atualização de 30/09/2026:** o Souza Gomes tem um caminhão de 6 m³ que carrega
+> **3 m³ de areia + 3 m³ de brita** (meio a meio) por **R$1.100,00 o caminhão
+> completo** — a pedido do usuário, esse frete foi dividido ao meio (R$550,00 para
+> cada material) e usado no lugar da compra avulsa separada, por sair mais barato
+> no total (R$1.100,00 contra R$1.475,00 de areia+brita avulsas). Os 3 m³ de areia
+> cobrem os 2,76 m³ necessários com folga; os 3 m³ de brita ficam **~0,54 m³ abaixo**
+> dos 3,54 m³ calculados — a diferença é pequena (~15%) e fica dentro da margem de
+> contingência de 15% aplicada no total geral, mas se quiser ficar exato, dá pra
+> completar com brita avulsa (Souza Gomes, R$215,00/m³ × 0,6 m³ ≈ R$129,00 a mais).
+>
+> **Revisão de 09/11/2026 — pilares enterrados:** os pilares **não ficam mais
+> fixados sobre pedestal de concreto com chapa U**; cada tora é **enterrada 1,00 m
+> no solo** (furo Ø30 cm × 1,10 m: 10 cm de brita no fundo para drenar + reaterro em
+> concreto em volta da tora). O volume de concreto do reaterro é praticamente o
+> mesmo dos antigos pedestais: 10 × π × (0,15² − 0,065²) × 1,00 m = **0,57 m³** —
+> por isso o concreto total continua **4,5 m³** e cimento/areia não mudam. A brita
+> do fundo dos furos soma **0,07 m³** (falta da brita do caminhão passa de ~0,54 para
+> ~0,61 m³). Como a tora atravessa o radier, **os pilares são chumbados antes da
+> concretagem da laje**.
 
 | Item | Especificação | Qtd. comprar | Loja | Preço un. (R$) | Total (R$) | Produto pesquisado |
 |---|---|---:|---|---:|---:|---|
 | **Opção A — Concreto manual (in loco), 4,5 m³:** | | | | | | |
 | Cimento CP-II 50kg | Itaú, saco 50kg — 4,5 m³ × 300 kg/m³ = 1.350 kg | 27 sacos | **Souza Altefenas** | 36,70 | 991,90 | Orçamento local nº 0000039455 (30/09/2026) — ref. 6165750, "CIMENTO CPII 50KG ITAU" |
-| Areia média | 4,5 m³ × 0,6143 m³/m³ = 2,76 m³ — **avulsa** agora sai mais barata que o caminhão de 6 m³ (R$880,00) | 3,0 m³ avulso | **Souza Altefenas** | 205,00/m³ | 615,00 | Orçamento local nº 0000039455 — "AREIA MEDIA 1M³" |
-| Brita nº 1 | 4,5 m³ × 0,7857 m³/m³ = 3,54 m³ — **avulsa** agora sai mais barata que o caminhão (R$1.100,00) | 4,0 m³ avulso | **Souza Gomes** | 215,00/m³ | 860,00 | Orçamento local, fornecedor Souza Gomes (30/09/2026) — Brita 1, preço avulso por m³ |
-| *Subtotal concreto manual (material, sem betoneira/mão de obra de mistura)* | | | | | ***2.466,90*** | |
+| Areia média | necessário 2,76 m³ — metade do caminhão misto Souza Gomes (6m³ = 3m³ areia + 3m³ brita, R$1.100,00 o caminhão ÷ 2) | 3,0 m³ (caminhão misto) | **Souza Gomes** | 550,00 (metade do frete) | 550,00 | Cotação local, fornecedor Souza Gomes (30/09/2026) — caminhão de 6m³, meio a meio |
+| Brita nº 1 | necessário 3,54 m³ — metade do mesmo caminhão misto (3m³ de brita, ~0,54 m³ abaixo do calculado — ver nota acima) | 3,0 m³ (caminhão misto) | **Souza Gomes** | 550,00 (metade do frete) | 550,00 | Cotação local, fornecedor Souza Gomes (30/09/2026) — caminhão de 6m³, meio a meio |
+| *Subtotal concreto manual (material, sem betoneira/mão de obra de mistura)* | | | | | ***2.091,90*** | |
 | **Opção B — Concreto usinado, 4,5 m³:** | | | | | | |
 | Concreto usinado FCK 20 MPa | bombeado ou por caminhão-betoneira, inclui mistura e entrega | 4,5 m³ | valor informado pelo usuário | 550,00 | 2.475,00 | Preço por m³ informado diretamente (22/09/2026); não inclui taxa de bombeamento nem mínimo de carga do fornecedor local — confirmar com a concreteira de Alfenas-MG (e o mínimo de carga do caminhão-betoneira, que pode não cobrir só 4,5 m³) |
 | Malha soldada POP 2×3m, malha 20×20 | painel 2×3 m (6 m² cada); substitui a Tela Q92 (2,45×6m, malha 15×15) originalmente especificada — **aprovado pelo usuário em 30/09/2026** | 13 un (78 m² p/ 73,5 m² necessários) | **Souza Altefenas** | 42,65 | 554,45 | Orçamento local nº 0000039455 — "MALHA POP 2X3MT 20X20" |
 | Bloco canaleta de concreto | 9×19×39 cm | 75 un | **Souza Altefenas** | 3,20 | 240,00 | Orçamento local nº 0000039455 — "CANALETA BLOCO 09X19X39" |
 | Vergalhão CA-50 Ø3/8" (10mm) | barra 12 m, 7,40 kg | 6 barras (72 m p/ 62 m necessários) | **Souza Altefenas** | 52,86 | 317,16 | Orçamento local nº 0000039455 — ref. PA001242, "FERRO VERGALHAO 10.00MM 3/8 7.40KGS" |
 | Arame recozido nº 18 | amarração (alternativa ao estribo CA-60 pronto, ~56 un) | 3 kg | Lojas Coqueiro | 12,00 | 36,00 | [Arame Recozido nº 18 1kg](https://www.lojascoqueiro.com.br/ferragens-e-ferramentas/arames-arame-recozido-no-18-1kg) — alternativa mais barata que estribo pronto CA-60 (~R$4,90/un avulso) |
+| Reaterro dos furos dos pilares | concreto em volta da tora, 10 furos Ø30 cm × 1,00 m = 0,57 m³ (+ 0,07 m³ de brita no fundo) | — | — | — | — | Já **incluso** nos 4,5 m³ de concreto acima (mesmo volume dos antigos pedestais) |
 | Graute | 0,35 m³ | — | — | — | — | Considerado **incluso** no cimento/areia orçados acima, conforme sugestão do próprio levantamento (evita dupla contagem) |
 
-**Subtotal (radier/pedestais/cinta) — concreto manual: R$ 3.614,51**
-**Subtotal (radier/pedestais/cinta) — concreto usinado: R$ 3.622,61** (troca as 3 linhas de cimento/areia/brita pela linha única de concreto usinado: 3.614,51 − 2.466,90 + 2.475,00)
+**Subtotal (radier/reaterro/cinta) — concreto manual: R$ 3.239,51**
+**Subtotal (radier/reaterro/cinta) — concreto usinado: R$ 3.622,61** (troca as 3 linhas de cimento/areia/brita pela linha única de concreto usinado: 3.239,51 − 2.091,90 + 2.475,00)
 
 ### Drenagem pluvial
 
@@ -70,11 +90,11 @@
 
 **Subtotal (drenagem pluvial): R$ 551,69**
 
-### Fixação de pilares e rede hidrossanitária
+### Engaste dos pilares e rede hidrossanitária
 
 | Item | Especificação | Qtd. comprar | Loja | Preço un. (R$) | Total (R$) | Produto pesquisado |
 |---|---|---:|---|---:|---:|---|
-| Chumbador parabolt 3/8"×100mm | c/ porca e arruela | 1 kit de 20 un | MercadoLivre / Leroy Merlin (marketplace) | 54,90 (kit) | 54,90 | [Chumbador Parabolt 3/8x5 c/ Porca e Arruela Kit 20un](https://www.mercadolivre.com.br/chumbador-parabolt-38x5-c-porca-e-arruela-kit-20-unidades/p/MLB2037098331) — faixa observada R$49,41–78,99 |
+| Tinta asfáltica (Neutrol) — impermeabilização do pé do pilar | trecho enterrado + 20 cm acima do piso, 10 toras Ø13 cm × 1,20 m ≈ 4,9 m², 2 demãos. **Substitui o chumbador parabolt** (removido em 09/11/2026 junto com o pedestal) | 1 galão 3,6 ℓ + 1 lata 900 ml | Telhanorte | 129,90 + 57,90 | 187,80 | [Neutrol galão 3,6 L](https://www.telhanorte.com.br/neutrol-galao-de-3-6-litros-3506/p) e [Neutrol 45 900 ml](https://www.telhanorte.com.br/neutrol-lt-900-ml-171166/p) — preço online de referência (09/11/2026), recotar local |
 | Tubo PVC soldável 25mm | água fria, vendido por metro (Amanco) | 38 m | **Souza Altefenas** | 4,94 | 187,72 | Orçamento local nº 0000039455 — ref. 10458, "TUBO SOLDAVEL 25MM AMANCO (METRO)" |
 | Tubo PVC esgoto 100mm | vendido por metro (Amanco) | 9 m | **Souza Altefenas** | 18,99 | 170,91 | mesmo produto do item de drenagem acima — ref. 10472 |
 | Fossa séptica biodigestora | 1.500 ℓ — fornecedor local não tem o modelo de 1.300 ℓ; **1.500 ℓ aprovado pelo usuário em 30/09/2026** no lugar do de 750 ℓ (também disponível, mas mais justo para a carga). **Sem sumidouro** — a pedido do usuário em 30/09/2026, o biodigestor não vai precisar de poço de infiltração à parte | 1 un | **Souza Altefenas** | 2.611,55 | 2.611,55 | Orçamento local nº 0000039455 — ref. 520038, "BIODIGESTOR ACQUALIMP 1500L" |
@@ -82,10 +102,10 @@
 | Caixa de gordura pré-moldada pequena | Tigre 250×230×75mm | 1 un | Santec Online | 142,40 | 142,40 | [Caixa Sifonada com Tampa 250x230x75 Tigre](https://www.santeconline.com.br/caixa-sifonada-com-tampa-250-x-230-x-75-mm-27131344-tigre-13687) |
 | Caixa de passagem/inspeção | 40×40 cm | 2 un | pré-moldados regionais (Nichele/Lajomar — sem preço público exato) | 120,00 | 240,00 | [Caixa passagem concreto 40x40](https://www.nichele.com.br/caixa-passagem-concreto-40x40-konkret125038/p) — **preço estimado**, não publicado no catálogo online |
 
-**Subtotal (fixação/hidrossanitário): R$ 3.684,98**
+**Subtotal (engaste/hidrossanitário): R$ 3.817,88**
 
-### **SUBTOTAL FASE 1 — concreto manual: R$ 7.851,18**
-### **SUBTOTAL FASE 1 — concreto usinado: R$ 7.859,28**
+### **SUBTOTAL FASE 1 — concreto manual: R$ 7.609,08**
+### **SUBTOTAL FASE 1 — concreto usinado: R$ 7.992,18**
 
 ---
 
@@ -95,26 +115,26 @@
 
 | Item | Especificação | Qtd. comprar | Loja | Preço un. (R$) | Total (R$) | Produto pesquisado |
 |---|---|---:|---|---:|---:|---|
-| Eucalipto roliço tratado 12/14 | Pilares P2,P3,P4,P5 (leste, alto), peça 3,00 m | 4 un | **RM Eucaliptos Tratados** | 83,50 | 334,00 | Cotação local (30/09/2026) — "4 un. 12/14 - 3m" |
-| Eucalipto roliço tratado 12/14 | Pilares P1,P6,P9,P10 (recuada), peça 2,50 m | 4 un | **RM Eucaliptos Tratados** | 49,00 | 196,00 | Cotação local — "4 un. 12/14 - 2,5m" |
-| Eucalipto roliço tratado 12/14 | Pilares P7,P8 (ala, baixo) — spec pedia 2,00 m, fornecedor só tem peça de 2,20 m | 2 un | **RM Eucaliptos Tratados** | 44,00 | 88,00 | Cotação local — "2 un. 12/14 - 2,20m" |
+| Eucalipto roliço tratado 12/14 ⚠️ | Pilares P2,P3,P4,P5 (leste, alto): 3,10 m aparente + 1,00 m enterrado = 4,10 m → peça **4,50 m** | 4 un | **RM Eucaliptos Tratados** | 125,00 (estimado) | 500,00 | **Estimativa** (09/11/2026): RM não cotou peça de 4,50 m; preço extrapolado da peça de 4,00 m (R$111,00, ~R$27,75/m) — **recotar** |
+| Eucalipto roliço tratado 12/14 | Pilares P1,P6,P9,P10 (recuada): 2,56 m aparente + 1,00 m enterrado = 3,56 m → peça **4,00 m** | 4 un | **RM Eucaliptos Tratados** | 111,00 | 444,00 | Mesmo preço da peça de 4,00 m já cotada para V1/V2 — "12/14 - 4m" |
+| Eucalipto roliço tratado 12/14 | Pilares P7,P8 (ala, baixo): 2,16 m aparente + 1,00 m enterrado = 3,16 m → 1 peça de **7,00 m** cortada em 2×3,50 m | 1 un | **RM Eucaliptos Tratados** | 219,00 | 219,00 | Mesmo preço da peça de 7,00 m já cotada para V3–V6 — "12/14 - 7m" |
 | Eucalipto roliço tratado 12/14 | Vigas V1,V2 (transversal), peça 4,00 m | 2 un | **RM Eucaliptos Tratados** | 111,00 | 222,00 | Cotação local — "2 un. 12/14 - 4m" |
 | Eucalipto roliço tratado 12/14 | Peça de 7,00 m, cortar em 1×4,00m + 1×3,00m cada — rende as vigas V3,V4 (4,00m) e V5,V6/ala (3,00m) | 2 un | **RM Eucaliptos Tratados** | 219,00 | 438,00 | Cotação local — "2 un. 12/14 - 7m" |
 | Eucalipto roliço tratado **14/16** ⚠️ | Terças T1,T2,T3 (corpo), peça 11,00 m — fornecedor informa que peça de 11m só existe na bitola 14/16 (spec original pedia 10/12); bitola maior é mais resistente, não é uma redução | 3 un | **RM Eucaliptos Tratados** | 336,67 | 1.010,00 | Cotação local — "3 un. 14/16 - 11m" |
 | Eucalipto roliço tratado 10/12 | Terça T4 (ala), peça 3,50 m | 1 un | **RM Eucaliptos Tratados** | 70,00 | 70,00 | Cotação local — "1 un. 10/12 - 3,5m" |
 
-**Subtotal madeira (RM Eucaliptos Tratados): R$ 2.358,00** (10 pilares + 6 vigas + 4 terças = os 20 peças do corte, conforme total informado pelo fornecedor)
+**Subtotal madeira (RM Eucaliptos Tratados): R$ 2.903,00** (10 pilares + 6 vigas + 4 terças; era R$2.358,00 antes dos pilares enterrados — os pilares ficaram 1,50 m mais longos cada: +1,00 m enterrado +0,50 m que antes era pedestal)
 
 ### Fixação metálica
 
 | Item | Especificação | Qtd. comprar | Loja | Preço un. (R$) | Total (R$) | Produto pesquisado |
 |---|---|---:|---|---:|---:|---|
-| Chapa/base "U" ajustável galvanizada p/ poste Ø12–14 | equivalente comercial: base ajustável 130×45×45×3mm aço galvanizado p/ pilar | 10 un | Guemat | 77,61 | 776,10 | [Base Ajustável 130x45x45x3mm Aço Galvanizado p/ Pilares — Minubras](https://www.guemat.com.br/base-ajustavel-130x45x45x3mm-aco-galvanizado-para-pilares-951-301-minubras) — **aproximação:** não há sapata específica p/ poste roliço 12-14cm nas grandes redes |
-| Parafuso passante (rosca soberba) 3/8"×150mm | c/ porca e arruela | 20 un | Izashopmix | 3,20 | 64,00 | [Parafuso Sextavado Rosca Soberba 3/8x150mm Zincado](https://www.izashopmix.com.br/MLB-2922536947-parafuso-sextavado-rosca-soberba-38-x-150mm-zincado-10pcs-_JM) (pacote 10un R$32,00) |
 | Cantoneira/suporte metálico "U" p/ união viga-pilar | 100×100×40mm, aço, L furada | 26 un | Master Ferragens | 4,99 | 129,74 | [10x Cantoneiras Suporte União p/ Madeira 100x100x40mm](https://www.masterferragens.com/10x-cantoneiras-suporte-uniao-p-madeira-100x100x40mm-l-aco) (pacote 10un R$49,90) |
 | Parafuso autobrocante/prego 17×27 | ≈104 un | 1 kg (suficiente para 104 un) | Leroy Merlin | 24,90 | 24,90 | [Prego em Aço Polido com Cabeça 17x27 1kg](https://www.leroymerlin.com.br/prego-em-aco-polido-com-cabeca-17x27-1kg_92031324) |
 
-### **SUBTOTAL FASE 2: R$ 3.352,74** (madeira 2.358,00 + fixação metálica 994,74)
+> Chapa U (R$776,10) e parafusos passantes da chapa (R$64,00) **removidos em 09/11/2026** — o pilar enterrado não usa base metálica.
+
+### **SUBTOTAL FASE 2: R$ 3.057,64** (madeira 2.903,00 + fixação metálica 154,64)
 
 ---
 
@@ -141,16 +161,16 @@ opções ao final do documento.
 
 | Fase | Concreto manual (R$) | Concreto usinado (R$) |
 |---|---:|---:|
-| Fase 1 — Fundação & hidráulica | 7.851,18 | 7.859,28 |
-| Fase 2 — Estrutura de madeira | 3.352,74 | 3.352,74 |
+| Fase 1 — Fundação & hidráulica | 7.609,08 | 7.992,18 |
+| Fase 2 — Estrutura de madeira | 3.057,64 | 3.057,64 |
 | Fase 3 — Cobertura (telha comum + isopor) | 3.696,41 | 3.696,41 |
-| **TOTAL GERAL (material, sem margem)** | **14.900,33** | **14.908,43** |
-| **+ 15% de margem/contingência** | **2.235,05** | **2.236,26** |
-| **TOTAL GERAL COM MARGEM DE 15%** | **17.135,38** | **17.144,69** |
+| **TOTAL GERAL (material, sem margem)** | **14.363,13** | **14.746,23** |
+| **+ 15% de margem/contingência** | **2.154,47** | **2.211,93** |
+| **TOTAL GERAL COM MARGEM DE 15%** | **16.517,60** | **16.958,16** |
 
-> Concreto manual (cimento+areia+brita, R$2.466,90 os 4,5 m³ ≈ R$548,20/m³, preços
-> locais Souza Altefenas + Brita 1 da Souza Gomes, 30/09/2026 — já com o radier em
-> 6 cm) é
+> Concreto manual (cimento+areia+brita, R$2.091,90 os 4,5 m³ ≈ R$464,87/m³, preços
+> locais Souza Altefenas + caminhão misto de areia/brita da Souza Gomes, 30/09/2026
+> — já com o radier em 6 cm) é
 > mais barato em **material**, mas exige betoneira, mão de obra de mistura e
 > tem mais perda/variabilidade de traço — nenhum desses custos extras está
 > neste levantamento (só material). Concreto usinado (R$550,00/m³, valor
@@ -160,10 +180,10 @@ opções ao final do documento.
 > (imprevistos, variação de preço entre a cotação e a compra real, e os itens
 > já sinalizados como aproximação — ver notas metodológicas). Ela **não**
 > substitui uma reserva específica para mão de obra, frete ou as fases 4 e 5.
-> Com o volume menor (4,5 m³), o manual (R$548,20/m³) e o usinado (R$550,00/m³)
-> praticamente empatam em material — a vantagem do usinado (sem betoneira, sem
-> mão de obra de mistura) pesa mais nessa comparação agora, mas fique atento ao
-> **mínimo de carga** do caminhão-betoneira local, que pode não aceitar entregar
+> Com o caminhão misto de areia/brita da Souza Gomes, o manual voltou a ficar mais
+> barato em material (R$464,87/m³ contra R$550,00/m³ do usinado) — mas o usinado
+> ainda pode compensar pela mão de obra de mistura que ele dispensa. Fique atento
+> ao **mínimo de carga** do caminhão-betoneira local, que pode não aceitar entregar
 > só 4,5 m³ sem taxa extra.
 
 ---
@@ -183,8 +203,7 @@ opções ao final do documento.
    final — recomenda-se cotação local antes da compra.
 3. **Itens aproximados** (produto exato não encontrado nas grandes redes, substituído
    pelo equivalente comercial mais próximo): canaleta de drenagem com grelha de ferro
-   fundido, caixa de inspeção pluvial 45×45×55cm, chapa/base "U" ajustável para poste
-   roliço 12–14cm, anéis de concreto para sumidouro, caixa de passagem 40×40cm. Esses
+   fundido, caixa de inspeção pluvial 45×45×55cm, anéis de concreto para sumidouro, caixa de passagem 40×40cm. Esses
    itens estão sinalizados na coluna de fonte.
 4. **Graute (0,35 m³)** foi considerado incluso no cimento/areia já orçados na fase 1,
    conforme já sugerido no levantamento original, para evitar dupla contagem.
@@ -260,8 +279,34 @@ opções ao final do documento.
     tratado (a maioria dos fabricantes ainda pede algum tipo de vala/poço de
     infiltração ou ligação a rede coletora — só não precisa ser em anéis de
     concreto como o item removido).
+16. **Areia e brita em caminhão misto, 30/09/2026:** o Souza Gomes tem um caminhão
+    de 6 m³ que carrega 3 m³ de areia + 3 m³ de brita por R$1.100,00 o frete
+    completo. A pedido do usuário, o frete foi dividido ao meio (R$550,00 por
+    material) e usado no lugar da compra avulsa separada (R$615,00 de areia +
+    R$860,00 de brita = R$1.475,00) — economia de R$375,00. Os 3 m³ de brita ficam
+    ~0,54 m³ abaixo do calculado (3,54 m³) — diferença pequena, coberta pela margem
+    de contingência de 15% do total geral; para ficar exato, dá pra completar com
+    brita avulsa (Souza Gomes, R$215,00/m³) depois.
 
 ---
+17. **Pilares enterrados, 09/11/2026:** a pedido do usuário, os pilares **não ficam
+    mais sobre pedestal de concreto com chapa U** — cada tora é enterrada **1,00 m**
+    no solo (furo Ø30 cm × 1,10 m, 10 cm de brita no fundo, reaterro em concreto,
+    trecho enterrado + 20 cm acima do piso pintado com tinta asfáltica). Efeitos:
+    - **Madeira:** cada pilar ganhou 1,50 m (1,00 m enterrado + 0,50 m que era o
+      pedestal). Compra: P2–P5 4×4,50 m (preço **estimado**, recotar), P1/P6/P9/P10
+      4×4,00 m, P7/P8 1×7,00 m cortada ao meio. Madeira +R$545,00.
+    - **Fixação:** saem chapa U (R$776,10), parafusos da chapa (R$64,00) e chumbadores
+      parabolt (R$54,90); entra tinta asfáltica (R$187,80).
+    - **Concreto:** sem mudança — o reaterro dos furos (0,57 m³) tem o mesmo volume
+      dos pedestais. Brita +0,07 m³ no fundo dos furos.
+    - **Sequência:** furar e chumbar os pilares **antes** de concretar o radier (a
+      tora atravessa a laje).
+    - Saldo: **−R$162,20** no total sem margem (concreto manual).
+    - Profundidade de 1,00 m está dentro da regra prática para postes (≈10% do
+      comprimento + 0,50–0,60 m ≈ 0,85–0,95 m); confirmar com responsável técnico
+      conforme o solo.
+
 
 ## Comparativo — Telha sanduíche PIR 43mm vs. Telha comum (zinco) + forro de isopor
 

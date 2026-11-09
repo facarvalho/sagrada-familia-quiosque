@@ -190,9 +190,8 @@ data = {
     "altura_pilar": altura_pilar,
     "diametro_pilar": raio_pilar * 2,
     "altura_tora": _projeto_ns.get("altura_tora", altura_pilar),
-    "altura_pedestal": _projeto_ns.get("altura_pedestal", 0.0),
-    "prof_pedestal": _projeto_ns.get("prof_pedestal", 0.0),
-    "diametro_pedestal": _projeto_ns.get("raio_pedestal", 0.0) * 2,
+    "prof_engaste": _projeto_ns.get("prof_engaste", 0.0),
+    "diametro_furo": _projeto_ns.get("raio_furo", 0.0) * 2,
     "altura_piso": altura_piso,
     "esp_piso": _projeto_ns.get("esp_piso", altura_piso or 0.10),
 }

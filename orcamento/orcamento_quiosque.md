@@ -19,9 +19,8 @@ de concreto.
 | Parâmetro | Valor |
 |---|---|
 | Pilar de madeira | eucalipto roliço tratado (autoclave CCA), **classe 12/14** |
-| Altura livre do pilar | **2,00 m** acima do pedestal |
-| Pedestal de concreto | cilindro Ø30 cm, **0,80 m** (0,30 m abaixo + 0,50 m acima do piso acabado) |
-| Fundação | broca Ø25 cm × 0,70 m sob cada pedestal |
+| Altura livre do pilar | **2,50 m** acima do piso (sem pedestal) |
+| Engaste no solo | tora enterrada **1,00 m**; furo Ø30 cm × 1,10 m (10 cm de brita no fundo + reaterro em concreto) — revisão 09/11/2026 |
 | Topo dos pilares | nivelado a **+2,50 m** do piso (pilares 7 e 8 da ala: ~2,16 m) |
 | Vigas transversais + terças | eucalipto roliço tratado **12/14** |
 | Montantes (lado alto, fileira leste) | eucalipto roliço tratado **12/14**, 4 un. × ~0,60 m |
@@ -43,21 +42,17 @@ Convenção das colunas: **Qtd. projeto** = quantidade líquida medida no modelo
 
 ---
 
-## A. Fundação e pedestais
+## A. Fundação — furos dos pilares (revisão 09/11/2026)
 
-10 pontos. Cada ponto: broca Ø25 cm × 0,70 m + pedestal cilíndrico Ø30 cm × 0,80 m
-(0,30 m abaixo e 0,50 m acima do piso acabado). Topo do pedestal abaulado;
-barreira asfáltica antes de assentar a madeira.
+10 pontos, **sem pedestal**: cada tora é enterrada 1,00 m no solo. Furo Ø30 cm ×
+1,10 m (cavadeira/perfuratriz), 10 cm de brita no fundo para drenagem, tora
+aprumada e reaterrada com concreto. Os pilares são chumbados **antes** do radier
+(a laje é concretada em volta deles).
 
 | Item | Especificação | Un. | Qtd. projeto | Qtd. comprar | Preço un. | Total | Obs. |
 |---|---|---|---:|---:|---:|---:|---|
-| Concreto fck 25 MPa (usinado) | brocas + pedestais | m³ | 0,91 | 1,0 | | | ou produzir na obra: ~10 sc cimento + 0,7 m³ areia + 1,0 m³ brita |
-| Tubo de forma de papelão Ø300 mm | trecho acima do solo + arremate | m | 6,0 | 6,0 | | | 2 peças de 3 m |
-| Aço CA-50 Ø8,0 mm | armadura vertical (4 por ponto) | barra 12 m | 5 | 5 | | | ~58 m |
-| Aço CA-60 Ø5,0 mm | estribos (6 por ponto) | barra 12 m | 4 | 4 | | | ~48 m |
-| Arame recozido nº 18 | amarração | kg | 2 | 2 | | | |
-| Espaçador de armadura | cobrimento | un | 40 | 50 | | | |
-| Brita nº 1 | lastro no fundo da broca | m³ | 0,2 | 0,3 | | | |
+| Concreto (reaterro dos furos) | 10 × π(0,15² − 0,065²) × 1,00 m | m³ | 0,57 | 0,6 | | | mesmo traço do radier |
+| Brita nº 1 | fundo dos furos, 10 cm | m³ | 0,07 | 0,1 | | | |
 
 **Subtotal A:** ____________
 
@@ -66,16 +61,16 @@ barreira asfáltica antes de assentar a madeira.
 ## B. Pilares
 
 Eucalipto roliço tratado em autoclave (CCA), classe 12/14 (ponta fina 12 cm /
-ponta grossa 14 cm). Ponta grossa para baixo. 2,00 m livres acima do pedestal
-(pilares 7 e 8 da ala: ~1,66 m, acompanham o caimento do telhado).
+ponta grossa 14 cm). Ponta grossa para baixo (no furo). 2,50 m aparentes acima do
+piso + 1,00 m enterrado (P2–P5 com o trecho do montante incorporado: 3,10 m
+aparentes; P1/P6/P9/P10: 2,56 m; ala P7/P8: 2,16 m).
 
 | Item | Especificação | Un. | Qtd. projeto | Qtd. comprar | Preço un. | Total | Obs. |
 |---|---|---|---:|---:|---:|---:|---|
-| Eucalipto roliço tratado 12/14 | pilares, 8 × 2,00 m + 2 × 1,66 m (ala) | peça 3,0 m | 10 | 10 | | | 30 m; sobras p/ montantes |
-| Base metálica galvanizada p/ poste Ø12–14 | sapata "U" c/ afastamento ≥ 3 cm e furação | un | 10 | 10 | | | isola a madeira do concreto |
-| Chumbador Ø16 × 150 mm (parabolt) | base ↔ pedestal, 2 por base | un | 20 | 22 | | | |
-| Tirefão Ø10 × 120 mm + arruela | tora ↔ base, 4 por pilar | un | 40 | 44 | | | |
-| Manta/fita asfáltica 10 cm | barreira concreto ↔ madeira | rolo | 1 | 1 | | | |
+| Eucalipto roliço tratado 12/14 | P2–P5, 4,10 m (3,10 + 1,00 enterrado) | peça 4,5 m | 4 | 4 | | | |
+| Eucalipto roliço tratado 12/14 | P1/P6/P9/P10, 3,56 m (2,56 + 1,00) | peça 4,0 m | 4 | 4 | | | |
+| Eucalipto roliço tratado 12/14 | P7/P8, 3,16 m (2,16 + 1,00) | peça 3,5 m | 2 | 2 | | | ou 1 peça de 7,0 m cortada ao meio |
+| Tinta asfáltica (Neutrol) | trecho enterrado + 20 cm acima do piso, 2 demãos (≈4,9 m²) | ℓ | 4 | 4,5 | | | galão 3,6 ℓ + lata 0,9 ℓ |
 
 **Subtotal B:** ____________
 
@@ -188,15 +183,15 @@ Planta ~53,6 m² (principal 48,0 + ala 5,6). Contrapiso e = 10 cm sobre lastro.
 ## Notas
 
 1. Quantidades levantadas a partir do modelo 3D do projeto com as revisões
-   acordadas em 28/08/2026: pilar de 2,00 m sobre pedestal de concreto;
+   acordadas em 28/08/2026 (fundação revista em 09/11/2026: pilar enterrado 1,00 m no solo, sem pedestal);
    telhado meia-água com caimento de 15% **para oeste, em direção à piscina**;
    estrutura enxuta em eucalipto 12/14 (montantes + vigas transversais +
    3 terças), sem caibros; telha metálica de 1,00 × 4,50 m com vão livre
    ≤ 2,50 m.
 2. Diâmetro de eucalipto conforme tabela do fornecedor: 12/14 = ponta fina
    12 cm / ponta grossa 14 cm.
-3. O modelo 3D já está atualizado com esta revisão (pedestais, pilares 12/14
-   de 2,00 m, ala rebaixada, telhado meia-água invertido e estrutura enxuta).
+3. O modelo 3D já está atualizado com esta revisão (pilares 12/14 enterrados
+   1,00 m, sem pedestal, ala rebaixada, telhado meia-água invertido e estrutura enxuta).
 4. O dimensionamento estrutural definitivo das vigas, terças e fundações deve
    ser confirmado por responsável técnico (engenheiro/arquiteto) antes da
    compra e execução.

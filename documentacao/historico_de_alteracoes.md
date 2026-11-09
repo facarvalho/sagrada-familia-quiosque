@@ -251,6 +251,21 @@ Registro das mudanças pedidas pelo cliente, na ordem em que foram feitas.
       12 telhas / terças T1–T4" em `render_labels.py`, `annotate.py`,
       `gerar_pdf.py`.
 
+24. **Pilares enterrados no solo** (09/11/2026):
+    - Fim do pedestal de concreto e da chapa U: cada tora de eucalipto 12/14
+      é **enterrada 1,00 m** num furo Ø30 cm × 1,10 m (10 cm de brita no
+      fundo, reaterro em concreto, tinta asfáltica no trecho enterrado).
+    - `projeto.py`: removidos `altura_pedestal`, `prof_pedestal`,
+      `raio_pedestal` e os objetos `Pedestal_Concreto_{n}`; novos
+      `prof_engaste` (1,00) e `raio_furo` (0,15); `altura_tora` = 2,50
+      (trecho aparente). Topo dos pilares continua +2,50 m. O trecho
+      enterrado é o objeto `Pilar_Enterrado_{n}` (oculto no render — a cena
+      não tem terreno sob a laje e ele apareceria abaixo do piso).
+    - Compra de madeira: P2–P5 4,50 m, P1/P6/P9/P10 4,00 m, P7/P8 3,50 m
+      (total eucalipto 84,5 → 99,5 m). Pilares chumbados **antes** do radier.
+    - Cotação, orçamento do site, caderno (especificações/sequência), PDF,
+      rótulos do render e da planta atualizados.
+
 ## Pendências / problemas conhecidos
 
 - ~~Artefato preto no encontro em L do piso~~ — RESOLVIDO no item 23 (piso

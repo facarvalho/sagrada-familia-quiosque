@@ -200,8 +200,8 @@ info_lines = [
     ("Espessura do piso", f"{data.get('esp_piso', 0.10):.2f} m"),
     ("Nível do piso", "0.00 m (= deck da piscina)"),
     ("Topo dos pilares", f"{data.get('altura_pilar', 2.50):.2f} m"),
-    ("Tora de eucalipto 12/14", f"{data.get('altura_tora', 2.00):.2f} m · Ø {data.get('diametro_pilar', 0.13):.2f} m"),
-    ("Pedestal de concreto", f"Ø {data.get('diametro_pedestal', 0.30):.2f} m · +{data.get('altura_pedestal', 0.50):.2f} / -{data.get('prof_pedestal', 0.30):.2f} m"),
+    ("Tora de eucalipto 12/14", f"{data.get('altura_tora', 2.50):.2f} m aparente · Ø {data.get('diametro_pilar', 0.13):.2f} m"),
+    ("Engaste no solo", f"{data.get('prof_engaste', 1.00):.2f} m · furo Ø {data.get('diametro_furo', 0.30):.2f} m"),
 ]
 info_h = 40 + (line_h + 22) * (len(info_lines) - 1)
 draw.rounded_rectangle(

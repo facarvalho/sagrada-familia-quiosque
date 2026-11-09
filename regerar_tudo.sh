@@ -60,6 +60,9 @@ step $R/vista_corredor_cozinha.png    $BL renders/scripts/render_corredor_cozinh
 step $R/banheiro_planta.png           $BL arquitetonico/render_bathroom_plan.py
 step $R/vista_360_fisheye.png         $BL renders/scripts/render_360_fisheye.py
 
+# --- Fotos da fase esqueleto (site: sequencia + galeria) -------------
+step $R/fase_esqueleto_estrutura.png  $BL visoes/fase-obra-comeco/render_fase_esqueleto.py
+
 # --- Documento + video -------------------------------------------------
 step documentacao/Caderno_de_Obra.pdf python3 -m documentacao.gerar_pdf
 step $R/passeio_quiosque.mp4          $BL renders/scripts/render_walkthrough.py

@@ -25,8 +25,7 @@ centro_y_piscina_agua = _projeto_ns.get("centro_y_piscina_agua", centro_y_piscin
 altura_pilar = _projeto_ns["altura_pilar"]
 raio_pilar = _projeto_ns["raio_pilar"]
 altura_tora = _projeto_ns.get("altura_tora", altura_pilar)
-altura_pedestal = _projeto_ns.get("altura_pedestal", 0.0)
-prof_pedestal = _projeto_ns.get("prof_pedestal", 0.0)
+prof_engaste = _projeto_ns.get("prof_engaste", 0.0)
 altura_piso = _projeto_ns["altura_piso"]
 largura_piscina = _projeto_ns["largura_piscina"]
 comprimento_piscina = _projeto_ns["comprimento_piscina"]
@@ -137,7 +136,7 @@ anchors = [
         "point": (4.0, 4.0, altura_pilar / 2),
         "text": (f"Pilares de Eucalipto (10x)\n"
                  f"tora 12/14 Ø {raio_pilar * 2:.2f} m · H {altura_tora:.2f} m\n"
-                 f"sobre pedestal concreto (+{altura_pedestal:.2f}/-{prof_pedestal:.2f} m)"),
+                 f"enterrada {prof_engaste:.2f} m no solo (sem pedestal)"),
         "side": "right",
     },
     {
